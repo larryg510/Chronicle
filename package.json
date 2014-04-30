@@ -1,0 +1,11 @@
+{
+  "name": "chronicle",
+  "version": "0.0.0",
+  "description": "Travel Chronicle",
+  "main": "server.js",
+  "dependencies": {
+    "express": "~3.4.7"
+  },
+  "devDependencies": {},
+  "author": ""
+}

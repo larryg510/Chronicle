@@ -1,0 +1,184 @@
+<html>
+	<head>
+    	<title>Chronicle</title>
+
+    	<meta name="viewport" content="width=device-width, user-scalable=no">
+
+		<!-- jQuery -->
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
+		<!-- Angular -->
+		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>
+
+		<!-- Bootstrap -->
+		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+		<!--link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css"-->
+		<link rel="stylesheet" href="css/bootstrap-theme.css">
+		<link rel="stylesheet" href="css/main.css">
+		<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+		<script src="js/chronicle.js"></script>
+		<script src="js/ng.js"></script>
+		<script src="js/main.js"></script>
+	</head>
+	<html ng-app='chronicle'>
+	    <div class="container">
+	    	<nav class="navbar navbar-inverse" role="navigation">
+		        <!-- Brand and toggle get grouped for better mobile display -->
+		        <div class="navbar-header">
+		            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+		                <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span><span
+		                    class="icon-bar"></span><span class="icon-bar"></span>
+		            </button>
+		            <a class="navbar-brand" href="#">Chronicle</a>
+		        </div>
+		        <!-- Collect the nav links, forms, and other content for toggling -->
+		        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+		            <ul class="nav navbar-nav">
+		                <li class="active"><a href="#"><span class="glyphicon glyphicon-home"></span>Dashboard</a></li>
+		                <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><span
+		                    class="glyphicon glyphicon-search"></span>Search <b class="caret"></b></a>
+		                    <ul class="dropdown-menu" style="min-width: 300px;">
+		                        <li>
+		                            <div class="row">
+		                                <div class="col-md-12">
+		                                    <form class="navbar-form navbar-left" role="search">
+		                                    <div class="input-group">
+		                                        <input type="text" class="form-control" placeholder="Search" />
+		                                        <span class="input-group-btn">
+		                                            <button class="btn btn-primary" type="button">
+		                                                Go!</button>
+		                                        </span>
+		                                    </div>
+		                                    </form>
+		                                </div>
+		                            </div>
+		                        </li>
+		                    </ul>
+		                </li>
+		            </ul>
+		            <ul class="nav navbar-nav navbar-right">
+		                <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><span
+		                    class="glyphicon glyphicon-comment"></span>Notifications <span class="label label-primary">3</span>
+		                </a>
+		                    <ul class="dropdown-menu">
+		                        <li><a href="#"><span class="label label-warning">7:00 AM</span>Hi :)</a></li>
+		                        <li><a href="#"><span class="label label-warning">8:00 AM</span>How are you?</a></li>
+		                        <li><a href="#"><span class="label label-warning">9:00 AM</span>What are you doing?</a></li>
+		                        <li class="divider"></li>
+		                        <li><a href="#" class="text-center">View All</a></li>
+		                    </ul>
+		                </li>
+		                <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><span
+		                    class="glyphicon glyphicon-user"></span>Admin <b class="caret"></b></a>
+		                    <ul class="dropdown-menu">
+		                        <li><a href="#"><span class="glyphicon glyphicon-user"></span>Profile</a></li>
+		                        <li><a href="#"><span class="glyphicon glyphicon-cog"></span>Settings</a></li>
+		                        <li class="divider"></li>
+		                        <li><a href="#"><span class="glyphicon glyphicon-off"></span>Logout</a></li>
+		                    </ul>
+		                </li>
+		            </ul>
+		        </div>
+		        <!-- /.navbar-collapse -->
+		    </nav>
+
+			<div class="row">
+				<div class="message-wrap col-8">
+		            <div class="msg-wrap" ng-controller="ContentCtrl">
+						<div ng-repeat="event in events">
+							<!-- EVENT A -->
+							<div class="alert alert-info msg-date">
+								<strong>{{event.title}}</strong>
+							</div>
+	
+							
+							<div ng-repeat="reply in event.replies">
+								<div class="media msg ">
+									<a class="pull-left" href="#">
+										<img class="media-object" data-src="holder.js/64x64" alt="64x64" style="width: 32px; height: 32px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAACqUlEQVR4Xu2Y60tiURTFl48STFJMwkQjUTDtixq+Av93P6iBJFTgg1JL8QWBGT4QfDX7gDIyNE3nEBO6D0Rh9+5z9rprr19dTa/XW2KHl4YFYAfwCHAG7HAGgkOQKcAUYAowBZgCO6wAY5AxyBhkDDIGdxgC/M8QY5AxyBhkDDIGGYM7rIAyBgeDAYrFIkajEYxGIwKBAA4PDzckpd+322243W54PJ5P5f6Omh9tqiTAfD5HNpuFVqvFyckJms0m9vf3EY/H1/u9vb0hn89jsVj8kwDfUfNviisJ8PLygru7O4TDYVgsFtDh9Xo9NBrNes9cLgeTybThgKenJ1SrVXGf1WoVDup2u4jFYhiPx1I1P7XVBxcoCVCr1UBfTqcTrVYLe3t7OD8/x/HxsdiOPqNGo9Eo0un02gHkBhJmuVzC7/fj5uYGXq8XZ2dnop5Mzf8iwMPDAxqNBmw2GxwOBx4fHzGdTpFMJkVzNB7UGAmSSqU2RoDmnETQ6XQiOyKRiHCOSk0ZEZQcUKlU8Pz8LA5vNptRr9eFCJQBFHq//szG5eWlGA1ywOnpqQhBapoWPfl+vw+fzweXyyU+U635VRGUBOh0OigUCggGg8IFK/teXV3h/v4ew+Hwj/OQU4gUq/w4ODgQrkkkEmKEVGp+tXm6XkkAOngmk4HBYBAjQA6gEKRmyOL05GnR99vbW9jtdjEGdP319bUIR8oA+pnG5OLiQoghU5OElFlKAtCGr6+vKJfLmEwm64aosd/XbDbbyIBSqSSeNKU+HXzlnFAohKOjI6maMs0rO0B20590n7IDflIzMmdhAfiNEL8R4jdC/EZIJj235R6mAFOAKcAUYApsS6LL9MEUYAowBZgCTAGZ9NyWe5gCTAGmAFOAKbAtiS7TB1Ng1ynwDkxRe58vH3FfAAAAAElFTkSuQmCC">
+									</a>
+									<div class="media-body">
+										<small class="pull-right"><span class="time"><i class="fa fa-clock-o"></i> 12:10am</span><br/><a href="#" data-toggle="modal" data-target="#reply" data-original-title>+</a></small>
+										<small class="col-lg-10">{{reply.content}}</small>
+									</div>
+								</div>
+							</div>
+						</div>
+		            </div>
+
+		            <!--div class="send-wrap ">
+		                <textarea class="form-control send-message" rows="3" placeholder="Write a reply..."></textarea>
+		            </div-->
+		            <div class="btn-panel">
+	            		<a href="#" class="btn col-lg-12" data-toggle="modal" data-target="#newevent" data-original-title><i class="icon-pencil"></i> <strong>New Event</strong></a>
+						<!--a href="#" class="btn col-lg-3"><i class="icon-edit"></i> <strong>Edit</strong></a>
+						<a href="#" class="btn col-lg-3"><i class="icon-trash"></i> <strong>Delete</strong></a>
+						<a href="#" class="btn col-lg-3"><i class="icon-align-justify"></i> <strong>List</strong></a-->
+		                <!--a href="" class=" col-lg-3 btn send-message-btn " role="button"><i class="fa fa-cloud-upload"></i> Add Files</a>
+		                <a href="" class=" col-lg-4 text-right btn send-message-btn pull-right" role="button"><i class="fa fa-plus"></i> Send Message</a-->
+		            </div>
+		        </div>
+		    </div>
+
+
+	        <div class="modal fade" id="newevent" tabindex="-1" role="dialog" aria-labelledby="contactLabel" aria-hidden="true">
+	            <div class="modal-dialog" ng-controller="ContentCtrl">
+	                <div class="panel panel-secondary">
+	                    <div class="panel-heading">
+	                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+	                        <h4 class="panel-title" id="contactLabel"><span class="glyphicon glyphicon-info-sign"></span>New Event</h4>
+	                    </div>
+	                    <form action="#" method="post" accept-charset="utf-8" ng-submit="createEvent()">
+							<div class="modal-body" style="padding: 5px;">
+								<div class="row">
+									<div class="col-lg-12 col-md-12 col-sm-12" style="padding-bottom: 10px;">
+										<input class="form-control" id="newevent_title" name="title" placeholder="Title" type="text" required autofocus />
+									</div>
+								</div>	
+								<div class="row">
+									<div class="col-lg-12 col-md-12 col-sm-12">
+										<textarea style="resize:vertical;" id="newevent_details" class="form-control" placeholder="First comment..." rows="6" name="comment" required></textarea>
+									</div>
+								</div>
+							</div>  
+							<div class="panel-footer" style="margin-bottom:-14px;">
+								<input type="submit" class="btn btn-success" value="Send"/>
+								<!--<span class="glyphicon glyphicon-ok"></span>-->
+								<input type="reset" class="btn btn-danger" value="Clear" />
+								<!--<span class="glyphicon glyphicon-remove"></span>-->
+								<button style="float: right;" type="button" class="btn btn-default btn-close" data-dismiss="modal">Close</button>
+							</div>
+	                    </form>
+	                </div>
+	            </div>
+	        </div>
+			
+			<div class="modal fade" id="reply" tabindex="-1" role="dialog" aria-labelledby="contactLabel" aria-hidden="true">
+	            <div class="modal-dialog" ng-controller="ContentCtrl">
+	                <div class="panel panel-primary">
+	                    <div class="panel-heading">
+	                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+	                        <h4 class="panel-title" id="contactLabel"><span class="glyphicon glyphicon-info-sign"></span>New Reply</h4>
+	                    </div>
+	                    <form action="#" method="post" accept-charset="utf-8" ng-submit="reply()">
+							<div class="modal-body" style="padding: 5px;">
+								<div class="row">
+									<div class="col-lg-12 col-md-12 col-sm-12">
+										<textarea style="resize:vertical;" id="reply_content" class="form-control" placeholder="Write your comment..." rows="6" name="comment" required></textarea>
+									</div>
+								</div>
+							</div>  
+							<div class="panel-footer" style="margin-bottom:-14px;">
+								<input type="submit" class="btn btn-success" value="Send"/>
+								<!--<span class="glyphicon glyphicon-ok"></span>-->
+								<input type="reset" class="btn btn-danger" value="Clear" />
+								<!--<span class="glyphicon glyphicon-remove"></span>-->
+								<button style="float: right;" type="button" class="btn btn-default btn-close" data-dismiss="modal">Close</button>
+							</div>
+	                    </form>
+	                </div>
+	            </div>
+	        </div>
+		</div>
+	</html>
+</html>
