@@ -1,2 +1,2 @@
-Chronicle
-=========
+Travel Chronicle
+================
