@@ -1,0 +1,21 @@
+<div class="container">
+  <div ng-show="!events.length">
+    You haven't created any events yet.
+    Create one now.
+  </div>
+  <ul ng-show="events.length" class="list-unstyled">
+    <li ng-repeat="event in events" class="event">
+      <div class="background-image" ng-style="{ 'background-image': 'url(' + event.background + '?' + event._id + ')' }"></div>
+      <div class="content">
+        <h3>{{event.title}}</h3>
+        <ul class="list-unstyled">
+          <li ng-repeat="content in event.contents">
+            <img ng-show="content.image" ng-src="{{content.image}}">
+            {{content.comment}}
+          </li>
+        </ul>
+      </div>
+      
+    </li>
+  </ul>
+</div>
