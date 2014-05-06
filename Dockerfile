@@ -6,7 +6,9 @@ RUN wget -O - http://nodejs.org/dist/v0.10.25/node-v0.10.25-linux-x64.tar.gz | t
 
 ADD . /data/app
 RUN cd /data/app ; npm install
+RUN cd /data/app ; npm install -g grunt-cli
 
 EXPOSE 80
 
-CMD cd /data/app ; npm start
+#install any added dependencies, build tasks, start
+CMD cd /data/app ; npm run-script build ; npm start
