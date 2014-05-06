@@ -1,2 +1,6 @@
 environment:
-  WEB_PORT: 80
+  COOKIE_SECRET: "688a05c0-d21c-11e3-9c1a-0800200c9a66"
+  COOKIE_MAX: 3600
+  MONGO_DATABASE: "chronicle"
+links:
+  mongo: dockerfile/mongodb
