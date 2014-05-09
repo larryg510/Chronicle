@@ -20,4 +20,33 @@
   .content {
     z-index: 1;
   }
+  
+  .content-item {
+    padding: 15px;
+    background-color: rgba(255, 255, 255, 0.50);
+    border-radius: 3px;
+    max-width: 75%;
+    display: inline-block;
+  }
+  .pull-right {
+    clear: both;
+  }
+  
+  .event-title {
+    font-size: @font-size-large;
+    background-color: rgba(255, 255, 255, 0.50);
+    text-align: center;
+    margin-bottom: 10px;
+  }
 }
+
+.event-list {
+  z-index: 0;
+  .list-unstyled;
+}
+
+[event-scroller] {
+  height: 100%;
+  overflow: auto;
+}
+

@@ -39,7 +39,7 @@ chronicleRouter.get('/:chronicle', function(req, res, next){
 });
 
 chronicleRouter.get('/:chronicle/events', function(req, res, next){
-  res.json(fakeEvents(3));
+  res.json(fakeEvents(6));
 });
 
 router.use('/chronicle', chronicleRouter);
@@ -83,7 +83,7 @@ function fakeEvents(max){
       title: Faker.Lorem.words(2).join(' '),
       created: Faker.Date.recent,
       contents: fakeContents(3),
-      background: Faker.Image.abstractImage(150, 150)
+      background: Faker.Image.abstractImage(150, 150).replace('http://', '//') + '/?' + Math.random()
     });
   }
   return events;
@@ -102,7 +102,7 @@ function fakeContents(max){
     } else {
       contents.push({
         _id: new mongoose.Types.ObjectId(),
-        image: Faker.Image.nightlife(150, 150),
+        image: Faker.Image.nightlife(150, 150).replace('http://', '//') + '/?' + Math.random(),
         author: fakeUser(),
         created: Faker.Date.recent
       });

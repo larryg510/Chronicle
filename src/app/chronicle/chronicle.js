@@ -5,20 +5,26 @@ angular.module('chronicle.chronicle', [
 ])
 
 .config(function($stateProvider) {
+  var resolve = {
+    chronicle: function($stateParams, apiService){
+      return apiService.chronicle($stateParams.chronicleId).info();
+    },
+    events: function($stateParams, apiService){
+      return apiService.chronicle($stateParams.chronicleId).events();
+    }
+  };
+  
   $stateProvider.state('app.chronicle', {
     url: '{chronicleId:[0-9a-f]{24}}',
+    resolve: resolve,
     views: {
       main: {
         controller: 'ChronicleCtrl',
         templateUrl: 'chronicle/chronicle.tpl.html',
-        resolve: {
-          chronicle: function($stateParams, apiService){
-            return apiService.chronicle($stateParams.chronicleId).info();
-          },
-          events: function($stateParams, apiService){
-            return apiService.chronicle($stateParams.chronicleId).events();
-          }
-        }
+      },
+      nav: {
+        controller: 'ChronicleNavCtrl',
+        templateUrl: 'chronicle/chronicle-nav.tpl.html',
       }
     }
   });
@@ -27,6 +33,43 @@ angular.module('chronicle.chronicle', [
 .controller('ChronicleCtrl', function($scope, $state, apiService, chronicle, events) {
   $scope.chronicle = chronicle;
   $scope.events = events;
+  
+})
+
+.controller('ChronicleNavCtrl', function($scope, $state, apiService, chronicle, events) {
+  $scope.chronicle = chronicle;
+  $scope.events = events;
+  $scope.event = events[0];
+  
+  $scope.$on('scroll-to-event', function(e, event){
+    $scope.event = event;
+  });
+})
+
+.directive('eventScroller', function(){
+  return {
+    restrict: 'A',
+    scope: {
+      events: '=eventScroller'
+    },
+    link: function(scope, element, attrs){
+      var elem = element[0];
+      
+      elem.addEventListener('scroll', function(e){
+        var currentEvent = scope.events[0];
+        
+        scope.events.forEach(function(event){
+          if(elem.getBoundingClientRect().top >= document.getElementById(event._id).getBoundingClientRect().top){
+            currentEvent = event;
+          }
+        });
+        
+        scope.$apply(function(){
+          scope.$root.$broadcast('scroll-to-event', currentEvent);
+        });
+      });
+    }
+  };
 })
 
 ;
