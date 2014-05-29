@@ -8,12 +8,17 @@ var express         = require('express')
   , MongoStore      = require('connect-mongo')(expressSession)
   , api             = require('./api')
   , ejs             = require('ejs'); ejs.open = '<$'; ejs.close = '$>';
-    
+
+//===Temporary Fig testing==============================================
+process.env.MONGO_PORT_27017_TCP_ADDR = process.env.MONGO_PORT_27017_TCP_ADDR || process.env.MONGO_1_PORT_27017_TCP_ADDR;
+process.env.MONGO_PORT_27017_TCP_PORT = process.env.MONGO_PORT_27017_TCP_PORT || process.env.MONGO_1_PORT_27017_TCP_PORT;
+
+
 function Server(){
   var server, db;
   
   //===Database Connection================================================
-  var connString = 'mongodb://' + process.env.MONGO_1_PORT_27017_TCP_ADDR + ':' + process.env.MONGO_1_PORT_27017_TCP_PORT
+  var connString = 'mongodb://' + process.env.MONGO_PORT_27017_TCP_ADDR + ':' + process.env.MONGO_PORT_27017_TCP_PORT
                 + '/' + process.env.MONGO_DATABASE;
                 
   mongoose.connect(connString);
@@ -23,8 +28,8 @@ function Server(){
     console.log('MongoDB Connection Opened');
     
     var sessionStore = new MongoStore({
-      host: process.env.MONGO_1_PORT_27017_TCP_ADDR,
-      port: process.env.MONGO_1_PORT_27017_TCP_PORT,
+      host: process.env.MONGO_PORT_27017_TCP_ADDR,
+      port: process.env.MONGO_PORT_27017_TCP_PORT,
       db: process.env.MONGO_DATABASE,
       auto_reconnect: true
     });

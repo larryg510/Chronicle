@@ -7,8 +7,8 @@ RUN wget -O - http://nodejs.org/dist/v0.10.25/node-v0.10.25-linux-x64.tar.gz | t
 ADD . /data/app
 WORKDIR /data/app
 
-RUN npm install
-RUN npm install -g grunt-cli
+RUN npm install > /dev/null 2>&1
+RUN npm install -g grunt-cli > /dev/null 2>&1
 RUN npm run-script build
 
 CMD npm start
