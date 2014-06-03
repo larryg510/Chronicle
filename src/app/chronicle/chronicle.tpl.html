@@ -2,11 +2,7 @@
   <div class="col-lg-6 col-lg-offset-3">
     <div ng-show="!events.length" class="row">
       You haven't created any events yet.
-      Create your first event.
-      <form>
-        Event name: <input type ="text" name="ename"> <br>
-        <input type="submit">
-      </form>
+      <a href="app/event/newevent.tpl.html">Create Your First Event</a>
     </div>
     <ul ng-show="events.length" class="event-list">
       <li ng-repeat="event in events" class="event row" id="{{event._id}}">

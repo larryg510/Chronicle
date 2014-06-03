@@ -39,7 +39,7 @@ chronicleRouter.get('/:chronicle', function(req, res, next){
 });
 
 chronicleRouter.get('/:chronicle/events', function(req, res, next){
-  res.json(fakeEvents(6));
+  res.json([]);
 });
 
 router.use('/chronicle', chronicleRouter);
