@@ -2,10 +2,38 @@
   "name": "chronicle",
   "version": "0.0.0",
   "description": "Travel Chronicle",
-  "main": "server.js",
+  "main": "server/main.js",
   "dependencies": {
-    "express": "~3.4.7"
+    "express": "*",
+    "body-parser": "*",
+    "cookie-parser": "*",
+    "express-session": "*",
+    "ejs": "*",
+    "mongoose": "*",
+    "mongoose-q": "*",
+    "connect-mongo": "*",
+    "q":  "*",
+    "Faker": "*"
   },
-  "devDependencies": {},
-  "author": ""
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-clean": "~0.4.1",
+    "grunt-contrib-copy": "~0.4.1",
+    "grunt-contrib-jshint": "~0.4.3",
+    "grunt-contrib-concat": "~0.3.0",
+    "grunt-contrib-watch": "~0.4.0",
+    "grunt-contrib-uglify": "~0.2.0",
+    "grunt-contrib-less": "~0.9.0",
+    "grunt-ngmin": "0.0.2",
+    "grunt-html2js": "~0.1.3",
+    "grunt-contrib-coffee": "~0.7.0",
+    "grunt-coffeelint": "0.0.6",
+    "grunt-conventional-changelog": "~0.1.1",
+    "grunt-bump": "0.0.6"
+  },
+  "author": "",
+  "scripts": {
+    "build": "grunt build",
+    "start": "node server/main.js"
+  }
 }
