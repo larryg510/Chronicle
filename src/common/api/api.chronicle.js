@@ -13,6 +13,9 @@ angular.module('chronicle.api.chronicle', ['chronicle.api.http'])
         },
         events: function(){
           return http.get(this.id + '/events');
+        },
+        newEvent: function(event){
+          return http.post(this.id + '/events', event);
         }
       };
       

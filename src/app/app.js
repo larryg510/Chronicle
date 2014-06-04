@@ -3,6 +3,8 @@ angular.module('chronicle', [
   'templates-common',
   'chronicle.api',
   'chronicle.chronicle',
+  'chronicle.events',
+  'chronicle.newevent',
   'ngSanitize',
   'ui.bootstrap',
   'ui.router',

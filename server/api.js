@@ -1,5 +1,7 @@
 var express   = require('express')
-  , mongoose  = require('mongoose');
+  , mongoose  = require('mongoose')
+  , Event     = require('./models/event')
+;
 
 var router = new express.Router();
 
@@ -40,6 +42,14 @@ chronicleRouter.get('/:chronicle', function(req, res, next){
 
 chronicleRouter.get('/:chronicle/events', function(req, res, next){
   res.json([]);
+});
+
+chronicleRouter.post('/:chronicle/events', function(req, res, next){
+  var event =  new Event(req.body.data);
+  event.chronicle = req.params.chronicle;
+  event.saveQ().then(function(){
+    res.json(event);
+  });
 });
 
 router.use('/chronicle', chronicleRouter);

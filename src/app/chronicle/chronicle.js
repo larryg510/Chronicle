@@ -34,6 +34,7 @@ angular.module('chronicle.chronicle', [
   $scope.chronicle = chronicle;
   $scope.events = events;
   
+  $state.go($scope.events.length ? '.events' : '.new');
 })
 
 .controller('ChronicleNavCtrl', function($scope, $state, apiService, chronicle, events) {
