@@ -18,6 +18,7 @@ angular.module('chronicle.newevent', [
 })
 
 .controller('NewEventCtrl', function($scope, $state, apiService) {
+  $scope.$root.$broadcast('scroll-to-event', { title: 'New Event' });
   $scope.create = function(){
     //todo: send to apiService
     var hue = Math.floor(Math.random()*360);
@@ -31,7 +32,7 @@ angular.module('chronicle.newevent', [
       color: background
     }).then(function(event){
       $scope.events.push(event);
-      $state.go('^');
+      $state.go('^.events');
     });
   };
 })
