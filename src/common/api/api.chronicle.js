@@ -1,4 +1,4 @@
-angular.module('chronicle.api.chronicle', ['chronicle.api.http'])
+  angular.module('chronicle.api.chronicle', ['chronicle.api.http'])
   .factory('apiChronicle', ['apiHTTP',
     function(apiHTTP){
       var http = new apiHTTP('/api/chronicle/');
@@ -16,7 +16,7 @@ angular.module('chronicle.api.chronicle', ['chronicle.api.http'])
         },
         newEvent: function(event){
           return http.post(this.id + '/events', event);
-        }
+        },
       };
       
       return function(id){
