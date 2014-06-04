@@ -18,6 +18,7 @@ angular.module('chronicle.newevent', [
 })
 
 .controller('NewEventCtrl', function($scope, $state, apiService) {
+  $scope.$root.$broadcast('scroll-to-event', { title: 'New Event' });
   $scope.create = function(){
     //todo: send to apiService
     apiService.chronicle($scope.chronicle._id).newEvent({
