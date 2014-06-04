@@ -10,7 +10,8 @@ var EventSchema = new Schema({
   names: String,
   location: String,
   time: String,
-  description: String
+  description: String,
+  color: String
 }, {
   toJSON: {
     virtuals: true

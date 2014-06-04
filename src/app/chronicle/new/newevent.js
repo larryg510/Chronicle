@@ -20,12 +20,15 @@ angular.module('chronicle.newevent', [
 .controller('NewEventCtrl', function($scope, $state, apiService) {
   $scope.create = function(){
     //todo: send to apiService
+    var hue = Math.floor(Math.random()*360);
+    var background = "background:hsl(" + hue + ", 50%, 90%)";
     apiService.chronicle($scope.chronicle._id).newEvent({
       title: $scope.title,
       names: $scope.names,
       location: $scope.location,
       time: $scope.time,
-      description: $scope.description
+      description: $scope.description,
+      color: background
     }).then(function(event){
       $scope.events.push(event);
       $state.go('^');
