@@ -24,7 +24,7 @@ angular.module('chronicle.chronicle', [
       },
       nav: {
         controller: 'ChronicleNavCtrl',
-        templateUrl: 'chronicle/chronicle-nav.tpl.html',
+        templateUrl: 'chronicle/nav/chronicle-nav.tpl.html',
       }
     }
   });
