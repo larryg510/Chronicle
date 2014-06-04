@@ -28,7 +28,7 @@ angular.module('chronicle.newevent', [
       description: $scope.description
     }).then(function(event){
       $scope.events.push(event);
-      $state.go('^');
+      $state.go('^.events');
     });
   };
 })
