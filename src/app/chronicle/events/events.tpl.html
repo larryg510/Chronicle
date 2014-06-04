@@ -1,0 +1,18 @@
+<ul ng-show="events.length" class="event-list">
+  <li ng-repeat="event in events" class="event row" id="{{event._id}}">
+    <div class="background-image" ng-style="{ 'background-image': 'url(' + event.background + ')' }"></div>
+    <div class="content">
+      <div class="event-title" ng-show="$index != 0">{{event.title}}</div>
+      <ul class="list-unstyled">
+        <li ng-repeat="content in event.contents">
+          <p class="content-item" ng-class="{ 'pull-right': $index % 2 }">
+            <img ng-show="content.image" ng-src="{{content.image}}">
+            <span ng-show="content.comment">
+              {{content.comment}}
+            </span>
+          </p>
+        </li>
+      </ul>
+    </div>
+  </li>
+</ul>
