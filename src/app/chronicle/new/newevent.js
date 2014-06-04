@@ -33,6 +33,8 @@ angular.module('chronicle.newevent', [
     }).then(function(event){
       $scope.events.push(event);
       $state.go('^.events');
+      $scope.$root.$broadcast('scroll-to-event', $scope.events[0]);
+
     });
   };
 })
