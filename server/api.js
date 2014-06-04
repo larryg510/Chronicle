@@ -41,7 +41,9 @@ chronicleRouter.get('/:chronicle', function(req, res, next){
 });
 
 chronicleRouter.get('/:chronicle/events', function(req, res, next){
-  res.json([]);
+  Event.findQ({ chronicle: req.params.chronicle }).then(function(results){
+    res.json(results);
+  });
 });
 
 chronicleRouter.post('/:chronicle/events', function(req, res, next){

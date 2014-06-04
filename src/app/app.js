@@ -55,7 +55,9 @@ angular.module('chronicle', [
 })
 
 .controller('AppCtrl', function($scope, $state, apiService, user) {
-  $state.go('app.chronicle', { chronicleId: '5369238f2df443631a888633' });
+  if($state.is('app')){
+    $state.go('app.chronicle', { chronicleId: '5369238f2df443631a888633' });
+  }
 })
 
 ;

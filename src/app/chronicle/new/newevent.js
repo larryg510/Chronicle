@@ -21,7 +21,11 @@ angular.module('chronicle.newevent', [
   $scope.create = function(){
     //todo: send to apiService
     apiService.chronicle($scope.chronicle._id).newEvent({
-      title: $scope.title
+      title: $scope.title,
+      names: $scope.names,
+      location: $scope.location,
+      time: $scope.time,
+      description: $scope.description
     }).then(function(event){
       $scope.events.push(event);
       $state.go('^');

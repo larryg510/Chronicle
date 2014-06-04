@@ -33,8 +33,10 @@ angular.module('chronicle.chronicle', [
 .controller('ChronicleCtrl', function($scope, $state, apiService, chronicle, events) {
   $scope.chronicle = chronicle;
   $scope.events = events;
-  
-  $state.go($scope.events.length ? '.events' : '.new');
+
+  if($state.is('app.chronicle')){
+    $state.go($scope.events.length ? '.events' : '.new');
+  }
 })
 
 .controller('ChronicleNavCtrl', function($scope, $state, apiService, chronicle, events) {

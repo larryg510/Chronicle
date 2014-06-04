@@ -7,6 +7,9 @@ var express     = require('express')
 var EventSchema = new Schema({
   chronicle: { type: Schema.Types.ObjectId, ref: 'chronicle'},
   title: String,
+  names: String,
+  location: String,
+  time: String,
   description: String
 }, {
   toJSON: {
