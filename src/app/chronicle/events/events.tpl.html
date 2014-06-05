@@ -1,7 +1,6 @@
 <div class="col-lg-6 col-lg-offset-3">
   <ul ng-show="events.length" class="event-list">
     <li ng-repeat="event in events" class="event row" id="{{event._id}}">
-      <!--div class="background-image" ng-style="{ 'background-image': 'url(' + event.background + ')' }"></div -->
       <a ui-sref="^.event({eventId: event._id})">
         <div class="content" style={{event.color}}>
           <br>

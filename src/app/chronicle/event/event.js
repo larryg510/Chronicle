@@ -18,7 +18,12 @@ angular.module('chronicle.event', [
 })
 
 .controller('EventCtrl', function($scope, $state, apiService) {
-
+  $scope.events.forEach(function(event){
+    if(event._id == $state.params.eventId) {
+      $scope.event = event;
+    }
+  });
+  $scope.$root.$broadcast('scroll-to-event', $scope.event);
 })
 
 ;
