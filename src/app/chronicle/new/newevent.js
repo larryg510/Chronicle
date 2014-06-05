@@ -5,7 +5,6 @@ angular.module('chronicle.newevent', [
 ])
 
 .config(function($stateProvider) {
-  
   $stateProvider.state('app.chronicle.new', {
     url: '/new',
     views: {
@@ -20,9 +19,9 @@ angular.module('chronicle.newevent', [
 .controller('NewEventCtrl', function($scope, $state, apiService) {
   $scope.$root.$broadcast('scroll-to-event', { title: 'New Event' });
   $scope.create = function(){
-    //todo: send to apiService
     var hue = Math.floor(Math.random()*360);
     var background = "background:hsl(" + hue + ", 50%, 90%)";
+    // Sent to apiService
     apiService.chronicle($scope.chronicle._id).newEvent({
       title: $scope.title,
       names: $scope.names,

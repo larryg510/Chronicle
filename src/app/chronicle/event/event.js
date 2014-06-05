@@ -5,8 +5,14 @@ angular.module('chronicle.event', [
 ])
 
 .config(function($stateProvider) {
-  
+  var resolve = {
+    contents: function($stateParams, apiService){
+      return apiService.chronicle($stateParams.chronicleId).event($stateParams.eventId).contents();
+    }
+  };
+
   $stateProvider.state('app.chronicle.event', {
+    resolve: resolve,
     url: '{eventId:[0-9a-f]{24}}',
     views: {
       main: {

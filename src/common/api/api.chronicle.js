@@ -1,21 +1,24 @@
-  angular.module('chronicle.api.chronicle', ['chronicle.api.http'])
-  .factory('apiChronicle', ['apiHTTP',
-    function(apiHTTP){
-      var http = new apiHTTP('/api/chronicle/');
-      
+  angular.module('chronicle.api.chronicle', ['chronicle.api.http', 'chronicle.api.event'])
+  .factory('apiChronicle', ['apiHTTP', 'apiEvent',
+    function(apiHTTP, apiEvent){
+  
       function Chronicle(id){
         this.id = id;
+        this.http = new apiHTTP('/api/chronicle/');
       }
       
       Chronicle.prototype = {
         info: function(){
-          return http.get(this.id);
+          return this.http.get(this.id);
         },
         events: function(){
-          return http.get(this.id + '/events');
+          return this.http.get(this.id + '/events');
+        },
+        event: function(eventId){
+          return apiEvent(this.id, eventId);
         },
         newEvent: function(event){
-          return http.post(this.id + '/events', event);
+          return this.http.post(this.id + '/events', event);
         },
       };
       
