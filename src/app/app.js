@@ -4,6 +4,7 @@ angular.module('chronicle', [
   'chronicle.api',
   'chronicle.chronicle',
   'chronicle.events',
+  'chronicle.event',
   'chronicle.newevent',
   'ngSanitize',
   'ui.bootstrap',
