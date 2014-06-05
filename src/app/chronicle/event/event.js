@@ -6,9 +6,7 @@ angular.module('chronicle.event', [
 
 .config(function($stateProvider) {
   var resolve = {
-    contents: function($stateParams, apiService){
-      return apiService.chronicle($stateParams.chronicleId).event($stateParams.eventId).contents();
-    }
+    
   };
 
   $stateProvider.state('app.chronicle.event', {
@@ -30,6 +28,14 @@ angular.module('chronicle.event', [
     }
   });
   $scope.$root.$broadcast('scroll-to-event', $scope.event);
+  $scope.create = function () {
+    apiService.chronicle($scope.chronicle._id).event($scope.event._id).newContent({
+      format: $scope.format,
+      content: $scope.content
+    }).then(function(content){
+      $scope.event.content.push(content);
+    });
+  };
 })
 
 ;

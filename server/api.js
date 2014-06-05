@@ -36,21 +36,45 @@ chronicleRouter.param('chronicle', function(req, res, next, id){
   next();
 });
 
+chronicleRouter.param('event', function(req, res, next, id){
+  Event.findOneQ({ _id: id }).then(function(event){
+    req.event = event;
+    next();
+  });
+});
+
 chronicleRouter.get('/:chronicle', function(req, res, next){
   res.json(req.chronicle);
 });
 
 chronicleRouter.get('/:chronicle/events', function(req, res, next){
-  Event.findQ({ chronicle: req.params.chronicle }).then(function(results){
+  Event.find({ chronicle: req.params.chronicle }).populate('owner content.owner').execQ().then(function(results){
     res.json(results);
   });
 });
 
 chronicleRouter.post('/:chronicle/events', function(req, res, next){
+  req.body.data.owner = req.user;
+
   var event =  new Event(req.body.data);
   event.chronicle = req.params.chronicle;
   event.saveQ().then(function(){
+    event.owner = req.user;
     res.json(event);
+  });
+});
+
+chronicleRouter.get('/:chronicle/event/:event', function(req, res, next){
+  res.json(req.event);
+});
+
+chronicleRouter.post('/:chronicle/event/:event/content', function(req, res, next){
+  req.body.data.owner = req.user;
+
+  var content = req.event.content[req.event.content.push(req.body.data) - 1]
+  req.event.updateQ({ $push: { content: content } }).then(function(){
+    content.owner = req.user;
+    res.json(content);
   });
 });
 

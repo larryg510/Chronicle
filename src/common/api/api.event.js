@@ -3,7 +3,7 @@
     function(apiHTTP){
       
       function Event(chronicle, id){
-        this.http = new apiHTTP('/api/chronicle/' + chronicle + '/event');
+        this.http = new apiHTTP('/api/chronicle/' + chronicle + '/event/');
         this.id = id;
       }
       
@@ -11,11 +11,8 @@
         info: function(){
           return this.http.get(this.id);
         },
-        contents: function(){
-          return this.http.get(this.id + '/contents/');
-        },
         newContent: function(content){
-          return this.http.post(this.id + '/contents', content);
+          return this.http.post(this.id + '/content', content);
         },
       };
       

@@ -28,7 +28,8 @@ angular.module('chronicle.newevent', [
       location: $scope.location,
       time: $scope.time,
       description: $scope.description,
-      color: background
+      color: background,
+      content: []
     }).then(function(event){
       $scope.events.push(event);
       $state.go('^.events');
