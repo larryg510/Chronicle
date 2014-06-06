@@ -13,13 +13,21 @@
       <div class="event-description">What: {{event.description}}</div>
     </div>
     <div ng-repeat="content in event.content" class="content row" id="{{content._id}}">
-        <div class="content" style={{event.color}}>
+        <div class="content" style={{event.color}} ng-hide="content.format === 'image'">
           <br>
           <div class="event-title">Format: {{content.format}}</div>
           <br>
           <div class="event-names" text-align="justify">Content: {{content.content}}</div>
           <br>
         </div>
+        <div class="content" style={{event.color}} ng-show="content.format === 'image'">
+          <br>
+          <div class="event-title">Format: {{content.format}}</div>
+          <br>
+          <div class="event-names" text-align="justify">Base64: {{content.content}}</div>
+          <img src="{{content.content}}"/>
+          <br>
+        </div>  
     </div>
   </ul>
   <br>
