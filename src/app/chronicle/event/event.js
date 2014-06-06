@@ -1,7 +1,7 @@
 angular.module('chronicle.event', [
   'chronicle.api',
   'ui.router',
-  'ui.bootstrap'
+  'ui.bootstrap',
 ])
 
 .config(function($stateProvider) {
@@ -21,21 +21,54 @@ angular.module('chronicle.event', [
   });
 })
 
-.controller('EventCtrl', function($scope, $state, apiService) {
+.controller('EventCtrl', function($scope, $state, apiService, $modal) {
   $scope.events.forEach(function(event){
     if(event._id == $state.params.eventId) {
       $scope.event = event;
     }
   });
+  
   $scope.$root.$broadcast('scroll-to-event', $scope.event);
-  $scope.create = function () {
-    apiService.chronicle($scope.chronicle._id).event($scope.event._id).newContent({
-      format: $scope.format,
-      content: $scope.content
-    }).then(function(content){
-      $scope.event.content.push(content);
+
+
+  $scope.open = function () {
+
+    var _chronicle = $scope.chronicle;
+    var _event = $scope.event;
+
+    var modalInstance = $modal.open({
+      templateUrl: 'chronicle/event/modal.tpl.html',
+      controller: function ($scope, $modalInstance) {
+        $scope.tabs = [
+          { title:'Text Content', thing:'Comment', format: 'text' },
+          { title:'Quote', thing:'Quote', format: 'quote'},
+          { title:'Image', thing:'upload image', format: 'image'}
+        ];
+
+        $scope.create = function () {
+          var format, content;
+          $scope.tabs.forEach(function(tab){
+            if(tab.active) {
+              format = tab.format;
+              content = tab.content;
+            }
+          });
+
+          apiService.chronicle(_chronicle._id).event(_event._id).newContent({
+            format: format,
+            content: content
+          }).then(function(content){
+            _event.content.push(content);
+          });
+
+          $modalInstance.close();
+        };
+
+        $scope.cancel = function () {
+          $modalInstance.dismiss('cancel');
+        };
+      }
     });
   };
-})
 
-;
+});

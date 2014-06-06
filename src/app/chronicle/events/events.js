@@ -13,6 +13,7 @@ angular.module('chronicle.events', [
         controller: 'EventsCtrl',
         templateUrl: 'chronicle/events/events.tpl.html',
       }
+      
     }
   });
 })

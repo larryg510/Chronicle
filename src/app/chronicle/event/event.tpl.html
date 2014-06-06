@@ -11,25 +11,16 @@
       <div class="event-time">When: {{event.time}}</div>
       <br>
       <div class="event-description">What: {{event.description}}</div>
-      <br>
-      format:  <input type="text" ng-model="format"><br>
-      <br>
-      content:   <input type="text" ng-model="content"><br>
-      <br>
-      <button class="btn btn=primary" ng-click="create()">Add content</button>
     </div>
-<div>
     <div ng-repeat="content in event.content" class="content row" id="{{content._id}}">
         <div class="content" style={{event.color}}>
           <br>
-          <div class="event-title">Title: {{content.format}}</div>
+          <div class="event-title">Format: {{content.format}}</div>
           <br>
-          <div class="event-names">Who: {{content.content}}</div>
+          <div class="event-names" text-align="justify">Content: {{content.content}}</div>
           <br>
         </div>
     </div>
   </ul>
-</div>
-  </ul>
-</div>
-<div 
+  <br>
+  <button class="btn btn-primary" ng-click="open()">Add content!</button>
