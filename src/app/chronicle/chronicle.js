@@ -22,10 +22,14 @@ angular.module('chronicle.chronicle', [
         controller: 'ChronicleCtrl',
         templateUrl: 'chronicle/chronicle.tpl.html',
       },
-      nav: {
-        controller: 'ChronicleNavCtrl',
+      topnav: {
+        controller: 'ChronicleTopNavCtrl',
         templateUrl: 'chronicle/nav/chronicle-nav.tpl.html',
       }
+      /* bottomnav: {
+        controller: 'ChronicleBottomNavCtrl',
+        templateUrl: 'chronicle/nav/chronicle-timeline-nav.tpl.html'
+      } */
     }
   });
 })
@@ -35,11 +39,11 @@ angular.module('chronicle.chronicle', [
   $scope.events = events;
 
   if($state.is('app.chronicle')){
-    $state.go($scope.events.length ? '.events' : '.new');
+    $state.go($scope.events.length ? '.events' : '.newevent');
   }
 })
 
-.controller('ChronicleNavCtrl', function($scope, $state, apiService, chronicle, events) {
+.controller('ChronicleTopNavCtrl', function($scope, $state, apiService, chronicle, events) {
   $scope.chronicle = chronicle;
   $scope.events = events;
   $scope.event = events[0];
@@ -48,6 +52,19 @@ angular.module('chronicle.chronicle', [
     $scope.event = event;
   });
 })
+
+/* .controller('ChronicleBottomNavCtrl', function($scope, $state, apiService, chronicle, events) {
+  $scope.chronicle = chronicle;
+  $scope.events = events;
+  $scope.event = events[0];
+
+  $scope.totalItems = 64;
+  $scope.currentPage = 
+  $scope.setPage = function (pageNo) {
+    $scope.currentPage = pageNo;
+  };
+  $scope.maxSize = 5;
+}) */
 
 .directive('eventScroller', function(){
   return {

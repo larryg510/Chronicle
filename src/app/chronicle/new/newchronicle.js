@@ -1,23 +1,23 @@
-angular.module('chronicle.newevent', [
+angular.module('chronicle.newchronicle', [
   'chronicle.api',
   'ui.router',
   'ui.bootstrap'
 ])
 
 .config(function($stateProvider) {
-  $stateProvider.state('app.chronicle.newevent', {
-    url: '/newevent',
+  $stateProvider.state('app.chronicle.newchronicle', {
+    url: '/newchronicle',
     views: {
       main: {
-        controller: 'NewEventCtrl',
-        templateUrl: 'chronicle/new/newevent.tpl.html',
+        controller: 'NewChronicleCtrl',
+        templateUrl: 'chronicle/new/newchronicle.tpl.html',
       }
     }
   });
 })
 
-.controller('NewEventCtrl', function($scope, $state, apiService) {
-  $scope.$root.$broadcast('scroll-to-event', { title: 'New Event' });
+.controller('NewChronicleCtrl', function($scope, $state, apiService) {
+  $scope.$root.$broadcast('scroll-to-event', { title: 'New Chronicle' });
   $scope.create = function(){
     var hue = Math.floor(Math.random()*360);
     var background = "background:hsl(" + hue + ", 50%, 90%)";
