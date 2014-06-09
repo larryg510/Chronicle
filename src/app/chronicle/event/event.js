@@ -42,7 +42,7 @@ angular.module('chronicle.event', [
         $scope.tabs = [
           { title:'Text Content', thing:'Comment', format: 'text' },
           { title:'Quote', thing:'Quote', format: 'quote'},
-          { title:'Image', thing:'upload image', format: 'image'}
+          { title:'Image', thing:'Upload (Must be a file <68 KB large)', format: 'image'}
         ];
 
         $scope.create = function () {
@@ -50,7 +50,13 @@ angular.module('chronicle.event', [
           $scope.tabs.forEach(function(tab){
             if(tab.active) {
               format = tab.format;
-              content = tab.content;
+              if (format === 'image') {
+                var canvas = document.createElement('canvas'),
+                contex = canvas.getContext('2d');
+              }
+              else {
+                content = tab.content;
+              }
             }
           });
 
