@@ -2,6 +2,7 @@ angular.module('chronicle', [
   'templates-app',
   'templates-common',
   'chronicle.api',
+  'chronicle.chronicles',
   'chronicle.chronicle',
   'chronicle.events',
   'chronicle.event',
