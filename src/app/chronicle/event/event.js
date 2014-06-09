@@ -2,6 +2,7 @@ angular.module('chronicle.event', [
   'chronicle.api',
   'ui.router',
   'ui.bootstrap',
+  'filereader'
 ])
 
 .config(function($stateProvider) {
@@ -38,31 +39,27 @@ angular.module('chronicle.event', [
 
     var modalInstance = $modal.open({
       templateUrl: 'chronicle/event/modal.tpl.html',
+      scope: $scope,
       controller: function ($scope, $modalInstance) {
         $scope.tabs = [
-          { title:'Text Content', thing:'Comment', format: 'text' },
-          { title:'Quote', thing:'Quote', format: 'quote'},
-          { title:'Image', thing:'Upload (Must be a file <68 KB large)', format: 'image'}
+          { title:'Text Content', thing:'Comment', format: 'text', content: '' },
+          { title:'Quote', thing:'Quote', format: 'quote', content: ''},
+          { title:'Image', thing:'Upload (Must be a file <68 KB large)', format: 'image', content: '' }
         ];
 
-        $scope.create = function () {
+        $scope.getActiveTab = function(){
+          for(var i = 0; i < $scope.tabs.length; i++){
+            if($scope.tabs[i].active) { return $scope.tabs[i]; }
+          }
+        };
+
+        $scope.create = function (img) {
           var format, content;
-          $scope.tabs.forEach(function(tab){
-            if(tab.active) {
-              format = tab.format;
-              if (format === 'image') {
-                var canvas = document.createElement('canvas'),
-                contex = canvas.getContext('2d');
-              }
-              else {
-                content = tab.content;
-              }
-            }
-          });
+          var activeTab = $scope.getActiveTab();
 
           apiService.chronicle(_chronicle._id).event(_event._id).newContent({
-            format: format,
-            content: content
+            format: activeTab.format,
+            content: activeTab.content
           }).then(function(content){
             _event.content.push(content);
           });
