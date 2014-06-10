@@ -1,83 +1,101 @@
 var express   = require('express')
   , mongoose  = require('mongoose')
-  , Event     = require('./models/event')
+  , Chronicle = require('./models/chronicle')
 ;
 
-var router = new express.Router();
+var router          = new express.Router()
+  , userRouter      = new express.Router()
+  , chronicleRouter = new express.Router();
 
-//Todo: put this in user model
-var userRouter = new express.Router();
+// map data to req.user using requested id
 userRouter.param('user', function(req, res, next, id) {
   req.user = fakeUser(id);
   next();
 });
 
+// get current user's personal profile
 userRouter.get('/', function(req, res, next){
   res.json(fakeUser());
 });
 
+// get current user's chronicle library
 userRouter.get('/chronicles', function(req, res, next){
   res.json(fakeChronicles());
 });
 
+// get requested user's personal profile
 userRouter.get('/:user', function(req, res, next){
   res.json(req.user);
 });
 
+// get requested user's chronicle library
 userRouter.get('/:user/chronicles', function(req, res, next){
   res.json(fakeChronicles());
 });
 
+// use userRouter
 router.use('/user', userRouter);
 
-var chronicleRouter = new express.Router();
+// map data to req.chronicle using requested chronicle id
 chronicleRouter.param('chronicle', function(req, res, next, id){
-  req.chronicle = fakeChronicle(id);
-  next();
-});
-
-chronicleRouter.param('event', function(req, res, next, id){
-  Event.findOneQ({ _id: id }).then(function(event){
-    req.event = event;
+  Chronicle.findByIdQ(id).then(function(chronicle){
+    req.chronicle = chronicle;
     next();
   });
 });
 
+// map data to req.event using requested event id
+chronicleRouter.param('event', function(req, res, next, id){
+  req.event = req.chronicle.events.id(id);
+  next();
+});
+
+// get data from requested chronicle
 chronicleRouter.get('/:chronicle', function(req, res, next){
   res.json(req.chronicle);
 });
 
+// get all event data from requested chronicle
 chronicleRouter.get('/:chronicle/events', function(req, res, next){
-  Event.find({ chronicle: req.params.chronicle }).populate('owner content.owner').execQ().then(function(results){
-    res.json(results);
-  });
+  res.json(req.chronicle.events);
 });
 
+// push new event to requested chronicle
 chronicleRouter.post('/:chronicle/events', function(req, res, next){
   req.body.data.owner = req.user;
-
-  var event =  new Event(req.body.data);
-  event.chronicle = req.params.chronicle;
-  event.saveQ().then(function(){
-    event.owner = req.user;
+  var event = req.chronicle.events[req.chronicle.events.push(req.body.data) - 1];
+  req.chronicle.updateQ({ $push: { 'events': event }}).then(function() {
     res.json(event);
   });
 });
 
+// get specific event data from requested chronicle
 chronicleRouter.get('/:chronicle/event/:event', function(req, res, next){
   res.json(req.event);
 });
 
-chronicleRouter.post('/:chronicle/event/:event/content', function(req, res, next){
-  req.body.data.owner = req.user;
-
-  var content = req.event.content[req.event.content.push(req.body.data) - 1]
-  req.event.updateQ({ $push: { content: content } }).then(function(){
-    content.owner = req.user;
-    res.json(content);
+// edit metadata from specific event in requested chronicle
+chronicleRouter.post('/:chronicle/event/:event', function(req, res, next){
+  req.event.metadata = req.body.data;
+  Chronicle.findAndUpdateQ({ events: { $elemMatch: { _id: req.event._id } } },
+    { $set: {'events.$.metadata': metadata}}).then(function() {
+    res.json(req.event);
   });
 });
 
+// push new content to event in requested chronicle
+chronicleRouter.post('/:chronicle/event/:event/content', function(req, res, next){
+  req.body.data.owner = req.user;
+  var content = req.event.content[req.event.content.push(req.body.data) - 1];
+  Chronicle.findOneAndUpdateQ({ events: { $elemMatch: {_id: req.event._id } } },
+    { $set: {'events.$.content' : content.toObject() }}).then(function(){
+      content.owner = req.user;
+      res.json(content);
+     });
+  //req.chronicle.event.updateQ({ $push: { content: content } }).then(function(){
+});
+
+// use chronicleRouter
 router.use('/chronicle', chronicleRouter);
 
 exports.router = router;

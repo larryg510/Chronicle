@@ -53,7 +53,8 @@ angular.module('chronicle', [
   $rootScope.$on('$stateChangeError', function(event, toState, toParams, fromState, fromParams, error) {
     console.log('stateChangeError', toState, fromState, error);
     event.preventDefault();
-    $state.go('app.error', { status: error.status, error: error.data && error.data.error || error });
+    console.log(error);
+    //$state.go('app.error', { status: error.status, error: error.data && error.data.error || error });
   });
 })
 

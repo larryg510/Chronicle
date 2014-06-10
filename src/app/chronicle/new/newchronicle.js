@@ -23,11 +23,11 @@ angular.module('chronicle.newchronicle', [
     var background = "background:hsl(" + hue + ", 50%, 90%)";
     // Sent to apiService
     apiService.chronicle($scope.chronicle._id).newEvent({
-      title: $scope.title,
-      names: $scope.names,
-      location: $scope.location,
-      time: $scope.time,
-      description: $scope.description,
+      title: $scope.metadata.title,
+      names: $scope.metadata.names,
+      location: $scope.metadata.location,
+      time: $scope.metadata.time,
+      description: $scope.metadata.description,
       color: background,
       content: []
     }).then(function(event){
