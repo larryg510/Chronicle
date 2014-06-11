@@ -17,9 +17,9 @@
         event: function(eventId){
           return apiEvent(this.id, eventId);
         },
-        newEvent: function(event){
-          return this.http.post(this.id + '/events', event);
-        },
+        newEvent: function(metadata){
+          return this.http.post(this.id + '/events', metadata);
+        }
       };
       
       return function(id){

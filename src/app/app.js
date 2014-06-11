@@ -6,7 +6,7 @@ angular.module('chronicle', [
   'chronicle.chronicle',
   'chronicle.events',
   'chronicle.event',
-  'chronicle.newevent',
+  'chronicle.editevent',
   'chronicle.newchronicle',
   'ngSanitize',
   'ui.bootstrap',

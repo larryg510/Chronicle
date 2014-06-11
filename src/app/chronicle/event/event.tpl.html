@@ -1,6 +1,6 @@
 <div class="col-lg-6 col-lg-offset-3">
   <ul>
-    <div class="content" style={{event.color}}>
+    <div class="content" style={{event.metadata.color}}>
       <br> <div class="event-title">Title: {{event.metadata.title}}</div>
       <br> <div class="event-names">Who: {{event.metadata.names}}</div>
       <br> <div class="event-location">Where: {{event.metadata.location}}</div>
@@ -19,6 +19,7 @@
           <br>
         </div>  
     </div>
+    <a class="btn btn-default" ui-sref=".edit">Edit</a>
   </ul>
   <br>
   <button class="btn btn-primary" ng-click="open()">Add content!</button>
