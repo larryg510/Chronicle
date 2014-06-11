@@ -23,7 +23,7 @@ var EventSchema = new Schema({
    location: String,
    time: String,
    description: String,
-   photo: String
+   photo: String,
    color: { type: String, default: function(){
     return "background:hsl(" + Math.floor(Math.random()*360) + ", 50%, 90%)";
    }}
