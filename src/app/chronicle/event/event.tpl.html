@@ -1,15 +1,17 @@
 <div class="col-lg-6 col-lg-offset-3">
   <ul>
-    <div class="content" style={{event.color}}>
-      <br> <div class="event-title">Title: {{event.metadata.title}}</div>
-      <br> <div class="event-names">Who: {{event.metadata.names}}</div>
-      <br> <div class="event-location">Where: {{event.metadata.location}}</div>
-      <br> <div class="event-time">When: {{event.metadata.time}}</div>
-      <br> <div class="event-description">What: {{event.metadata.description}}</div>
+    <div class="imgBox" style="background-image: url({{event.metadata.photo}}); 
+      background-size:auto 100%; margin:none; background-repeat:no-repeat">
+      <div style="margin:5%; background-color:white; opacity:0.6">
+        <br> <div class="event-title">{{event.metadata.title}}</div>
+        <br> <div class="event-names">{{event.metadata.names}}</div>
+        <br> <div class="event-location">{{event.metadata.location}}</div
+        <br> <div class="event-time">{{event.metadata.time}}</div>
+        <br> <div class="event-description">{{event.metadata.description}}</div>
+      </div>
     </div>
     <div ng-repeat="content in event.content" class="content row" id="{{content._id}}">
-        <div class="content" style={{event.color}} ng-hide="content.format === 'image'">
-          <br> <div class="event-title">Format: {{content.format}}</div>
+        <div class="content" style={{event.metadata.color}} ng-hide="content.format === 'image'">
           <br> <div class="event-names" text-align="justify">Content: {{content.content}}</div>
           <br>
         </div>
@@ -19,6 +21,7 @@
           <br>
         </div>  
     </div>
+    <a class="btn btn-default" ui-sref=".edit">Edit</a>
   </ul>
   <br>
   <button class="btn btn-primary" ng-click="open()">Add content!</button>
