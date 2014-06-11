@@ -16,7 +16,6 @@ var ContentSchema = new Schema({
 */
 
 var EventSchema = new Schema({
- color: String,
  content: [ContentSchema],
  metadata: {
    title: String,
@@ -24,6 +23,10 @@ var EventSchema = new Schema({
    location: String,
    time: String,
    description: String,
+   photo: String
+   color: { type: String, default: function(){
+    return "background:hsl(" + Math.floor(Math.random()*360) + ", 50%, 90%)";
+   }}
  }, 
  //owner: { type: Schema.Types.ObjectId, ref: 'user'}
 });

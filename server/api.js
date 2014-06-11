@@ -37,7 +37,7 @@ userRouter.get('/:user/chronicles', function(req, res, next){
 router.use('/user', userRouter);
 
 // map data to req.chronicle using requested chronicle id
-chronicleRouter.param('chronicle', function(req, res, next, id){
+router.param('chronicle', function(req, res, next, id){
   Chronicle.findByIdQ(id).then(function(chronicle){
     req.chronicle = chronicle;
     next();
@@ -51,40 +51,39 @@ chronicleRouter.param('event', function(req, res, next, id){
 });
 
 // get data from requested chronicle
-chronicleRouter.get('/:chronicle', function(req, res, next){
+chronicleRouter.get('/', function(req, res, next){
   res.json(req.chronicle);
 });
 
 // get all event data from requested chronicle
-chronicleRouter.get('/:chronicle/events', function(req, res, next){
+chronicleRouter.get('/events', function(req, res, next){
   res.json(req.chronicle.events);
 });
 
 // push new event to requested chronicle
-chronicleRouter.post('/:chronicle/events', function(req, res, next){
-  req.body.data.owner = req.user;
-  var event = req.chronicle.events[req.chronicle.events.push(req.body.data) - 1];
+chronicleRouter.post('/events', function(req, res, next){
+  var event = req.chronicle.events[req.chronicle.events.push({ owner: req.user, metadata: req.body.data}) - 1];
   req.chronicle.updateQ({ $push: { 'events': event }}).then(function() {
     res.json(event);
   });
 });
 
 // get specific event data from requested chronicle
-chronicleRouter.get('/:chronicle/event/:event', function(req, res, next){
+chronicleRouter.get('/event/:event', function(req, res, next){
   res.json(req.event);
 });
 
 // edit metadata from specific event in requested chronicle
-chronicleRouter.post('/:chronicle/event/:event', function(req, res, next){
+chronicleRouter.post('/event/:event', function(req, res, next){
   req.event.metadata = req.body.data;
-  Chronicle.findAndUpdateQ({ events: { $elemMatch: { _id: req.event._id } } },
-    { $set: {'events.$.metadata': metadata}}).then(function() {
+  Chronicle.findOneAndUpdateQ({ events: { $elemMatch: { _id: req.event._id } } },
+    { $set: { 'events.$.metadata': req.event.metadata.toObject() } }).then(function() {
     res.json(req.event);
   });
 });
 
 // push new content to event in requested chronicle
-chronicleRouter.post('/:chronicle/event/:event/content', function(req, res, next){
+chronicleRouter.post('/event/:event/content', function(req, res, next){
   req.body.data.owner = req.user;
   var content = req.event.content[req.event.content.push(req.body.data) - 1];
   Chronicle.findOneAndUpdateQ({ events: { $elemMatch: {_id: req.event._id } } },
@@ -96,7 +95,7 @@ chronicleRouter.post('/:chronicle/event/:event/content', function(req, res, next
 });
 
 // use chronicleRouter
-router.use('/chronicle', chronicleRouter);
+router.use('/chronicle/:chronicle', chronicleRouter);
 
 exports.router = router;
 

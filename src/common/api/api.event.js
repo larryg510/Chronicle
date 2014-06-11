@@ -14,6 +14,9 @@
         newContent: function(content){
           return this.http.post(this.id + '/content', content);
         },
+        update: function(metadata){
+          return this.http.post(this.id, metadata);
+        }
       };
       
       return function(chronicle, id){
