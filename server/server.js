@@ -33,7 +33,7 @@ function Server(){
       db: process.env.MONGO_DATABASE,
       auto_reconnect: true
     });
-    
+
     //===Web Server=========================================================================
   
     app.set('port',  process.env.WEB_PORT || 80);
@@ -61,7 +61,8 @@ function Server(){
       console.log('Listening on port %d', server.address().port);
     });
   });
-  
+
+
   //===Graceful Shutdown===============================================================
   // this function is called when you want the server to die gracefully
   // i.e. wait for existing connections

@@ -1,27 +1,31 @@
 <div class="col-lg-6 col-lg-offset-3">
   <ul>
-    <div class="imgBox" style="background-image: url({{event.metadata.photo}}); 
-      background-size:auto 100%; margin:none; background-repeat:no-repeat">
-      <div style="margin:5%; background-color:white; opacity:0.6">
-        <br> <div class="event-title">{{event.metadata.title}}</div>
-        <br> <div class="event-names">{{event.metadata.names}}</div>
-        <br> <div class="event-location">{{event.metadata.location}}</div
-        <br> <div class="event-time">{{event.metadata.time}}</div>
-        <br> <div class="event-description">{{event.metadata.description}}</div>
+    <a ui-sref=".edit" style="text-decoration:none">
+    <div style="background-image: url({{event.metadata.photo}}); background-position:center; margin:none; background-repeat:no-repeat; max-width:100%;">
+      <br><br><br><br><br>
+      <div style="text-align:center; text-color:black; background-color:white;
+      font-family:'Lucida Sans Unicode'; opacity:0.6; margin-left:10%; margin-right:10%">
+        <br>
+        <div class="event-title" style="font-size:20pt">{{event.metadata.title}}</div>
+        <div class="event-names">{{event.metadata.names}}</div>
+        <div class="event-location">{{event.metadata.location}}</div>
+        <div class="event-time">{{event.metadata.time}}</div>
+        <div class="event-description">{{event.metadata.description}}</div>
+        <br>
       </div>
+      <br><br><br><br><br>
     </div>
-    <div ng-repeat="content in event.content" class="content row" id="{{content._id}}">
-        <div class="content" style={{event.metadata.color}} ng-hide="content.format === 'image'">
-          <br> <div class="event-names" text-align="justify">Content: {{content.content}}</div>
+    </a>
+    <div ng-repeat="content in event.content" style="border: 1px solid {{event.metadata.color}}" id="event._id">
+        <div class="content" style="text-align: left;" ng-hide="content.format === 'image'">
+          <br> <div class="event-names" text-align="justify">{{content.content}}</div>
           <br>
         </div>
         <div class="content" style={{event.color}} ng-show="content.format === 'image'">
-          <br> <div class="event-title">Format: {{content.format}}</div>
-          <br> <img src="{{content.content}}"/>
+          <br> <img src="{{content.content}}" style="max-width:100%"/>
           <br>
         </div>  
     </div>
-    <a class="btn btn-default" ui-sref=".edit">Edit</a>
   </ul>
-  <br>
   <button class="btn btn-primary" ng-click="open()">Add content!</button>
+  </div>

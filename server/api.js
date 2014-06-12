@@ -38,10 +38,12 @@ router.use('/user', userRouter);
 
 // map data to req.chronicle using requested chronicle id
 router.param('chronicle', function(req, res, next, id){
-  Chronicle.findByIdQ(id).then(function(chronicle){
-    req.chronicle = chronicle;
-    next();
-  });
+  // Chronicle.findByIdQ(id).then(function(chronicle){
+  //   req.chronicle = chronicle;
+  //   next();
+  // });
+  req.chronicle = fakeChronicle(id);
+  next();
 });
 
 // map data to req.event using requested event id
@@ -87,10 +89,10 @@ chronicleRouter.post('/event/:event/content', function(req, res, next){
   req.body.data.owner = req.user;
   var content = req.event.content[req.event.content.push(req.body.data) - 1];
   Chronicle.findOneAndUpdateQ({ events: { $elemMatch: {_id: req.event._id } } },
-    { $set: {'events.$.content' : content.toObject() }}).then(function(){
+    { $push: {'events.$.content' : content.toObject() }}).then(function(){
       content.owner = req.user;
       res.json(content);
-     });
+     }).catch(console.log);
   //req.chronicle.event.updateQ({ $push: { content: content } }).then(function(){
 });
 
