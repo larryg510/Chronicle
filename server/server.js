@@ -7,7 +7,8 @@ var express         = require('express')
   , mongoose        = require('mongoose-q')(require('mongoose'), { spread:true })
   , MongoStore      = require('connect-mongo')(expressSession)
   , api             = require('./api')
-  , ejs             = require('ejs'); ejs.open = '<$'; ejs.close = '$>';
+  , ejs             = require('ejs'); ejs.open = '<$'; ejs.close = '$>'
+;
 
 //===Temporary Fig testing==============================================
 process.env.MONGO_PORT_27017_TCP_ADDR = process.env.MONGO_PORT_27017_TCP_ADDR || process.env.MONGO_1_PORT_27017_TCP_ADDR;
@@ -33,7 +34,7 @@ function Server(){
       db: process.env.MONGO_DATABASE,
       auto_reconnect: true
     });
-
+    
     //===Web Server=========================================================================
   
     app.set('port',  process.env.WEB_PORT || 80);
@@ -51,6 +52,9 @@ function Server(){
     
     //---Api Route--------------------------------------------------------------------------
     app.use('/api', api.router);
+
+    //temporary data loading
+    api.loadTemp();
     
     //---Main Route--------------------------------------------------------------------------
     app.use(function(req, res, next) {
@@ -61,6 +65,7 @@ function Server(){
       console.log('Listening on port %d', server.address().port);
     });
   });
+  
 
 
   //===Graceful Shutdown===============================================================

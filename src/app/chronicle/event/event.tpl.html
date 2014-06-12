@@ -16,16 +16,20 @@
       <br><br><br><br><br>
     </div>
     </a>
-    <div ng-repeat="content in event.content" style="border: 1px solid {{event.metadata.color}}" id="event._id">
-        <div class="content" style="text-align: left;" ng-hide="content.format === 'image'">
-          <br> <div class="event-names" text-align="justify">{{content.content}}</div>
+    <div ng-repeat="content in event.content" style="border: 1px solid; font-family:'Lucida Sans Unicode';" id="event._id">
+        <div class="content" style="text-align:left;" ng-hide="content.format === 'quote' ">
+          <br> <div class="event-names">{{content.content}}</div>
+          <br>
+        </div>
+        <div class="content" style="text-align:center; font-weight:bold;" ng-show="content.format === 'quote'">
+          <br> <div class="event-names">{{content.content}}</div>
           <br>
         </div>
         <div class="content" style={{event.color}} ng-show="content.format === 'image'">
           <br> <img src="{{content.content}}" style="max-width:100%"/>
           <br>
         </div>  
-    </div>
-  </ul>
-  <button class="btn btn-primary" ng-click="open()">Add content!</button>
   </div>
+  </ul>
+  <button class="btn btn-primary" style="text-align:center" ng-click="open()">Add content!</button>
+</div>

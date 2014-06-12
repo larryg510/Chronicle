@@ -38,12 +38,16 @@ router.use('/user', userRouter);
 
 // map data to req.chronicle using requested chronicle id
 router.param('chronicle', function(req, res, next, id){
-  // Chronicle.findByIdQ(id).then(function(chronicle){
-  //   req.chronicle = chronicle;
-  //   next();
-  // });
-  req.chronicle = fakeChronicle(id);
-  next();
+  Chronicle.findByIdQ(id).then(function(chronicle){
+    req.chronicle = chronicle;
+    next();
+  });
+  
+  // Chronicle.save({_id: Object('5369238f2df443631a888633'), events: []});
+
+  // req.chronicle = fakeChronicle(id);
+  // res.json(req.chronicle);
+
 });
 
 // map data to req.event using requested event id
@@ -100,6 +104,13 @@ chronicleRouter.post('/event/:event/content', function(req, res, next){
 router.use('/chronicle/:chronicle', chronicleRouter);
 
 exports.router = router;
+
+exports.loadTemp = function(){
+  var chronicle = new Chronicle({_id: mongoose.Types.ObjectId('5369238f2df443631a888633')});
+  chronicle.saveQ().then(function(){
+    console.log('Dummy Data Chronicle Saved');
+  });
+}
 
 //===Dummy Data===========================================================
 var Faker = require('Faker');

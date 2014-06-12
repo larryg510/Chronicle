@@ -32,7 +32,7 @@ angular.module('chronicle.event', [
   $scope.$root.$broadcast('scroll-to-event', $scope.event);
 
 
-  $scope.open = function () {
+  $scope.open = function (position) {
 
     var _chronicle = $scope.chronicle;
     var _event = $scope.event;
