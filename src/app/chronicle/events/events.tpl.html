@@ -1,16 +1,25 @@
-<div class="col-lg-6 col-lg-offset-3">
-  <ul ng-show="events.length" class="event-list">
-    <li ng-repeat="event in events" class="event row" id="{{event._id}}">
-      <a ui-sref="^.event({eventId: event._id})" style="text-decoration:none">
-        <div class="content" style={{event.metadata.color}}>
-          <br> <div class="event-title">Title: {{event.metadata.title}}</div>
-          <br> <div class="event-names">Who: {{event.metadata.names}}</div>
-          <br> <div class="event-location">Where: {{event.metadata.location}}</div>
-          <br> <div class="event-time">When: {{event.metadata.time}}</div>
-          <br> <div class="event-description">What: {{event.metadata.description}}</div>
-          <br> <img src="{{event.metadata.photo}}"/>
-        </div>
-      </a>
-    </li>
-  </ul>
+<div class="container-fluid">  
+  <div class="col-lg-6 col-lg-offset-3">
+    <ul ng-show="events.length" class="event-list">
+      <li ng-repeat="event in events" class="event row" id="{{event._id}}">
+        <a ui-sref="^.event({eventId: event._id})" style="text-decoration:none">
+          <div style="width: 300px; height; 400px; overflow: hidden;">
+            <div class="event-left" ng-show="$index%2 == 0"> 
+              <img class= "event-fill" src= "{{event.metadata.photo}}">
+            </div>
+            <div class = "event-info" style= {{event.metadata.color}}>             
+              <br> <div class="event-title">Title: {{event.metadata.title}}</div>
+              <br> <div class="event-names">Who: {{event.metadata.names}}</div>
+              <br> <div class="event-location">Where: {{event.metadata.location}}</div>
+              <br> <div class="event-time">When: {{event.metadata.time}}</div>
+              <br> <div class="event-description">What: {{event.metadata.description}}</div>
+            </div>
+            <div class="event-right" ng-show="($index + 1)%2 == 0">  
+              <img class="event-fill" src= "{{event.metadata.photo}}"> 
+            </div>
+          </div>
+        </a>
+      </li>
+    </ul>
+  </div>
 </div>
