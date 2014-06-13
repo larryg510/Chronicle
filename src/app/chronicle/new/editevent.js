@@ -25,6 +25,18 @@ angular.module('chronicle.editevent', [
     }
   }); 
 })
+/*
+.controller('DateCtrl', function(){
+  this.current = 1;
+  this.setcurrent = function(dateoption){
+    this.current = dateoption;
+  }
+  this.isSet = function(dateop){
+    return this.current === dateop;
+  }
+
+})
+*/
 
 .controller('EditEventCtrl', function($scope, $state, apiService) {
   if($state.params.eventId){
@@ -45,6 +57,13 @@ angular.module('chronicle.editevent', [
     $scope.event = {};
   }
 
+  $scope.currenttab = 1;
+  $scope.settab = function(chosentab){
+    $scope.currenttab = chosentab;
+  };
+  $scope.istab = function(settab){
+    return $scope.currenttab == settab;
+  };
   $scope.modify = function(){
     // Sent to apiService
 
@@ -62,5 +81,4 @@ angular.module('chronicle.editevent', [
     }
   };
 })
-
 ;
