@@ -12,7 +12,7 @@ angular.module('chronicle.event', [
 
   $stateProvider.state('app.chronicle.event', {
     resolve: resolve,
-    url: '{eventId:[0-9a-f]{24}}',
+    url: '/{eventId:[0-9a-f]{24}}',
     views: {
       main: {
         controller: 'EventCtrl',
