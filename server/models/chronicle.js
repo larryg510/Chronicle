@@ -25,7 +25,7 @@ var EventSchema = new Schema({
    description: String,
    photo: String,
    color: { type: String, default: function(){
-    return "background:hsl(" + Math.floor(Math.random()*360) + ", 50%, 90%)";
+    return "background:hsl(" + Math.floor(Math.random()*360) + ", 100%, 60%)";
    }}
  }, 
  //owner: { type: Schema.Types.ObjectId, ref: 'user'}

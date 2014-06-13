@@ -7,12 +7,14 @@
             <div class="event-left" ng-show="$index%2 == 0"> 
               <img class= "event-fill" src= "{{event.metadata.photo}}">
             </div>
-            <div class = "event-info" style= {{event.metadata.color}}>             
-              <br> <div class="event-title">Title: {{event.metadata.title}}</div>
-              <br> <div class="event-names">Who: {{event.metadata.names}}</div>
-              <br> <div class="event-location">Where: {{event.metadata.location}}</div>
-              <br> <div class="event-time">When: {{event.metadata.time}}</div>
-              <br> <div class="event-description">What: {{event.metadata.description}}</div>
+            <div class = "event-info" style= {{event.metadata.color}}>
+              <br>             
+              <div class="event-title">{{event.metadata.title}}</div>
+              <div class="event-names">{{event.metadata.names}}</div>
+              <div class="event-location">{{event.metadata.location}}</div>
+              <div class="event-time">{{event.metadata.time}}</div>
+              <div class="event-description"> {{event.metadata.description}}</div>
+              <br>              <br>              <br>              <br>
             </div>
             <div class="event-right" ng-show="($index + 1)%2 == 0">  
               <img class="event-fill" src= "{{event.metadata.photo}}"> 
