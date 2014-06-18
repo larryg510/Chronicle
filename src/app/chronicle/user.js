@@ -39,15 +39,12 @@ angular.module('chronicle.user', [
   if($state.is('app.user')){
     $state.go($scope.user.chronicles.length ? '.chronicles' : '.newchronicle');
   }
-<<<<<<< HEAD
-=======
 })
 
 .controller('ChronicleTopNavCtrl', function($scope, $state, apiService, user, chronicles) {
   $scope.user = user;
   $scope.chronicles = chronicles;
   $scope.chronicle = chronicles[0];
->>>>>>> 40277be141c67c1b846800f445b7cd06cf17f571
 })
 
 /* .controller('ChronicleBottomNavCtrl', function($scope, $state, apiService, chronicle, events) {
