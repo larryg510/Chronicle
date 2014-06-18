@@ -3,22 +3,18 @@
     <ul ng-show="events.length" class="event-list">
       <li ng-repeat="event in events" class="event row" id="{{event._id}}">
         <a ui-sref="^.event({eventId: event._id})" style="text-decoration:none">
-          <div style="width: 300px; height; 400px; overflow: hidden;">
-            <div class="event-left" ng-show="$index%2 == 0"> 
-              <img class= "event-fill" src= "{{event.metadata.photo}}">
+          <div class="background" style="background-image: url({{event.metadata.photo}});">
+
+            <div class="metadata">
+              <br>
+              <div style="font-size:14pt; text-transform:uppercase">{{event.metadata.title}}</div>
+              <div>{{event.metadata.names}}</div>
+              <div>{{event.metadata.location}}</div>
+              <div>{{event.metadata.time}}</div>
+              <div>{{event.metadata.description}}</div>
+              <br>
             </div>
-            <div class = "event-info" style= {{event.metadata.color}}>
-              <br>             
-              <div class="event-title">{{event.metadata.title}}</div>
-              <div class="event-names">{{event.metadata.names}}</div>
-              <div class="event-location">{{event.metadata.location}}</div>
-              <div class="event-time">{{event.metadata.time}}</div>
-              <div class="event-description"> {{event.metadata.description}}</div>
-              <br>              <br>              <br>              <br>
-            </div>
-            <div class="event-right" ng-show="($index + 1)%2 == 0">  
-              <img class="event-fill" src= "{{event.metadata.photo}}"> 
-            </div>
+            <br><br><br><br><br>
           </div>
         </a>
       </li>

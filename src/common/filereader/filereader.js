@@ -13,7 +13,9 @@ angular.module('filereader', [])
                 scope.filereader = loadEvent.target.result;
               });
             };
+
             reader.readAsDataURL(changeEvent.target.files[0]);
+
           });
         }
       };
