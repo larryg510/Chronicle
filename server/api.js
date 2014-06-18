@@ -23,6 +23,7 @@ userRouter.get('/chronicles', function(req, res, next){
   res.json(req.user.chronicles);
 });
 
+// post new chronicle to user's chronicle library
 userRouter.post('/chronicles', function(req, res, next){
   req.body.data.owner = req.user;
 
@@ -54,7 +55,7 @@ userRouter.get('/:user/chronicles', function(req, res, next){
 });
 
 // use userRouter
-router.use('/user', userRouter);
+router.use('/user/:user', userRouter);
 
 // map data to req.chronicle using requested chronicle id
 router.param('chronicle', function(req, res, next, id){

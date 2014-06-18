@@ -5,7 +5,7 @@ angular.module('chronicle.newchronicle', [
 ])
 
 .config(function($stateProvider) {
-  $stateProvider.state('app.chronicle.newchronicle', {
+  $stateProvider.state('app.user.newchronicle', {
     url: '/newchronicle',
     views: {
       main: {
