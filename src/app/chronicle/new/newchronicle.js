@@ -17,23 +17,20 @@ angular.module('chronicle.newchronicle', [
 })
 
 .controller('NewChronicleCtrl', function($scope, $state, apiService) {
+
   $scope.$root.$broadcast('scroll-to-event', { title: 'New Chronicle' });
+  
   $scope.create = function(){
-    var hue = Math.floor(Math.random()*360);
-    var background = "background:hsl(" + hue + ", 50%, 90%)";
+    // var hue = Math.floor(Math.random()*360);
+    // var background = "background:hsl(" + hue + ", 50%, 90%)";
     // Sent to apiService
-    apiService.chronicle($scope.chronicle._id).newEvent({
-      title: $scope.metadata.title,
-      names: $scope.metadata.names,
-      location: $scope.metadata.location,
-      time: $scope.metadata.time,
-      description: $scope.metadata.description,
-      color: background,
-      content: []
-    }).then(function(event){
-      $scope.events.push(event);
-      $state.go('^.events');
-      $scope.$root.$broadcast('scroll-to-event', $scope.events[0]);
+    // var chronicle = {
+    //   title: $scope.title,
+    //   events: []
+    // };
+    return apiService.user($scope.user._id).newChronicle($scope.title).then(function(chronicle){
+      $scope.user.chronicles.push(chronicle);
+      $state.go('^.chronicles');
 
     });
   };

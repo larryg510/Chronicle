@@ -20,7 +20,27 @@ userRouter.get('/', function(req, res, next){
 
 // get current user's chronicle library
 userRouter.get('/chronicles', function(req, res, next){
-  res.json(fakeChronicles());
+  res.json(req.user.chronicles);
+});
+
+userRouter.post('/chronicles', function(req, res, next){
+  req.body.data.owner = req.user;
+
+  var chronicle =  new Chronicle(req.body.data);
+  chronicle.user = req.user;
+  chronicle.saveQ().then(function(){
+    chronicle.owner = req.user;
+    res.json(chronicle);
+  });
+  // var chronicle = new Chronicle({_id: mongoose.Types.ObjectId()});
+  // req.user.saveQ({ $push: { 'chronicles': chronicle }}).then(function() {
+  //   res.json(chronicle);
+  // });
+  // var chronicle = new Chronicle({_id: mongoose.Types.ObjectId('5369238f2df443631a888635')});
+  // chronicle.saveQ().then(function(){
+  //   console.log('New Chronicle Saved');
+  //   res.json(chronicle);
+  // });
 });
 
 // get requested user's personal profile
@@ -107,6 +127,7 @@ exports.router = router;
 
 exports.loadTemp = function(){
   var chronicle = new Chronicle({_id: mongoose.Types.ObjectId('5369238f2df443631a888633')});
+
   chronicle.saveQ().then(function(){
     console.log('Dummy Data Chronicle Saved');
   });
@@ -120,7 +141,8 @@ function fakeUser(id){
     _id: id || new mongoose.Types.ObjectId(),
     username: Faker.Internet.userName(),
     email: Faker.Internet.email(),
-    bio: Faker.Lorem.sentences()
+    bio: Faker.Lorem.sentences(),
+    chronicles: [],
   };
 }
 

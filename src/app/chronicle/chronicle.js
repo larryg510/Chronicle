@@ -6,6 +6,9 @@ angular.module('chronicle.chronicle', [
 
 .config(function($stateProvider) {
   var resolve = {
+    user: function($stateParams, apiService){
+      return apiService.user($stateParams.userId).info();
+    },
     chronicle: function($stateParams, apiService){
       return apiService.chronicle($stateParams.chronicleId).info();
     },
@@ -34,7 +37,8 @@ angular.module('chronicle.chronicle', [
   });
 })
 
-.controller('ChronicleCtrl', function($scope, $state, apiService, chronicle, events) {
+.controller('ChronicleCtrl', function($scope, $state, apiService, user, chronicle, events) {
+  $scope.user = user;
   $scope.chronicle = chronicle;
   $scope.events = events;
 
