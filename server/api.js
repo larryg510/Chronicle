@@ -55,7 +55,7 @@ userRouter.get('/:user/chronicles', function(req, res, next){
 });
 
 // use userRouter
-router.use('/user/:user', userRouter);
+router.use('/user', userRouter);
 
 // map data to req.chronicle using requested chronicle id
 router.param('chronicle', function(req, res, next, id){
@@ -123,7 +123,6 @@ chronicleRouter.post('/event/:event/content', function(req, res, next){
 
 // use chronicleRouter
 router.use('/chronicle/:chronicle', chronicleRouter);
-router.use('/user/:user', userRouter);
 
 exports.router = router;
 

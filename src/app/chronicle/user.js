@@ -42,9 +42,6 @@ angular.module('chronicle.user', [
 })
 
 .controller('ChronicleTopNavCtrl', function($scope, $state, apiService, user, chronicles) {
-  $scope.user = user;
-  $scope.chronicles = chronicles;
-  $scope.chronicle = chronicles[0];
 })
 
 /* .controller('ChronicleBottomNavCtrl', function($scope, $state, apiService, chronicle, events) {
