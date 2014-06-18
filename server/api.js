@@ -122,6 +122,7 @@ chronicleRouter.post('/event/:event/content', function(req, res, next){
 
 // use chronicleRouter
 router.use('/chronicle/:chronicle', chronicleRouter);
+router.use('/user/:user', userRouter);
 
 exports.router = router;
 

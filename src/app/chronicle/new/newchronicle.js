@@ -5,7 +5,7 @@ angular.module('chronicle.newchronicle', [
 ])
 
 .config(function($stateProvider) {
-  $stateProvider.state('app.chronicle.newchronicle', {
+  $stateProvider.state('app.user.newchronicle', {
     url: '/newchronicle',
     views: {
       main: {
@@ -21,13 +21,16 @@ angular.module('chronicle.newchronicle', [
   $scope.$root.$broadcast('scroll-to-event', { title: 'New Chronicle' });
   
   $scope.create = function(){
-    // var hue = Math.floor(Math.random()*360);
-    // var background = "background:hsl(" + hue + ", 50%, 90%)";
-    // Sent to apiService
-    // var chronicle = {
-    //   title: $scope.title,
-    //   events: []
-    // };
+    
+    var hue = Math.floor(Math.random()*360);
+    var background = "background:hsl(" + hue + ", 50%, 90%)";
+    
+    // sent to apiService
+    var chronicle = {
+      title: $scope.title,
+      events: []
+    };
+    
     return apiService.user($scope.user._id).newChronicle($scope.title).then(function(chronicle){
       $scope.user.chronicles.push(chronicle);
       $state.go('^.chronicles');

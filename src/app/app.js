@@ -2,6 +2,7 @@ angular.module('chronicle', [
   'templates-app',
   'templates-common',
   'chronicle.api',
+  'chronicle.user',
   'chronicle.chronicles',
   'chronicle.chronicle',
   'chronicle.events',
@@ -60,7 +61,7 @@ angular.module('chronicle', [
 
 .controller('AppCtrl', function($scope, $state, apiService, user) {
   if($state.is('app')){
-    $state.go('app.chronicle', { chronicleId: '5369238f2df443631a888633' });
+    $state.go('app.user', { userId: '5369238f2df443631a888634' });
   }
 })
 

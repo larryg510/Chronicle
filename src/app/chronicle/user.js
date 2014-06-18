@@ -14,7 +14,7 @@ angular.module('chronicle.user', [
     }
   };
   
-  $stateProvider.state('app.chronicle.user', {
+  $stateProvider.state('app.user', {
     url: '{userId:[0-9a-f]{24}}',
     resolve: resolve,
     views: {
@@ -23,8 +23,8 @@ angular.module('chronicle.user', [
         templateUrl: 'chronicle/user.tpl.html',
       },
       topnav: {
-        controller: 'ChronicleTopNavCtrl',
-        templateUrl: 'chronicle/nav/chronicle-nav.tpl.html',
+        controller: 'UserTopNavCtrl',
+        templateUrl: 'chronicle/nav/user-nav.tpl.html',
       }
       /* bottomnav: {
         controller: 'ChronicleBottomNavCtrl',
@@ -35,10 +35,16 @@ angular.module('chronicle.user', [
 })
 
 .controller('UserCtrl', function($scope, $state, apiService, user) {
-  // $scope.user = user;
-  // if($state.is('app.chronicle.user')){
-  //   $state.go($scope.user.chronicles.length ? '.chronicles' : '.newchronicle');
-  // }
+  $scope.user = user;
+  if($state.is('app.user')){
+    $state.go($scope.user.chronicles.length ? '.chronicles' : '.newchronicle');
+  }
+})
+
+.controller('ChronicleTopNavCtrl', function($scope, $state, apiService, user, chronicles) {
+  $scope.user = user;
+  $scope.chronicles = chronicles;
+  $scope.chronicle = chronicles[0];
 })
 
 /* .controller('ChronicleBottomNavCtrl', function($scope, $state, apiService, chronicle, events) {
