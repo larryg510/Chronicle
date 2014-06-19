@@ -15,7 +15,7 @@ angular.module('chronicle.user', [
   };
   
   $stateProvider.state('app.user', {
-    url: '{userId:[0-9a-f]{24}}',
+    url: 'user/{userId:[0-9a-f]{24}}',
     resolve: resolve,
     views: {
       main: {
@@ -41,7 +41,7 @@ angular.module('chronicle.user', [
   }
 })
 
-.controller('ChronicleTopNavCtrl', function($scope, $state, apiService, user, chronicles) {
+.controller('UserTopNavCtrl', function($scope, $state, apiService, user, chronicles) {
 })
 
 /* .controller('ChronicleBottomNavCtrl', function($scope, $state, apiService, chronicle, events) {

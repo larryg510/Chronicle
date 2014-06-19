@@ -17,8 +17,8 @@ angular.module('chronicle.chronicle', [
     }
   };
   
-  $stateProvider.state('app.chronicle', {
-    url: '{chronicleId:[0-9a-f]{24}}',
+  $stateProvider.state('app.user.chronicle', {
+    url: 'chronicle/{chronicleId:[0-9a-f]{24}}',
     resolve: resolve,
     views: {
       main: {

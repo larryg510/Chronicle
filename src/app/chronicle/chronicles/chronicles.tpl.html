@@ -1,21 +1,14 @@
-<div class="col-lg-6 col-lg-offset-3">
+<div class="col-lg-6 col-lg-offset-3"> {{user}}
   <ul ng-show="chronicles.length" class="event-list">
     <li ng-repeat="chronicle in chronicles" class="event row" id="{{chronicle._id}}">
       <a ui-sref="^.chronicle({chronicleId: chronicle._id})" style="text-decoration:none">
-        <div class="content" style={{event.color}}>
+        <div class="content">
           <br>
-          <div class="event-title">Title: {{event.title}}</div>
+          <div>Title: {{chronicle.title}}</div>
           <br>
-          <div class="event-names">Who: {{event.names}}</div>
-          <br>
-          <div class="event-location">Where: {{event.location}}</div>
-          <br>
-          <div class="event-time">When: {{event.time}}</div>
-          <br>
-          <div class="event-description">What: {{event.description}}</div>
-          <br>
+          <div>ID: {{chronicle._id}}</div>
         </div>
       </a>
     </li>
   </ul>
-</div>
+</div> 

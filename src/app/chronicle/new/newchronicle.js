@@ -31,10 +31,12 @@ angular.module('chronicle.newchronicle', [
       events: []
     };
     
-    return apiService.user($scope.user._id).newChronicle($scope.title).then(function(chronicle){
+    return apiService.user($scope.user._id).newChronicle(chronicle).then(function(chronicle){
       $scope.user.chronicles.push(chronicle);
-      $state.go('^.chronicles');
+      $state.go('^.chronicles');  
 
+    }).catch(function(error){
+      alert(error);
     });
   };
 })

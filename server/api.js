@@ -7,6 +7,18 @@ var router          = new express.Router()
   , userRouter      = new express.Router()
   , chronicleRouter = new express.Router();
 
+router.use(function(req, res, next){
+  res.success = function(data){
+    res.json(data);
+  };
+
+  res.error = function(error){
+    res.json(500, { error: error });
+  };
+
+  next();
+})
+
 // map data to req.user using requested id
 userRouter.param('user', function(req, res, next, id) {
   req.user = fakeUser(id);
@@ -20,28 +32,18 @@ userRouter.get('/', function(req, res, next){
 
 // get current user's chronicle library
 userRouter.get('/chronicles', function(req, res, next){
+  // Chronicle.findbyIdQ(req.user._id).then(function(chronicle){
+  //   res.json(chronicle)
+  // })
   res.json(req.user.chronicles);
 });
 
 // post new chronicle to user's chronicle library
-userRouter.post('/chronicles', function(req, res, next){
+userRouter.post('/:user/chronicles', function(req, res, next){
   req.body.data.owner = req.user;
-
   var chronicle =  new Chronicle(req.body.data);
-  chronicle.user = req.user;
-  chronicle.saveQ().then(function(){
-    chronicle.owner = req.user;
-    res.json(chronicle);
-  });
-  // var chronicle = new Chronicle({_id: mongoose.Types.ObjectId()});
-  // req.user.saveQ({ $push: { 'chronicles': chronicle }}).then(function() {
-  //   res.json(chronicle);
-  // });
-  // var chronicle = new Chronicle({_id: mongoose.Types.ObjectId('5369238f2df443631a888635')});
-  // chronicle.saveQ().then(function(){
-  //   console.log('New Chronicle Saved');
-  //   res.json(chronicle);
-  // });
+  chronicle.user = req.user._id;
+  chronicle.saveQ().thenResolve(chronicle).then(res.success).catch(res.error);
 });
 
 // get requested user's personal profile
@@ -122,7 +124,7 @@ chronicleRouter.post('/event/:event/content', function(req, res, next){
 });
 
 // use chronicleRouter
-router.use('/chronicle/:chronicle', chronicleRouter);
+router.use('/user/:user/chronicle/:chronicle', chronicleRouter);
 
 exports.router = router;
 

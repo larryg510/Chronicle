@@ -5,7 +5,7 @@ angular.module('chronicle.editevent', [
 ])
 
 .config(function($stateProvider) {
-  $stateProvider.state('app.chronicle.event.edit', {
+  $stateProvider.state('app.user.chronicle.event.edit', {
     url: '/edit',
     views: {
       'main@app.chronicle': {
@@ -15,7 +15,7 @@ angular.module('chronicle.editevent', [
     }
   });
 
-  $stateProvider.state('app.chronicle.newevent', {
+  $stateProvider.state('app.user.chronicle.newevent', {
     url: '/newevent',
     views: {
       main: {
