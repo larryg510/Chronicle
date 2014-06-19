@@ -40,8 +40,8 @@ function Server(){
     app.set('port',  process.env.WEB_PORT || 80);
     app.set('views', Path.join(__dirname, 'views'));
     app.set('view engine', 'ejs');
-    app.use(bodyParser.json());
-    app.use(bodyParser.urlencoded());
+    app.use(bodyParser.json({ limit: '50mb' }));
+    app.use(bodyParser.urlencoded({ limit: '50mb' }));
     app.use(cookieParser(process.env.COOKIE_SECRET));
     app.use(expressSession({
       secret: process.env.COOKIE_SECRET,

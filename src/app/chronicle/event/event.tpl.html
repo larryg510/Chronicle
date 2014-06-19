@@ -20,7 +20,7 @@
   </div>
   <div class="contentrow">
     <div class="evcontent" ng-repeat="content in event.content" id="event._id">
-        <div class="text" ng-hide="(content.format === 'image') || (content.format === 'quote')">
+        <div class="text" ng-show="content.format === 'text'">
           <br><div>{{content.content}}</div>
         </div>
         <div class="quote" ng-show="content.format === 'quote'">

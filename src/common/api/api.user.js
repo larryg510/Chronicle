@@ -17,6 +17,7 @@ angular.module('chronicle.api.user', ['chronicle.api.http','chronicle.api.chroni
         newChronicle: function(chronicle){
           return http.post(this.id + '/chronicles', chronicle);
         }
+
       };
       
       return function(id){
