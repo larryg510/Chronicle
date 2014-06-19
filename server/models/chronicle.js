@@ -32,7 +32,7 @@ var EventSchema = new Schema({
 });
 
 var ChronicleSchema = new Schema({
- user: { type: Schema.Types.ObjectId, ref: 'user'},
+ user: { type: Schema.Types.ObjectId, ref: 'User'},
  title: String,
  events: [EventSchema],
 }, {
@@ -40,5 +40,7 @@ var ChronicleSchema = new Schema({
    virtuals: true
  }
 });
+
+
 
 var Chronicle = module.exports = mongoose.model('Chronicle', ChronicleSchema);

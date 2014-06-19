@@ -1,36 +1,69 @@
 var express   = require('express')
   , mongoose  = require('mongoose')
   , Chronicle = require('./models/chronicle')
+  , User      = require('./models/user')
 ;
 
 var router          = new express.Router()
   , userRouter      = new express.Router()
   , chronicleRouter = new express.Router();
 
+
+router.use(function(req, res, next){
+  res.success = function(data){
+    res.json(data);
+  };
+
+  res.error = function(error){
+    res.json(500, { error: error });
+  };
+
+  User.findOneQ({ sessionId: req.sessionID }).then(function(user){
+    req.login = user;
+  }).then(function(){
+    next();
+  });
+});
+
 // map data to req.user using requested id
 userRouter.param('user', function(req, res, next, id) {
-  req.user = fakeUser(id);
-  next();
+  User.findbyIdQ(id).then(function(user){
+    req.user = user;
+    next();
+  });
 });
 
 // get current user's personal profile
+router.post('/signup', function(req, res, next){
+  if(req.login){
+    return res.success(req.login.toObject()); //should never really happen
+  } else {
+    var user = new User({
+      name: req.body.data.username,
+      sessionId: req.sessionID
+    });
+
+    user.saveQ().thenResolve(user).then(res.success).catch(res.error);
+  }
+});
+
 userRouter.get('/', function(req, res, next){
-  res.json(fakeUser());
+  res.success(req.login || 'not logged in');
 });
 
 // get current user's chronicle library
 userRouter.get('/chronicles', function(req, res, next){
-  res.json(fakeChronicles());
+  Chronicle.findQ({ user: req.login._id }).then(res.success).catch(res.error);
 });
 
 // get requested user's personal profile
 userRouter.get('/:user', function(req, res, next){
-  res.json(req.user);
+  res.success(req.user);
 });
 
 // get requested user's chronicle library
 userRouter.get('/:user/chronicles', function(req, res, next){
-  res.json(fakeChronicles());
+  Chronicle.findQ({ user: req.user._id }).then(res.success).catch(res.error);
 });
 
 // use userRouter
@@ -65,6 +98,7 @@ chronicleRouter.get('/', function(req, res, next){
 chronicleRouter.get('/events', function(req, res, next){
   res.json(req.chronicle.events);
 });
+
 
 // push new event to requested chronicle
 chronicleRouter.post('/events', function(req, res, next){

@@ -1,14 +1,13 @@
 var express     = require('express')
   , mongoose    = require('mongoose')
   , Q           = require('q')
-  , Schema      = mongoose.
-  , Chronicle = require('Chronicle')
+  , Schema      = mongoose.Schema
 ;
 
 var UserSchema = new Schema({
-  name : String,
-  id : String,
-  chronicles : [{type: Schema.Types.ObjectId,  ref: 'Chronicle'}],
+  name:       String,
+  sessionId:  String,
+  chronicles: [{type: Schema.Types.ObjectId,  ref: 'Chronicle'}],
 }, {
  toJSON: {
    virtuals: true

@@ -6,17 +6,17 @@ angular.module('chronicle.login', [
 ])
 
 .config(function($stateProvider) {
-  $stateProvider.state('app.chronicle.login', {
-    url: '/login',
+  $stateProvider.state('app.login', {
+    url: 'login',
     views: {
-      'main@app.chronicle': {
+      'main@app': {
         controller: 'LoginCtrl',
         templateUrl: 'chronicle/users/login.tpl.html',
       }
     }
   });
-  $stateProvider.state('app.chronicle.signup', {
-    url: '/signup',
+  $stateProvider.state('app.signup', {
+    url: 'signup',
     views: {
       main: {
         controller: 'LoginCtrl',
@@ -27,4 +27,8 @@ angular.module('chronicle.login', [
 })
 
 .controller('LoginCtrl', function($scope, $state, apiService){
+  $scope.login = function(){
+    return apiService.signup($scope.username).then(function(){
+    });
+  };
 });

@@ -14,6 +14,7 @@ angular.module('chronicle.api.user', ['chronicle.api.http'])
         chronicles: function(){
           return http.get(this.id + '/chronicles');
         }
+
       };
       
       return function(id){
