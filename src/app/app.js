@@ -8,7 +8,7 @@ angular.module('chronicle', [
   'chronicle.event',
   'chronicle.editevent',
   'chronicle.newchronicle',
-  //'chronicle.login',
+  'chronicle.login',
   'ngSanitize',
   'ui.bootstrap',
   'ui.router',
