@@ -2,25 +2,24 @@
   .factory('apiEvent', ['apiHTTP',
     function(apiHTTP){
       
-      function Event(chronicle, id){
-        this.http = new apiHTTP('/api/chronicle/' + chronicle + '/event/');
-        this.id = id;
+      function Event(prefix, id){
+        this.http = new apiHTTP(prefix + '/event/' + id);
       }
       
       Event.prototype = {
         info: function(){
-          return this.http.get(this.id);
+          return this.http.get();
         },
         newContent: function(content){
-          return this.http.post(this.id + '/content', content);
+          return this.http.post('/content', content);
         },
         update: function(metadata){
-          return this.http.post(this.id, metadata);
+          return this.http.post('', metadata);
         }
       };
       
-      return function(chronicle, id){
-        return new Event(chronicle, id);
+      return function(prefix, id){
+        return new Event(prefix, id);
       };
     }
   ]);

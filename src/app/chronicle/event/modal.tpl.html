@@ -9,7 +9,7 @@
               <tabset>
                 <tab ng-repeat="tab in tabs" heading={{tab.title}} active="tab.active">
                   <br>{{tab.thing}}:  
-                  <textarea class="form-control" ng-model="tab.content" ng-hide="tab.format === 'image'"></textarea>
+                  <textarea class="form-control" ng-model="tab.content" ng-hide="tab.format === 'image'" maxlength="10"></textarea>
                   <!-- <input type="file" ng-model="tab.content" ng-show="tab.format === 'image'"> -->
                   <input type="file" filereader="tab.content" ng-show="tab.format === 'image'"/>
                   <br>

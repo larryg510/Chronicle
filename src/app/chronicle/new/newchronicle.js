@@ -5,7 +5,7 @@ angular.module('chronicle.newchronicle', [
 ])
 
 .config(function($stateProvider) {
-  $stateProvider.state('app.chronicle.newchronicle', {
+  $stateProvider.state('app.user.newchronicle', {
     url: '/newchronicle',
     views: {
       main: {
@@ -16,25 +16,27 @@ angular.module('chronicle.newchronicle', [
   });
 })
 
-.controller('NewChronicleCtrl', function($scope, $state, apiService) {
+.controller('NewChronicleCtrl', function($scope, $state, apiService, chronicles) {
+
   $scope.$root.$broadcast('scroll-to-event', { title: 'New Chronicle' });
+  
   $scope.create = function(){
+    
     var hue = Math.floor(Math.random()*360);
     var background = "background:hsl(" + hue + ", 50%, 90%)";
-    // Sent to apiService
-    apiService.chronicle($scope.chronicle._id).newEvent({
-      title: $scope.metadata.title,
-      names: $scope.metadata.names,
-      location: $scope.metadata.location,
-      time: $scope.metadata.time,
-      description: $scope.metadata.description,
-      color: background,
-      content: []
-    }).then(function(event){
-      $scope.events.push(event);
-      $state.go('^.events');
-      $scope.$root.$broadcast('scroll-to-event', $scope.events[0]);
+    
+    // sent to apiService
+    var chronicle = {
+      title: $scope.title,
+      events: []
+    };
+    
+    return apiService.user($scope.user._id).newChronicle(chronicle).then(function(chronicle){
+      chronicles.push(chronicle);
+      $state.go('^.chronicles');  
 
+    }).catch(function(error){
+      alert(error);
     });
   };
 })

@@ -8,7 +8,6 @@ var router          = new express.Router()
   , userRouter      = new express.Router()
   , chronicleRouter = new express.Router();
 
-
 router.use(function(req, res, next){
   res.success = function(data){
     res.json(data);
@@ -27,7 +26,7 @@ router.use(function(req, res, next){
 
 // map data to req.user using requested id
 userRouter.param('user', function(req, res, next, id) {
-  User.findbyIdQ(id).then(function(user){
+  User.findByIdQ(id).then(function(user){
     req.user = user;
     next();
   });
@@ -53,7 +52,19 @@ userRouter.get('/', function(req, res, next){
 
 // get current user's chronicle library
 userRouter.get('/chronicles', function(req, res, next){
-  Chronicle.findQ({ user: req.login._id }).then(res.success).catch(res.error);
+  // Chronicle.findbyIdQ(req.user._id).then(function(chronicle){
+  //   res.json(chronicle)
+  // })
+  Chronicle.findQ({ user: req.login && req.login._id }).then(res.success).catch(res.error);
+  //res.json(req.login.chronicles);
+});
+
+// post new chronicle to user's chronicle library
+userRouter.post('/:user/chronicles', function(req, res, next){
+  req.body.data.owner = req.user;
+  var chronicle =  new Chronicle(req.body.data);
+  chronicle.user = req.user._id;
+  chronicle.saveQ().thenResolve(chronicle).then(res.success).catch(res.error);
 });
 
 // get requested user's personal profile
@@ -135,12 +146,13 @@ chronicleRouter.post('/event/:event/content', function(req, res, next){
 });
 
 // use chronicleRouter
-router.use('/chronicle/:chronicle', chronicleRouter);
+router.use('/user/:user/chronicle/:chronicle', chronicleRouter);
 
 exports.router = router;
 
 exports.loadTemp = function(){
   var chronicle = new Chronicle({_id: mongoose.Types.ObjectId('5369238f2df443631a888633')});
+
   chronicle.saveQ().then(function(){
     console.log('Dummy Data Chronicle Saved');
   });
@@ -154,7 +166,8 @@ function fakeUser(id){
     _id: id || new mongoose.Types.ObjectId(),
     username: Faker.Internet.userName(),
     email: Faker.Internet.email(),
-    bio: Faker.Lorem.sentences()
+    bio: Faker.Lorem.sentences(),
+    chronicles: [],
   };
 }
 

@@ -2,6 +2,7 @@ angular.module('chronicle', [
   'templates-app',
   'templates-common',
   'chronicle.api',
+  'chronicle.user',
   'chronicle.chronicles',
   'chronicle.chronicle',
   'chronicle.events',
@@ -59,7 +60,7 @@ angular.module('chronicle', [
   });
 })
 
-.controller('AppCtrl', function($scope, $state, apiService, user) {
+.controller('AppCtrl', function($scope, $state, apiService) {
   if($state.is('app')){
     $state.go('app.login');
   }

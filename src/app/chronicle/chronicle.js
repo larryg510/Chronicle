@@ -6,16 +6,16 @@ angular.module('chronicle.chronicle', [
 
 .config(function($stateProvider) {
   var resolve = {
-    chronicle: function($stateParams, apiService){
-      return apiService.chronicle($stateParams.chronicleId).info();
+    chronicle: function($stateParams, apiService, user){
+      return apiService.user(user._id).chronicle($stateParams.chronicleId).info();
     },
-    events: function($stateParams, apiService){
-      return apiService.chronicle($stateParams.chronicleId).events();
+    events: function($stateParams, apiService, user){
+      return apiService.user(user._id).chronicle($stateParams.chronicleId).events();
     }
   };
   
-  $stateProvider.state('app.chronicle', {
-    url: '{chronicleId:[0-9a-f]{24}}',
+  $stateProvider.state('app.user.chronicle', {
+    url: '/chronicle/{chronicleId:[0-9a-f]{24}}',
     resolve: resolve,
     views: {
       main: {
@@ -38,7 +38,7 @@ angular.module('chronicle.chronicle', [
   $scope.chronicle = chronicle;
   $scope.events = events;
 
-  if($state.is('app.chronicle')){
+  if($state.is('app.user.chronicle')){
     $state.go($scope.events.length ? '.events' : '.newevent');
   }
 })
