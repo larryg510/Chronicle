@@ -16,7 +16,7 @@ angular.module('chronicle.newchronicle', [
   });
 })
 
-.controller('NewChronicleCtrl', function($scope, $state, apiService) {
+.controller('NewChronicleCtrl', function($scope, $state, apiService, chronicles) {
 
   $scope.$root.$broadcast('scroll-to-event', { title: 'New Chronicle' });
   
@@ -32,7 +32,7 @@ angular.module('chronicle.newchronicle', [
     };
     
     return apiService.user($scope.user._id).newChronicle(chronicle).then(function(chronicle){
-      $scope.user.chronicles.push(chronicle);
+      chronicles.push(chronicle);
       $state.go('^.chronicles');  
 
     }).catch(function(error){

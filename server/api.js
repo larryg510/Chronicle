@@ -26,7 +26,7 @@ router.use(function(req, res, next){
 
 // map data to req.user using requested id
 userRouter.param('user', function(req, res, next, id) {
-  User.findbyIdQ(id).then(function(user){
+  User.findByIdQ(id).then(function(user){
     req.user = user;
     next();
   });
@@ -55,8 +55,8 @@ userRouter.get('/chronicles', function(req, res, next){
   // Chronicle.findbyIdQ(req.user._id).then(function(chronicle){
   //   res.json(chronicle)
   // })
-  // Chronicle.findQ({ user: req.login._id }).then(res.success).catch(res.error);
-  res.json(req.user.chronicles);
+  Chronicle.findQ({ user: req.login && req.login._id }).then(res.success).catch(res.error);
+  //res.json(req.login.chronicles);
 });
 
 // post new chronicle to user's chronicle library
@@ -65,7 +65,6 @@ userRouter.post('/:user/chronicles', function(req, res, next){
   var chronicle =  new Chronicle(req.body.data);
   chronicle.user = req.user._id;
   chronicle.saveQ().thenResolve(chronicle).then(res.success).catch(res.error);
- 
 });
 
 // get requested user's personal profile

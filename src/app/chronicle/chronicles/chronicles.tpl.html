@@ -1,4 +1,4 @@
-<div class="col-lg-6 col-lg-offset-3"> {{user}}
+<div class="col-lg-6 col-lg-offset-3">
   <ul ng-show="chronicles.length" class="event-list">
     <li ng-repeat="chronicle in chronicles" class="event row" id="{{chronicle._id}}">
       <a ui-sref="^.chronicle({chronicleId: chronicle._id})" style="text-decoration:none">

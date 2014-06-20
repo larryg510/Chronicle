@@ -29,7 +29,7 @@ angular.module('chronicle.login', [
 .controller('LoginCtrl', function($scope, $state, apiService){
   $scope.login = function(){
     return apiService.signup($scope.username).then(function(user){
-      $state.go('app.user', user.sessionId);
+      $state.go('app.user', {userId: user._id});
     });
   };
 });

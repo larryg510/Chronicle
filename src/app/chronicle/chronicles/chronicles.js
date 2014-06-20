@@ -18,8 +18,8 @@ angular.module('chronicle.chronicles', [
   });
 })
 
-.controller('ChroniclesCtrl', function($scope, $state, apiService) {
-  
+.controller('ChroniclesCtrl', function($scope, $state, apiService, chronicles) {
+  $scope.chronicles = chronicles;
 })
 
 ;
