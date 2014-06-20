@@ -7,10 +7,10 @@ angular.module('chronicle.chronicle', [
 .config(function($stateProvider) {
   var resolve = {
     chronicle: function($stateParams, apiService, user){
-      return apiService.user(user._id).chronicle($stateParams.chronicleId).info();
+      return apiService.chronicle($stateParams.chronicleId).info();
     },
     events: function($stateParams, apiService, user){
-      return apiService.user(user._id).chronicle($stateParams.chronicleId).events();
+      return apiService.chronicle($stateParams.chronicleId).events();
     }
   };
   

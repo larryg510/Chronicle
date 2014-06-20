@@ -12,11 +12,8 @@ angular.module('chronicle.api.user', ['chronicle.api.http','chronicle.api.chroni
         chronicles: function(){
           return this.http.get('/chronicles');
         },
-        newChronicle: function(chronicle){
-          return this.http.post('/chronicles', chronicle);
-        },
         chronicle: function(chronicleId){
-          return apiChronicle(this.http.prefix, chronicleId);
+          return apiChronicle(chronicleId, this.http.prefix);
         }
 
       };

@@ -31,7 +31,7 @@ angular.module('chronicle.newchronicle', [
       events: []
     };
     
-    return apiService.user($scope.user._id).newChronicle(chronicle).then(function(chronicle){
+    return apiService.newChronicle(chronicle).then(function(chronicle){
       chronicles.push(chronicle);
       $state.go('^.chronicles');  
 

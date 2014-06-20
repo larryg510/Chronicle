@@ -6,6 +6,9 @@ angular.module('chronicle.api', ['chronicle.api.user', 'chronicle.api.chronicle'
       return {
         user: apiUser,
         chronicle: apiChronicle,
+        newChronicle: function(chronicle){
+          return http.post('/chronicles', chronicle);
+        },
         signup: function(username){
           return http.post('signup', { username: username });
         }

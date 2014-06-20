@@ -13,8 +13,8 @@ router.use(function(req, res, next){
     res.json(data);
   };
 
-  res.error = function(error){
-    res.json(500, { error: error });
+  res.error = function(error, code){
+    res.json(500 || code, { error: error });
   };
 
   User.findOneQ({ sessionId: req.sessionID }).then(function(user){
@@ -24,12 +24,9 @@ router.use(function(req, res, next){
   });
 });
 
-// map data to req.user using requested id
-userRouter.param('user', function(req, res, next, id) {
-  User.findByIdQ(id).then(function(user){
-    req.user = user;
-    next();
-  });
+router.post('*', function(req, res, next){
+  if(!req.login) { return res.error('you must be logged in', 403); }
+  next();
 });
 
 // get current user's personal profile
@@ -46,52 +43,26 @@ router.post('/signup', function(req, res, next){
   }
 });
 
-userRouter.get('/', function(req, res, next){
-  res.success(req.login || 'not logged in');
-});
-
-// get current user's chronicle library
-userRouter.get('/chronicles', function(req, res, next){
-  // Chronicle.findbyIdQ(req.user._id).then(function(chronicle){
-  //   res.json(chronicle)
-  // })
-  Chronicle.findQ({ user: req.login && req.login._id }).then(res.success).catch(res.error);
-  //res.json(req.login.chronicles);
+// get current user's personal profile
+router.get('/chronicles', function(req, res, next){
+  Chroncile.findQ({ user: req.login && req.login._id }).then(res.success).catch(res.error);
 });
 
 // post new chronicle to user's chronicle library
-userRouter.post('/:user/chronicles', function(req, res, next){
-  req.body.data.owner = req.user;
+router.post('/chronicles', function(req, res, next){
   var chronicle =  new Chronicle(req.body.data);
-  chronicle.user = req.user._id;
+  chronicle.user = req.login._id;
   chronicle.saveQ().thenResolve(chronicle).then(res.success).catch(res.error);
 });
 
-// get requested user's personal profile
-userRouter.get('/:user', function(req, res, next){
-  res.success(req.user);
-});
 
-// get requested user's chronicle library
-userRouter.get('/:user/chronicles', function(req, res, next){
-  Chronicle.findQ({ user: req.user._id }).then(res.success).catch(res.error);
-});
-
-// use userRouter
-router.use('/user', userRouter);
-
+//=====Chronicle Routes===========================================================================
 // map data to req.chronicle using requested chronicle id
 router.param('chronicle', function(req, res, next, id){
   Chronicle.findByIdQ(id).then(function(chronicle){
     req.chronicle = chronicle;
     next();
   });
-  
-  // Chronicle.save({_id: Object('5369238f2df443631a888633'), events: []});
-
-  // req.chronicle = fakeChronicle(id);
-  // res.json(req.chronicle);
-
 });
 
 // map data to req.event using requested event id
@@ -145,81 +116,36 @@ chronicleRouter.post('/event/:event/content', function(req, res, next){
   //req.chronicle.event.updateQ({ $push: { content: content } }).then(function(){
 });
 
-// use chronicleRouter
-router.use('/user/:user/chronicle/:chronicle', chronicleRouter);
+
+router.use('/chronicle/:chronicle', chronicleRouter);
+
+
+//===User Routes=========================================================================
+
+// map data to req.user using requested id
+userRouter.param('user', function(req, res, next, id) {
+  User.findByIdQ(id).then(function(user){
+    req.user = user;
+    next();
+  });
+});
+
+
+// get current user info
+userRouter.get('/', function(req, res, next){
+  res.success(req.login || 'not logged in');
+});
+
+// get requested user's personal profile
+userRouter.get('/:user', function(req, res, next){
+  res.success(req.user);
+});
+
+// get requested user's chronicle library
+userRouter.get('/:user/chronicles', function(req, res, next){
+  Chronicle.findQ({ user: req.user._id }).then(res.success).catch(res.error);
+});
+
+router.use('/user', userRouter);
 
 exports.router = router;
-
-exports.loadTemp = function(){
-  var chronicle = new Chronicle({_id: mongoose.Types.ObjectId('5369238f2df443631a888633')});
-
-  chronicle.saveQ().then(function(){
-    console.log('Dummy Data Chronicle Saved');
-  });
-}
-
-//===Dummy Data===========================================================
-var Faker = require('Faker');
-
-function fakeUser(id){
-  return {
-    _id: id || new mongoose.Types.ObjectId(),
-    username: Faker.Internet.userName(),
-    email: Faker.Internet.email(),
-    bio: Faker.Lorem.sentences(),
-    chronicles: [],
-  };
-}
-
-function fakeChronicle(id){
-  return {
-    _id: id || new mongoose.Types.ObjectId(),
-    title: Faker.Lorem.words(2).join(' ')
-  };
-}
-
-function fakeChronicles(max){
-  var num = Math.round(Math.random() * (max || 1));
-  var chronicles = [];
-  for(var i = 0; i < num; i++){
-    chronicles.push(fakeChronicle());
-  }
-  return chronicles;
-}
-
-function fakeEvents(max){
-  var num = Math.round(Math.random() * (max || 1));
-  var events = [];
-  for(var i = 0; i < num; i++){
-    events.push({
-      _id: new mongoose.Types.ObjectId(),
-      title: Faker.Lorem.words(2).join(' '),
-      created: Faker.Date.recent,
-      contents: fakeContents(3),
-      background: Faker.Image.abstractImage(150, 150).replace('http://', '//') + '/?' + Math.random()
-    });
-  }
-  return events;
-}
-
-function fakeContents(max){
-  var num = Math.round(Math.random() * (max || 1));
-  var contents = [];
-  for(var i = 0; i < num; i++){
-    if(Math.random() > 0.5){
-      contents.push({
-        _id: new mongoose.Types.ObjectId(),
-        comment: Faker.Lorem.sentences(),
-        author: fakeUser()
-      });
-    } else {
-      contents.push({
-        _id: new mongoose.Types.ObjectId(),
-        image: Faker.Image.nightlife(150, 150).replace('http://', '//') + '/?' + Math.random(),
-        author: fakeUser(),
-        created: Faker.Date.recent
-      });
-    }
-  }
-  return contents;
-}

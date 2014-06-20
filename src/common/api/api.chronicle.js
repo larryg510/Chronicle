@@ -2,8 +2,8 @@
   .factory('apiChronicle', ['apiHTTP', 'apiEvent',
     function(apiHTTP, apiEvent){
   
-      function Chronicle(prefix, id){
-        this.http = new apiHTTP(prefix + '/chronicle/' + id);
+      function Chronicle(id, prefix){
+        this.http = new apiHTTP((prefix || '/api') + '/chronicle/' + id);
       }
       
       Chronicle.prototype = {
@@ -14,15 +14,15 @@
           return this.http.get('/events');
         },
         event: function(eventId){
-          return apiEvent(this.http.prefix, eventId);
+          return apiEvent(eventId, this.http.prefix);
         },
         newEvent: function(metadata){
           return this.http.post('/events', metadata);
         }
       };
       
-      return function(prefix, id){
-        return new Chronicle(prefix, id);
+      return function(id, prefix){
+        return new Chronicle(id, prefix);
       };
     }
   ]);

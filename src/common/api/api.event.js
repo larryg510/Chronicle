@@ -2,8 +2,8 @@
   .factory('apiEvent', ['apiHTTP',
     function(apiHTTP){
       
-      function Event(prefix, id){
-        this.http = new apiHTTP(prefix + '/event/' + id);
+      function Event(id, prefix){
+        this.http = new apiHTTP((prefix || '/api') + '/event/' + id);
       }
       
       Event.prototype = {
@@ -18,8 +18,8 @@
         }
       };
       
-      return function(prefix, id){
-        return new Event(prefix, id);
+      return function(id, prefix){
+        return new Event(id, prefix);
       };
     }
   ]);

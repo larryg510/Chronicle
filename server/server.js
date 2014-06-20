@@ -52,9 +52,6 @@ function Server(){
     
     //---Api Route--------------------------------------------------------------------------
     app.use('/api', api.router);
-
-    //temporary data loading
-    api.loadTemp();
     
     //---Main Route--------------------------------------------------------------------------
     app.use(function(req, res, next) {
@@ -85,7 +82,7 @@ function Server(){
     setTimeout(function() {
       console.error("Could not close connections in time, forcefully shutting down");
       process.exit();
-    }, 10*1000);
+    }, 3*1000);
   }
   
   // listen for TERM signal .e.g. kill
