@@ -62,7 +62,6 @@ angular.module('chronicle', [
 
 .controller('AppCtrl', function($scope, $state, apiService) {
   if($state.is('app')){
-    // $state.go('app.user', { userId: '5369238f2df443631a888634' });
     $state.go('app.login');
   }
 })
