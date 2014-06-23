@@ -45,7 +45,7 @@ router.post('/signup', function(req, res, next){
 
 // get current user's personal profile
 router.get('/chronicles', function(req, res, next){
-  Chroncile.findQ({ user: req.login && req.login._id }).then(res.success).catch(res.error);
+  Chronicle.findQ({ user: req.login && req.login._id }).then(res.success).catch(res.error);
 });
 
 // post new chronicle to user's chronicle library
