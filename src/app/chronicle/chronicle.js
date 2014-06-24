@@ -1,7 +1,7 @@
 angular.module('chronicle.chronicle', [
   'chronicle.event',
   'chronicle.events',
-  'chronicle.newchronicle'
+  'chronicle.newchronicle',
   'chronicle.api',
   'ui.router',
   'ui.bootstrap'

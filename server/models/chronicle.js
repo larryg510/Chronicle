@@ -7,7 +7,8 @@ var express     = require('express')
 var ContentSchema = new Schema({
  format: String,
  content: String,
- //owner: { type: Schema.Types.ObjectId, ref: 'user'}
+ //: String
+ owner: { type: Schema.Types.ObjectId, ref: 'User'}
 });
 
 /* ContentSchema.virtuals('url').get(function(){
@@ -33,7 +34,7 @@ var EventSchema = new Schema({
 
 var ChronicleSchema = new Schema({
  user: { type: Schema.Types.ObjectId, ref: 'User'},
- access: [{type: Schema.ObjectId, ref: 'user' }],
+ access: [{type: Schema.ObjectId, ref: 'User' }],
  title: String,
  events: [EventSchema],
 }, {

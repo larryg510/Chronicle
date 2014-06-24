@@ -28,7 +28,7 @@
         </div>
         <div class="photo" ng-show="content.format === 'image'">
           <br><img src="{{content.content}}" style="max-width:100%"/>
-        </div>  
+        </div> {{content.owner.name}}  
     </div>
     <br><button class="btn btn-primary" style="text-align:center" ng-click="open()">Add content!</button>
   </div>

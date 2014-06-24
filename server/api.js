@@ -83,7 +83,10 @@ chronicleRouter.get('/', function(req, res, next){
 
 // get all events from requested chronicle
 chronicleRouter.get('/events', function(req, res, next){
-  res.json(req.chronicle.events);
+  req.chronicle.populateQ("events.content.owner").then(function(){
+    res.json(req.chronicle.events);
+  });
+
 });
 
 
@@ -111,12 +114,13 @@ chronicleRouter.post('/event/:event', function(req, res, next){
 
 // push new content to event in requested chronicle
 chronicleRouter.post('/event/:event/content', function(req, res, next){
-  req.body.data.owner = req.user;
+  req.body.data.owner = req.login;
   var content = req.event.content[req.event.content.push(req.body.data) - 1];
   Chronicle.findOneAndUpdateQ({ events: { $elemMatch: {_id: req.event._id } } },
     { $push: {'events.$.content' : content.toObject() }}).then(function(){
-      content.owner = req.user;
-      res.json(content);
+      var response = content.toObject();
+      response.owner = req.login.toObject();
+      res.json(response);
      }).catch(console.log);
   //req.chronicle.event.updateQ({ $push: { content: content } }).then(function(){
 });
