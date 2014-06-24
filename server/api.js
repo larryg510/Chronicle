@@ -9,14 +9,17 @@ var router          = new express.Router()
   , chronicleRouter = new express.Router();
 
 router.use(function(req, res, next){
+  // standardizes success
   res.success = function(data){
     res.json(data);
   };
 
+  // standardizes error
   res.error = function(error, code){
     res.json(500 || code, { error: error });
   };
 
+  // login based on user's sessionID
   User.findOneQ({ sessionId: req.sessionID }).then(function(user){
     req.login = user;
   }).then(function(){
@@ -24,12 +27,13 @@ router.use(function(req, res, next){
   });
 });
 
+// if no sessionID found
 router.post('*', function(req, res, next){
   //if(!req.login) { return res.error('you must be logged in', 403); }
   next();
 });
 
-// get current user's personal profile
+// creates sessionID for new user
 router.post('/signup', function(req, res, next){
   if(req.login){
     return res.success(req.login.toObject()); //should never really happen
@@ -72,12 +76,12 @@ chronicleRouter.param('event', function(req, res, next, id){
   next();
 });
 
-// get data from requested chronicle
+// get all info from requested chronicle
 chronicleRouter.get('/', function(req, res, next){
   res.json(req.chronicle);
 });
 
-// get all event data from requested chronicle
+// get all events from requested chronicle
 chronicleRouter.get('/events', function(req, res, next){
   res.json(req.chronicle.events);
 });
