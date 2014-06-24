@@ -1,4 +1,7 @@
 angular.module('chronicle.chronicle', [
+  'chronicle.event',
+  'chronicle.events',
+  'chronicle.newchronicle'
   'chronicle.api',
   'ui.router',
   'ui.bootstrap'
@@ -14,8 +17,8 @@ angular.module('chronicle.chronicle', [
     }
   };
   
-  $stateProvider.state('app.user.chronicle', {
-    url: '/chronicle/{chronicleId:[0-9a-f]{24}}',
+  $stateProvider.state('app.chronicle', {
+    url: 'chronicle/{chronicleId:[0-9a-f]{24}}',
     resolve: resolve,
     views: {
       main: {
@@ -24,7 +27,7 @@ angular.module('chronicle.chronicle', [
       },
       topnav: {
         controller: 'ChronicleTopNavCtrl',
-        templateUrl: 'chronicle/nav/chronicle-nav.tpl.html',
+        templateUrl: 'chronicle/chronicle-nav.tpl.html',
       }
       /* bottomnav: {
         controller: 'ChronicleBottomNavCtrl',
@@ -38,7 +41,7 @@ angular.module('chronicle.chronicle', [
   $scope.chronicle = chronicle;
   $scope.events = events;
 
-  if($state.is('app.user.chronicle')){
+  if($state.is('app.chronicle')){
     $state.go($scope.events.length ? '.events' : '.newevent');
   }
 })

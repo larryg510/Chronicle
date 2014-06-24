@@ -6,8 +6,13 @@ angular.module('chronicle.api', ['chronicle.api.user', 'chronicle.api.chronicle'
       return {
         user: apiUser,
         chronicle: apiChronicle,
-        newChronicle: function(chronicle){
-          return http.post('/chronicles', chronicle);
+        chronicles: function(chronicle){
+          if(chronicle){
+            return http.post('/chronicles', chronicle);
+          }else {
+            return http.get('/chronicles');
+          }
+          
         },
         signup: function(username){
           return http.post('signup', { username: username });

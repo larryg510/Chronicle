@@ -25,7 +25,7 @@ router.use(function(req, res, next){
 });
 
 router.post('*', function(req, res, next){
-  if(!req.login) { return res.error('you must be logged in', 403); }
+  //if(!req.login) { return res.error('you must be logged in', 403); }
   next();
 });
 
@@ -43,9 +43,10 @@ router.post('/signup', function(req, res, next){
   }
 });
 
-// get current user's personal profile
+// get current user's chronicle library
 router.get('/chronicles', function(req, res, next){
-  Chronicle.findQ({ user: req.login && req.login._id }).then(res.success).catch(res.error);
+  //Chronicle.findQ({ user: req.login && req.login._id }).then(res.success).catch(res.error);
+  Chronicle.findQ({}).then(res.success).catch(res.error)
 });
 
 // post new chronicle to user's chronicle library

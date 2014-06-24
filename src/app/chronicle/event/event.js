@@ -1,4 +1,5 @@
 angular.module('chronicle.event', [
+  'chronicle.event.edit',
   'chronicle.api',
   'ui.router',
   'ui.bootstrap',
@@ -10,7 +11,7 @@ angular.module('chronicle.event', [
     
   };
 
-  $stateProvider.state('app.user.chronicle.event', {
+  $stateProvider.state('app.chronicle.event', {
     resolve: resolve,
     url: '/{eventId:[0-9a-f]{24}}',
     views: {

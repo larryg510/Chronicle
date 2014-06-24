@@ -33,6 +33,7 @@ var EventSchema = new Schema({
 
 var ChronicleSchema = new Schema({
  user: { type: Schema.Types.ObjectId, ref: 'User'},
+ access: [{type: Schema.ObjectId, ref: 'user' }],
  title: String,
  events: [EventSchema],
 }, {

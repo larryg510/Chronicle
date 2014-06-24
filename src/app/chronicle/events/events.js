@@ -6,7 +6,7 @@ angular.module('chronicle.events', [
 
 .config(function($stateProvider) {
   
-  $stateProvider.state('app.user.chronicle.events', {
+  $stateProvider.state('app.chronicle.events', {
     url: '/events',
     views: {
       main: {
