@@ -37,7 +37,7 @@ angular.module('chronicle.chronicles', [
   });
 })
 
-.controller('ChroniclesCtrl', function($scope, $state, apiService, chronicles) {
+.controller('ChroniclesCtrl', function($scope, $state, apiService, user, chronicles) {
   $scope.chronicles = chronicles;
 })
 
