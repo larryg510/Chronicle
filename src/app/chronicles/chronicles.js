@@ -12,6 +12,10 @@ angular.module('chronicle.chronicles', [
       main: {
         controller: 'ChroniclesCtrl',
         templateUrl: 'chronicles/chronicles.tpl.html',
+      },
+      topnav: {
+        controller: 'ChroniclesTopNavCtrl',
+        templateUrl: "user/user-nav.tpl.html",
       }
     }, 
     resolve: {
@@ -37,4 +41,6 @@ angular.module('chronicle.chronicles', [
   $scope.chronicles = chronicles;
 })
 
+.controller('ChroniclesTopNavCtrl', function($scope, $state, apiService, user, chronicles) {
+})
 ;

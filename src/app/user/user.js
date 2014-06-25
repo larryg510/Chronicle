@@ -37,7 +37,7 @@ angular.module('chronicle.user', [
 .controller('UserCtrl', function($scope, $state, apiService, user, chronicles) {
   $scope.user = user;
   if($state.is('app.user')){
-    $state.go(chronicles.length ? '.chronicles' : '.newchronicle');
+    $state.go(chronicles.length ? '^.chronicles' : 'app.newchronicle');
   }
 })
 
