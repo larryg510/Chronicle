@@ -3,11 +3,8 @@
     <a class="navbar-brand navbar-left" style="color:#FFFFFF;" href="javascript:history.back()">
       <i class="fa fa-angle-left"></i>
     </a>
-    <span class="navbar-text" style="color:#FFFFFF" >
-      <ul class="breadcrumb">
-        <li><a href="#">{{user.name}}</a></li>
-        <li>{{chronicle.title}}</li>
-      </ul>
+    <span class="navbar-text" style="color:#FFFFFF;" >
+      your chronicle library
     </span>
     
     
@@ -18,8 +15,8 @@
           <i class="fa fa-bars"></i>
         </a>
         <ul class="dropdown-menu">
-          <li><a ui-sref="app.newchronicle"><i class="fa fa-plus"></i>&nbsp;&nbsp;Add Chronicle</a></li>
-          <li><a ui-sref=".settings"><i class="fa fa-cog"></i>&nbsp;&nbsp;Settings</a></li>
+          <li><a ui-sref="^.newchronicle"><i class="fa fa-plus"></i>&nbsp;&nbsp;add chronicle</a></li>
+          <li><a ui-sref=".settings"><i class="fa fa-cog"></i>&nbsp;&nbsp;settings</a></li>
         </ul>
       </li>
     </ul>
