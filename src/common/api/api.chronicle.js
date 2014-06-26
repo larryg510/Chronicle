@@ -18,6 +18,9 @@
         },
         newEvent: function(metadata){
           return this.http.post('/events', metadata);
+        },
+        delete: function(){
+          return this.http.delete('/');
         }
       };
       

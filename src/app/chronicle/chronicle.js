@@ -35,6 +35,7 @@ angular.module('chronicle.chronicle', [
       } */
     }
   });
+
 })
 
 .controller('ChronicleCtrl', function($scope, $state, apiService, chronicle, events) {
@@ -50,6 +51,13 @@ angular.module('chronicle.chronicle', [
   $scope.chronicle = chronicle;
   $scope.events = events;
   $scope.event = events[0];
+
+  $scope.delete = function() {
+    apiService.chronicle(chronicle._id).delete().then(function(){
+      $state.go('app.chronicles');
+    });
+  };
+
   
   $scope.$on('scroll-to-event', function(e, event){
     $scope.event = event;

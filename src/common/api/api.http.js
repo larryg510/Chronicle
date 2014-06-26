@@ -19,15 +19,21 @@ angular.module('chronicle.api.http', [])
             return results.data;
           });
         },
-        post: function post(action, data, raw){
+        post: function (action, data, raw){
           // Post actions require login
           return this.transmit('post', action || '', {
             data: data || {},
             withCredentials: true
           }, raw);
         },
-        get: function get(action, data, raw){
+        get: function (action, data, raw){
           return this.transmit('get', action || '', {
+            params: data || {},
+            withCredentials: true
+          }, raw);
+        },
+        delete: function (action, data, raw){
+          return this.transmit('delete', action || '', {
             params: data || {},
             withCredentials: true
           }, raw);

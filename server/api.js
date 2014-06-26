@@ -125,6 +125,11 @@ chronicleRouter.post('/event/:event/content', function(req, res, next){
   //req.chronicle.event.updateQ({ $push: { content: content } }).then(function(){
 });
 
+chronicleRouter.delete('/', function(req, res, next){
+  console.log("omgmiew");
+  Chronicle.findByIdAndRemoveQ(req.chronicle._id).then(res.success).catch(res.error);
+});
+
 
 router.use('/chronicle/:chronicle', chronicleRouter);
 
