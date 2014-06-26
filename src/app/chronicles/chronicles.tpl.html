@@ -3,14 +3,16 @@
   <ul ng-show="chronicles.length" class="event-list">
     <li ng-repeat="chronicle in chronicles" class="event row" id="{{chronicle._id}}">
       <a ui-sref="app.chronicle({chronicleId: chronicle._id})" style="text-decoration:none">
-        <div class="content">
+        <div class="content" style="border:1px solid black; text-align: center;">
           <br>
-          <div>Title: {{chronicle.title}}</div>
+          <div>{{chronicle.title}}</div>
+
+          <div> {{chronicle.user.name}}</div>
           <br>
-          <div>ID: {{chronicle.user}}</div>
         </div>
+      </br>
       </a>
-    </li>
+    </li> 
   </ul>
 </div> 
 </div>

@@ -43,6 +43,10 @@ angular.module('chronicle.newchronicle', [
       alert(error);
     });
   };
+
+  $scope.back = function(){
+    $state.go('app.user');
+  };
 })
 
 .controller('UserNavCtrl', function(){
