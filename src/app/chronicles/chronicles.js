@@ -12,6 +12,10 @@ angular.module('chronicle.chronicles', [
       main: {
         controller: 'ChroniclesCtrl',
         templateUrl: 'chronicles/chronicles.tpl.html',
+      },
+      topnav: {
+        controller: 'UserNavCtrl',
+        templateUrl: 'user/user-nav.tpl.html',
       }
     }, 
     resolve: {
@@ -31,10 +35,32 @@ angular.module('chronicle.chronicles', [
       
     }
   });
+
+  $stateProvider.state('app.owned', {
+    url: 'chronicles/owned',
+    views: {
+      main: {
+        controller: 'ChroniclesCtrl',
+        templateUrl: 'chronicles/chronicles.tpl.html'
+      },
+      topnav: {
+        controller: 'UserNavCtrl',
+        templateUrl: 'user/user-nav.tpl.html',
+      }
+    },
+    resolve: {
+      chronicles: function($stateParams, apiService){
+        return apiService.mychronicles();
+      }
+    }
+  });
 })
 
 .controller('ChroniclesCtrl', function($scope, $state, apiService, chronicles) {
   $scope.chronicles = chronicles;
 })
 
+.controller('UserNavCtrl', function(){
+
+})
 ;

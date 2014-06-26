@@ -1,3 +1,4 @@
+<div class="container-fluid">
 <div class="col-lg-6 col-lg-offset-3">
   <ul ng-show="chronicles.length" class="event-list">
     <li ng-repeat="chronicle in chronicles" class="event row" id="{{chronicle._id}}">
@@ -6,9 +7,10 @@
           <br>
           <div>Title: {{chronicle.title}}</div>
           <br>
-          <div>ID: {{chronicle._id}}</div>
+          <div>ID: {{chronicle.user}}</div>
         </div>
       </a>
     </li>
   </ul>
 </div> 
+</div>

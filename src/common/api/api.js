@@ -16,6 +16,9 @@ angular.module('chronicle.api', ['chronicle.api.user', 'chronicle.api.chronicle'
         },
         signup: function(username){
           return http.post('signup', { username: username });
+        },
+        mychronicles: function(){
+          return http.get('/chronicles/owned');
         }
       };
     }

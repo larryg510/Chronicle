@@ -47,10 +47,15 @@ router.post('/signup', function(req, res, next){
   }
 });
 
-// get current user's chronicle library
+// get current user's chronicles
+router.get('/chronicles/owned', function(req, res, next){
+  Chronicle.findQ({ user: req.login && req.login._id}).then(res.success).catch(res.error);
+});
+
+// get all chronicles
 router.get('/chronicles', function(req, res, next){
   //Chronicle.findQ({ user: req.login && req.login._id }).then(res.success).catch(res.error);
-  Chronicle.findQ({}).then(res.success).catch(res.error)
+  Chronicle.findQ({}).then(res.success).catch(res.error);
 });
 
 // post new chronicle to user's chronicle library
@@ -59,6 +64,8 @@ router.post('/chronicles', function(req, res, next){
   chronicle.user = req.login._id;
   chronicle.saveQ().thenResolve(chronicle).then(res.success).catch(res.error);
 });
+
+
 
 
 //=====Chronicle Routes===========================================================================
