@@ -15,6 +15,9 @@
         },
         update: function(metadata){
           return this.http.post('', metadata);
+        },
+        deleteEvent: function(){
+          return this.http.delete('');
         }
       };
       
