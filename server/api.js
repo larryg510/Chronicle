@@ -139,6 +139,12 @@ chronicleRouter.delete('/', function(req, res, next){
   Chronicle.findByIdAndRemoveQ(req.chronicle._id).then(res.success).catch(res.error);
 });
 
+chronicleRouter.delete('/event/:event', function(req, res, next){
+  console.log("delete event");  
+  Chronicle.findByIdAndUpdateQ(req.chronicle._id, 
+    { $pull: { 'events': { _id: req.event._id } } }).then(res.success).catch(res.error);
+});
+
 
 router.use('/chronicle/:chronicle', chronicleRouter);
 

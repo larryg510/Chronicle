@@ -58,6 +58,16 @@ angular.module('chronicle.chronicle', [
     });
   };
 
+  $scope.deleteEvent = function() {
+    apiService.chronicle(chronicle._id).event($scope.event._id).deleteEvent($scope.event._id).then(function(){
+      var index = $scope.events.indexOf($scope.event);
+      if(index !== -1){
+        $scope.events.splice(index, 1);
+      }
+      $state.go($scope.events.length ? 'app.chronicle.events' : 'app.chronicle.newevent');
+    });
+  };
+
   
   $scope.$on('scroll-to-event', function(e, event){
     $scope.event = event;
