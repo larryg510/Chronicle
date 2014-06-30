@@ -10,14 +10,16 @@
         info: function(){
           return this.http.get();
         },
-        events: function(){
-          return this.http.get('/events');
+        events: function(metadata, before){
+          if(metadata){
+            console.log(before);
+            return this.http.post('/events' + (before ? '?before=' + before : ''), metadata);
+          }else {
+            return this.http.get('/events');
+          }
         },
         event: function(eventId){
           return apiEvent(eventId, this.http.prefix);
-        },
-        newEvent: function(metadata){
-          return this.http.post('/events', metadata);
         },
         delete: function(){
           return this.http.delete('/');
