@@ -3,6 +3,8 @@
     <ul ng-show="events.length" class="event-list">
       <li ng-repeat="event in events" class="event row" id="{{event._id}}">
         <a ui-sref="^.event({eventId: event._id})" style="text-decoration:none">
+          <a ui-sref="^.neweventyay({currentEvent: event._id})">Add Event Here</a>
+          {{$index}}
           <div class="background" style="background-image: url({{event.metadata.photo}});">
 
             <div class="metadata">
@@ -16,6 +18,7 @@
             </div>
             <br><br><br><br><br>
           </div>
+
         </a>
       </li>
     </ul>

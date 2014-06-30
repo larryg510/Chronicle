@@ -15,6 +15,16 @@ angular.module('chronicle.event.edit', [
     }
   });
 
+  $stateProvider.state('app.chronicle.neweventyay', {
+    url: '/newevent/:currentEvent',
+    views: {
+      main: {
+        controller: 'EditEventCtrl',
+        templateUrl: 'chronicle/event/edit.tpl.html',
+      }
+    }
+  });
+
   $stateProvider.state('app.chronicle.newevent', {
     url: '/newevent',
     views: {
@@ -47,11 +57,10 @@ angular.module('chronicle.event.edit', [
       }
     }*/
     $scope.events.forEach(function(event){
-    if(event._id == $state.params.eventId) {
-      $scope.event = event;
-    }
-  });
-
+      if(event._id == $state.params.eventId) {
+        $scope.event = event;
+      }
+    });
   } else {
     $scope.$root.$broadcast('scroll-to-event', { title: 'New Event' });
     $scope.event = {};
@@ -72,8 +81,21 @@ angular.module('chronicle.event.edit', [
         $state.go('^');
         $scope.$root.$broadcast('scroll-to-event', event);
       });
-    }else {
-      return apiService.chronicle($scope.chronicle._id).newEvent($scope.event.metadata).then(function(event){
+    }else if($state.params.currentEvent){
+      return apiService.chronicle($scope.chronicle._id).events($scope.event.metadata, $state.params.currentEvent).then(function(event){
+        console.log("current event:");
+        console.log($state.params.currentEvent);
+        var index = 0;
+        for (var i = 0; i < $scope.events.length; i ++){
+          if ($scope.events[i]._id == $state.params.currentEvent){index = i; console.log("found");}
+        }
+        
+        $scope.events.splice(index, 0, event);
+        $state.go('^.events');
+        $scope.$root.$broadcast('scroll-to-event', event);
+      });
+    }else{
+      return apiService.chronicle($scope.chronicle._id).events($scope.event.metadata).then(function(event){
         $scope.events.push(event);
         $state.go('^.events');
         $scope.$root.$broadcast('scroll-to-event', event);

@@ -99,10 +99,32 @@ chronicleRouter.get('/events', function(req, res, next){
 
 // push new event to requested chronicle
 chronicleRouter.post('/events', function(req, res, next){
-  var event = req.chronicle.events[req.chronicle.events.push({ owner: req.user, metadata: req.body.data}) - 1];
-  req.chronicle.updateQ({ $push: { 'events': event }}).then(function() {
-    res.json(event);
-  });
+  var event = { owner: req.user, metadata: req.body.data };
+
+  console.log(req.query.before);
+
+  if(req.query.before){
+    //splice before this id
+    var index = req.chronicle.events.length;
+    for(var i = 0; i < req.chronicle.events.length; i++){
+      if (req.chronicle.events[i]._id == req.query.before){
+        index = i; 
+        break;
+      }
+    }
+
+    req.chronicle.events.splice(index , 0, event);
+    event = req.chronicle.events[index];
+    Chronicle.updateQ({ $push : { 'events' : { $each: [event], $position: index } } }).thenResolve(event).then(res.success).catch(res.error);
+
+
+  }else {
+    req.chronicle.updateQ({ $push: { 'events': event }}).then(function() {
+      req.chronicle.events.push({ owner: req.user, metadata: req.body.data});
+      res.json(event);
+    });
+  }
+
 });
 
 // get specific event data from requested chronicle
@@ -132,13 +154,13 @@ chronicleRouter.post('/event/:event/content', function(req, res, next){
   //req.chronicle.event.updateQ({ $push: { content: content } }).then(function(){
 });
 
-
-
+//delete a chronicle 
 chronicleRouter.delete('/', function(req, res, next){
   console.log("omgmiew");
   Chronicle.findByIdAndRemoveQ(req.chronicle._id).then(res.success).catch(res.error);
 });
 
+//delete an event 
 chronicleRouter.delete('/event/:event', function(req, res, next){
   console.log("delete event");  
   Chronicle.findByIdAndUpdateQ(req.chronicle._id, 
