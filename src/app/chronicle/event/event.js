@@ -29,7 +29,19 @@ angular.module('chronicle.event', [
       $scope.event = event;
     }
   });
-  
+  /*
+   $scope.deleteEvent = function() {
+    apiService.chronicle(chronicle._id).event($scope.event._id).deleteEvent($scope.event._id).then(function(){
+      var index = $scope.events.indexOf($scope.event);
+      if(index !== -1){
+        $scope.events.splice(index, 1);
+      }
+      $state.go($scope.events.length ? 'app.chronicle.events' : 'app.chronicle.newevent');
+    });
+  };
+  */
+
+
   $scope.$root.$broadcast('scroll-to-event', $scope.event);
 
 
@@ -73,6 +85,19 @@ angular.module('chronicle.event', [
         };
       }
     });
+
   };
+    $scope.deleteContent = function (id) {
+    console.log(id.id);
+    apiService.chronicle($scope.chronicle._id).event($scope.event._id).deleteContent(id).then(function(){
+      for(var i = 0; i < $scope.event.content.length; i++){
+        if($scope.event.content[i]._id == id.id){
+          var index = i;
+          $scope.event.content.splice(index, 1);
+        }
+      }
+    });
+  };
+
 
 });

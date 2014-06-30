@@ -18,6 +18,9 @@
         },
         deleteEvent: function(){
           return this.http.delete('');
+        },
+        deleteContent: function(id){
+          return this.http.delete('/content', id);
         }
       };
       

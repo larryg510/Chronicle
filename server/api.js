@@ -132,7 +132,12 @@ chronicleRouter.post('/event/:event/content', function(req, res, next){
   //req.chronicle.event.updateQ({ $push: { content: content } }).then(function(){
 });
 
-
+chronicleRouter.delete('/event/:event/content', function(req, res, next){
+  console.log("Nyabu");
+  console.log(req.query.id);
+  Chronicle.findOneAndUpdateQ({events: {$elemMatch: {_id: req.event._id} } }, 
+    { $pull: { 'events.$.content': { _id: req.query.id } } }).then(res.success).catch(res.error)
+});
 
 chronicleRouter.delete('/', function(req, res, next){
   console.log("omgmiew");
@@ -141,7 +146,7 @@ chronicleRouter.delete('/', function(req, res, next){
 
 chronicleRouter.delete('/event/:event', function(req, res, next){
   console.log("delete event");  
-  Chronicle.findByIdAndUpdateQ(req.chronicle._id, 
+  Chronicle.findByIdAndUpdateQ(req.chronicle._id,
     { $pull: { 'events': { _id: req.event._id } } }).then(res.success).catch(res.error);
 });
 
