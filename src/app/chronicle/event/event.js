@@ -21,6 +21,7 @@ angular.module('chronicle.event', [
       }
     }
   });
+
 })
 
 .controller('EventCtrl', function($scope, $state, apiService, $modal) {
