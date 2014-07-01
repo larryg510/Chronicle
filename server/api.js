@@ -2,6 +2,7 @@ var express   = require('express')
   , mongoose  = require('mongoose')
   , Chronicle = require('./models/chronicle')
   , User      = require('./models/user')
+  , Q         = require('q')
 ;
 
 var router          = new express.Router()
@@ -112,10 +113,17 @@ chronicleRouter.post('/events', function(req, res, next){
         break;
       }
     }
-
+    console.log(index);
     req.chronicle.events.splice(index , 0, event);
     event = req.chronicle.events[index];
-    Chronicle.updateQ({ $push : { 'events' : { $each: [event], $position: index } } }).thenResolve(event).then(res.success).catch(res.error);
+
+    Q.ninvoke(Chronicle.collection, 'update', {_id: req.chronicle._id}, { $push : { 'events' : { $each: [event.toObject()], $position: index } } }).thenResolve(event).then(res.success).catch(res.error);
+    // Chronicle.collection.update({_id: req.chronicle._id}, { $push : { 'events' : { $each: [event.toObject()], $position: index } } }, function(error){
+    //   console.log(arguments);
+    //   if (error) {return res.error(error);} 
+    //   else {return res.success(event);}
+    // })
+    //Chronicle.updateQ({_id: req.chronicle._id}, { $push : { 'events' : { $each: [event.toObject()], $position: index } } }).thenResolve(event).then(res.success).catch(res.error);
 
 
   }else {
