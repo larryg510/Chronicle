@@ -10,8 +10,14 @@
         info: function(){
           return this.http.get();
         },
-        newContent: function(content){
-          return this.http.post('/content', content);
+        newContent: function(content, id){
+          if(content){
+            console.log(id);
+            return this.http.post('/content' + (id ? '?id=' + id : ''), content);
+          }
+          else{
+            return this.http.get('');
+          }
         },
         update: function(metadata){
           return this.http.post('', metadata);
@@ -29,3 +35,12 @@
       };
     }
   ]);
+
+/*
+    if(metadata){
+            console.log(before);
+            return this.http.post('/events' + (before ? '?before=' + before : ''), metadata);
+          }else {
+            return this.http.get('/events');
+          }
+*/

@@ -2,6 +2,7 @@ var express   = require('express')
   , mongoose  = require('mongoose')
   , Chronicle = require('./models/chronicle')
   , User      = require('./models/user')
+  , Q         = require('q')
 ;
 
 var router          = new express.Router()
@@ -112,10 +113,17 @@ chronicleRouter.post('/events', function(req, res, next){
         break;
       }
     }
-
+    console.log(index);
     req.chronicle.events.splice(index , 0, event);
     event = req.chronicle.events[index];
-    Chronicle.updateQ({ $push : { 'events' : { $each: [event], $position: index } } }).thenResolve(event).then(res.success).catch(res.error);
+
+    Q.ninvoke(Chronicle.collection, 'update', {_id: req.chronicle._id}, { $push : { 'events' : { $each: [event.toObject()], $position: index } } }).thenResolve(event).then(res.success).catch(res.error);
+    // Chronicle.collection.update({_id: req.chronicle._id}, { $push : { 'events' : { $each: [event.toObject()], $position: index } } }, function(error){
+    //   console.log(arguments);
+    //   if (error) {return res.error(error);} 
+    //   else {return res.success(event);}
+    // })
+    //Chronicle.updateQ({_id: req.chronicle._id}, { $push : { 'events' : { $each: [event.toObject()], $position: index } } }).thenResolve(event).then(res.success).catch(res.error);
 
 
   }else {
@@ -144,6 +152,31 @@ chronicleRouter.post('/event/:event', function(req, res, next){
 // push new content to event in requested chronicle
 chronicleRouter.post('/event/:event/content', function(req, res, next){
   req.body.data.owner = req.login;
+  if(req.query.id){
+    var content = req.body.data;
+    var index = req.event.content.length;
+    for(var i = 0; i < req.event.content.length; i++){
+      if (req.event.content[i]._id == req.query.id){
+        index = i;
+        break;
+      }
+    }
+    console.log(index);
+    //must define content before running code
+    console.log(req.event);
+    req.event.content.splice(index, 0, content);
+    content = req.event.content[index].toObject();
+
+    console.log(content);
+    Q.ninvoke(Chronicle.collection, 'update', {events: {$elemMatch: {_id: req.event._id} } },
+      { $push: {'events.$.content' : { $each: [content], $position: index} } }).then(function(){
+        var response = content;
+        response.owner = req.login.toObject();
+        res.json(response);
+      }).then(res.success).catch(res.error);
+  }
+  else{
+  
   var content = req.event.content[req.event.content.push(req.body.data) - 1];
   Chronicle.findOneAndUpdateQ({ events: { $elemMatch: {_id: req.event._id } } },
     { $push: {'events.$.content' : content.toObject() }}).then(function(){
@@ -152,6 +185,7 @@ chronicleRouter.post('/event/:event/content', function(req, res, next){
       res.json(response);
      }).catch(console.log);
   //req.chronicle.event.updateQ({ $push: { content: content } }).then(function(){
+  }
 });
 
 chronicleRouter.delete('/event/:event/content', function(req, res, next){

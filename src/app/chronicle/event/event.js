@@ -46,8 +46,7 @@ angular.module('chronicle.event', [
   $scope.$root.$broadcast('scroll-to-event', $scope.event);
 
 
-  $scope.open = function (position) {
-
+  $scope.open = function (id) {
     var _chronicle = $scope.chronicle;
     var _event = $scope.event;
 
@@ -71,13 +70,30 @@ angular.module('chronicle.event', [
           var format, content;
           var activeTab = $scope.getActiveTab();
 
+        if(id){
+          console.log("NYABUTALES");
+          apiService.chronicle(_chronicle._id).event(_event._id).newContent({
+            format: activeTab.format,
+            content: activeTab.content
+          }, id.id).then(function(content){
+            for(var i = 0; i < $scope.event.content.length; i++){
+              if($scope.event.content[i]._id == id.id){
+                var index = i;
+                $scope.event.content.splice(index, 0, content);
+                break;
+              }
+            }
+            _event.content.push(content);
+          });
+        } 
+        else{
           apiService.chronicle(_chronicle._id).event(_event._id).newContent({
             format: activeTab.format,
             content: activeTab.content
           }).then(function(content){
             _event.content.push(content);
           });
-
+        }
           $modalInstance.close();
         };
 

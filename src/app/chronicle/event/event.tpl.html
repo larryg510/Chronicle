@@ -20,8 +20,9 @@
   </div>
   <div class="contentrow">
     <div class="evcontent" ng-repeat="content in event.content" id="event._id">
+    <br><button class="btn btn-primary" ng-click="open({id: content._id})">Add content here </button>
         <div class="text" ng-show="content.format === 'text'">
-          <br><div>{{content.content}}</div>
+          <br><div>{{content.content}}</div>                                                                                                
         </div>
         <div class="quote" ng-show="content.format === 'quote'">
           <br><div>"{{content.content}}"</div>
