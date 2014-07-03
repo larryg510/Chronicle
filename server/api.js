@@ -98,12 +98,11 @@ chronicleRouter.get('/events', function(req, res, next){
 });
 
 // edit chronicle title
-chronicleRouter.post('/chronicle/:chronicle', function(req, res, next){
+chronicleRouter.post('/', function(req, res, next){
+  console.log("Miew");
   req.chronicle.title = req.body.data;
-  Chronicle.findOneAndUpdateQ( { $elemMatch: { _id: req.chronicle._id } },
-    { $set: { 'chronicle.$.title': req.chronicle.title.toObject() } }).then(function() {
-    res.json(req.chronicle);
-  });
+  Chronicle.findOneAndUpdateQ( { _id: req.chronicle._id } ,
+    { $set: { 'title': req.chronicle.title } }).then(res.success).catch(res.error);
 });
 
 // push new event to requested chronicle
