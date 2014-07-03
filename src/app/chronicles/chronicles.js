@@ -60,7 +60,7 @@ angular.module('chronicle.chronicles', [
   $scope.chronicles = chronicles;
 })
 
-.controller('UserNavCtrl', function(){
-
+.controller('UserNavCtrl', function($scope, $state){
+  $scope.$state = $state;
 })
 ;

@@ -21,6 +21,9 @@
         event: function(eventId){
           return apiEvent(eventId, this.http.prefix);
         },
+        update: function(title){
+          return this.http.post('', title);
+        },
         delete: function(){
           return this.http.delete('/');
         }
