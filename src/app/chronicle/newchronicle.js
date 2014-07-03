@@ -22,7 +22,7 @@ angular.module('chronicle.newchronicle', [
 
 .controller('NewChronicleCtrl', function($scope, $state, apiService) {
   $scope.state = $state;
-
+  $scope.public = true;
   $scope.$root.$broadcast('scroll-to-event', { title: 'New Chronicle' });
   
   $scope.create = function(){
@@ -33,7 +33,8 @@ angular.module('chronicle.newchronicle', [
     // sent to apiService
     var chronicle = {
       title: $scope.title,
-      events: []
+      events: [],
+      public: $scope.public
     };
     
     return apiService.chronicles(chronicle).then(function(chronicle){
