@@ -181,7 +181,7 @@ chronicleRouter.post('/event/:event/content', function(req, res, next){
         var response = content;
         response.owner = req.login.toObject();
         res.json(response);
-      }).then(res.success).catch(res.error);
+      }).catch(console.log);
   }
   else{
   

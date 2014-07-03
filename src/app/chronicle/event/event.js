@@ -67,7 +67,7 @@ angular.module('chronicle.event', [
         };
 
         $scope.create = function (img) {
-          var format, content;
+         // var format, content;
           var activeTab = $scope.getActiveTab();
 
         if(id){
@@ -76,14 +76,14 @@ angular.module('chronicle.event', [
             format: activeTab.format,
             content: activeTab.content
           }, id.id).then(function(content){
-            for(var i = 0; i < $scope.event.content.length; i++){
-              if($scope.event.content[i]._id == id.id){
+            for(var i = 0; i < _event.content.length; i++){
+              if(_event.content[i]._id == id.id){
                 var index = i;
-                $scope.event.content.splice(index, 0, content);
+                _event.content.splice(index, 0, content);
                 break;
               }
             }
-            _event.content.push(content);
+            
           });
         } 
         else{
