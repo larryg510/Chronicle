@@ -33,11 +33,12 @@ var EventSchema = new Schema({
 });
 
 var ChronicleSchema = new Schema({
- user: { type: Schema.Types.ObjectId, ref: 'User'},
- access: [{type: Schema.ObjectId, ref: 'User' }],
- title: String,
- public: {type: Boolean, default: true},
- events: [EventSchema],
+user: { type: Schema.Types.ObjectId, ref: 'User'},
+read: [{type: Schema.Types.ObjectId, ref: 'User'}],
+edit: [{type: Schema.Types.ObjectId, ref: 'User'}],
+title: String,
+public: {type: Boolean, default: true},
+events: [EventSchema],
 }, {
  toJSON: {
    virtuals: true

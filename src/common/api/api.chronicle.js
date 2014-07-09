@@ -21,8 +21,17 @@
         event: function(eventId){
           return apiEvent(eventId, this.http.prefix);
         },
+        update: function(title){
+          return this.http.post('', title);
+        },
         delete: function(){
           return this.http.delete('/');
+        },
+        readaccess: function(addeduser){
+          return this.http.post('/read', addeduser);
+        },
+        editaccess: function(addeduser){
+          return this.http.post('/edit', addeduser);
         }
       };
       

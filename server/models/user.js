@@ -5,11 +5,9 @@ var express     = require('express')
 ;
 
 var UserSchema = new Schema({
-  name:       String,
+  name:       { type: String, index: 'text' },
   sessionId:  String,
-  chronicles: [{type: Schema.Types.ObjectId,  ref: 'Chronicle'}],
-  read: [{type: Schema.Types.ObjectId, ref: 'Chronicle'}],
-  edit: [{type: Schema.Types.ObjectId, ref: 'Chronicle'}]
+  chronicles: [{type: Schema.Types.ObjectId,  ref: 'Chronicle'}]
 }, {
  toJSON: {
    virtuals: true

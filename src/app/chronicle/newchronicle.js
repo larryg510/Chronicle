@@ -18,6 +18,21 @@ angular.module('chronicle.newchronicle', [
       }
     }
   });
+
+  $stateProvider.state('app.chronicle.edit', {
+    url: '/edit',
+    views: {
+      main : {
+        controller: 'NewChronicleCtrl',
+        templateUrl: 'chronicle/newchronicle.tpl.html',
+      },
+      topnav: {
+        controller: 'UserNavCtrl',
+        templateUrl: 'user/user-nav.tpl.html',
+      }
+    }
+  });
+
 })
 
 .controller('NewChronicleCtrl', function($scope, $state, apiService) {
@@ -26,23 +41,28 @@ angular.module('chronicle.newchronicle', [
   $scope.$root.$broadcast('scroll-to-event', { title: 'New Chronicle' });
   
   $scope.create = function(){
-    
-    var hue = Math.floor(Math.random()*360);
-    var background = "background:hsl(" + hue + ", 50%, 90%)";
-    
-    // sent to apiService
-    var chronicle = {
-      title: $scope.title,
-      events: [],
-      public: $scope.public
-    };
-    
-    return apiService.chronicles(chronicle).then(function(chronicle){
-      $state.go('app.chronicles');  
+    if($scope.chronicle){
+      return apiService.chronicle($scope.chronicle._id).update($scope.title).then(function(){
+        $state.go('app.chronicle.events');
+      });
+    }else {
+      var hue = Math.floor(Math.random()*360);
+      var background = "background:hsl(" + hue + ", 50%, 90%)";
+      
+      // sent to apiService
+      var chronicle = {
+        title: $scope.title,
+        events: [],
+        public: true
+      };
+      
+      return apiService.chronicles(chronicle).then(function(chronicle){
+        $state.go('app.chronicles');  
 
-    }).catch(function(error){
-      alert(error);
-    });
+      }).catch(function(error){
+        alert(error);
+      });
+    }
   };
 
   $scope.back = function(){
