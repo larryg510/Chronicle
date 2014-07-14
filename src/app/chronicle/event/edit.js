@@ -48,7 +48,7 @@ angular.module('chronicle.event.edit', [
 })
 */
 
-.controller('EditEventCtrl', function($scope, $state, apiService) {
+.controller('EditEventCtrl', function($scope, $state, apiService, user) {
   if($state.params.eventId){
     //todo search for event in chronicle VVVV ????? 
     /* for(var i = 0; i < $scope.chronicle.events.length; i++){
@@ -65,7 +65,20 @@ angular.module('chronicle.event.edit', [
     $scope.$root.$broadcast('scroll-to-event', { title: 'New Event' });
     $scope.event = {};
   }
-
+  $scope.user = user;
+  $scope.access = ($scope.user._id == $scope.chronicle.user) || ($scope.chronicle.edit.indexOf($scope.user._id) !== -1);
+  if($scope.event._id || $state.params.currentEvent){
+    if(!$scope.access)
+    {
+      if(!$scope.chronicle.public)
+      {
+        $state.go('app.chronicles');
+      }
+      else{
+        $state.go('^');
+      }
+    }
+  }
   $scope.currenttab = 1;
   $scope.settab = function(chosentab){
     $scope.currenttab = chosentab;

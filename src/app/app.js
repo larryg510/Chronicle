@@ -7,6 +7,7 @@ angular.module('chronicle', [
   'chronicle.chronicle',
   'chronicle.login',
   'ngSanitize',
+  'ngTouch',
   'ui.bootstrap',
   'ui.router',
   'ui.route'

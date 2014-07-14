@@ -1,17 +1,20 @@
 <div class="container-fluid">
+<div class="text-right"><a href="javascript:history.back()" style="text-decoration:none">
+  <i class="fa fa-times"></i></a>
+</div>
 <div class="text-center">
-    <h1 class="control-label col-sm-10 col-sm-offset-2"> <font color=#0099FF> Create a new chronicle </font> </h1>
+    <h1 class="control-label col-sm-10 col-sm-offset-2"> <font color=#33CCFF size=200pt> Create a new chronicle </font> </h1>
 </div>
 <form class="form-horizontal" role="form">
   	<br>
-  		<label class="control-label col-sm-2" placeholder="Title">Title:</label>
   		<div class="col-sm-10">
-    		<input type="text" class="form-control" ng-model="title"><br>
+       <input type="text" class="form-control" style="text-align: center" ng-model="title" placeholder="title" onfocus="this.placeholder = ''"><br>
+        Public: <input type="checkbox" ng-model="public"> 
     	</div>
+    <br>
     	<div class="control-group">
         <div class="col-sm-offset-2 col-sm-10">
           <button class="btn btn-primary form-control" ng-click="create()">Submit</button>
-          <button class="btn" ng-click="back()">Cancel</button>
         </div>
     	</div>
 </form>

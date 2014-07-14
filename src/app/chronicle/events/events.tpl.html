@@ -16,7 +16,40 @@
 </div>
 
 <div class="container-fluid">
-  <div class="col-lg-6 col-lg-offset-3">
+
+  <script type="text/ng-template" id="search-users.html">
+    <a>{{(match.model).name}}</a>
+  </script>
+
+  <div class="col-lg-8 col-lg-offset-2">
+
+    <div class="control-group">
+      <div class="col-sm-12 left-inner-addon" >
+        <pre> Model: {{read | json}} </pre>
+        <i class="fa fa-person"></i>
+        <input id="text" class="form-control" typeahead="user as user.name for user in searchUsers($viewValue) | limitTo: 8" placeholder="Give Read Access" ng-model="read"
+        typeahead-template-url="search-users.html">
+      </div>
+      <div class="col sm-10 col-sm-offset-2">
+        <button class="btn btn-primary" ng-show="read" ng-click="adduser()"> Add User </button>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <div class="col-sm-12 left-inner-addon" >
+        <i class="fa fa-person"></i>
+        <pre> Model: {{edit | json}} </pre>
+        <input id="text" class="form-control" typeahead="user as user.name for user in searchUsers($viewValue) | limitTo: 8" placeholder="Give Edit Access" ng-model="edit">
+      </div>
+      <div class="col sm-10 col-sm-offset-2">
+        <button class="btn btn-primary" ng-show="edit" ng-click="adduser()"> Add User </button>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="col-lg-8 col-lg-offset-2">
+    
     <ul ng-show="events.length" class="event-list">
       <li ng-repeat="event in events" class="event row-fluid">
 
@@ -33,30 +66,6 @@
       </li>
     </ul>
   </div>
+
 </div>
 
-<!-- <div class="container-fluid">  
-  <div class="col-lg-6 col-lg-offset-3">
-    <ul ng-show="events.length" class="event-list">
-      <li ng-repeat="event in events" class="event row" id="{{event._id}}">
-        <a ui-sref="^.neweventyay({currentEvent: event._id})">Add Event Here</a>
-          {{$index}}
-          <a ui-sref="^.event({eventId: event._id})" style="text-decoration:none">
-          <div class="background" style="background-image: url({{event.metadata.photo}});">
-
-            <div class="metadata">
-              <br>
-              <div style="font-size:14pt; text-transform:uppercase">{{event.metadata.title}}</div>
-              <div>{{event.metadata.names}}</div>
-              <div>{{event.metadata.location}}</div>
-              <div>{{event.metadata.time}}</div>
-              <div>{{event.metadata.description}}</div>
-              <br>
-            </div>
-            <br><br><br><br><br>
-          </div>
-          </a>
-      </li>
-    </ul>
-  </div>
-</div> -->
