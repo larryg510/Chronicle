@@ -1,7 +1,7 @@
 angular.module('chronicle.chronicles', [
   'chronicle.api',
   'ui.router',
-  'ui.bootstrap'
+  'ui.bootstrap',
 ])
 
 .config(function($stateProvider) {
@@ -12,10 +12,6 @@ angular.module('chronicle.chronicles', [
       main: {
         controller: 'ChroniclesCtrl',
         templateUrl: 'chronicles/chronicles.tpl.html',
-      },
-      topnav: {
-        controller: 'UserNavCtrl',
-        templateUrl: 'user/user-nav.tpl.html',
       }
     }, 
     resolve: {
@@ -32,7 +28,6 @@ angular.module('chronicle.chronicles', [
         controller: 'ChroniclesCtrl',
         templateUrl: 'chronicles/chronicles.tpl.html',
       }
-      
     }
   });
 
@@ -42,10 +37,6 @@ angular.module('chronicle.chronicles', [
       main: {
         controller: 'ChroniclesCtrl',
         templateUrl: 'chronicles/chronicles.tpl.html'
-      },
-      topnav: {
-        controller: 'UserNavCtrl',
-        templateUrl: 'user/user-nav.tpl.html',
       }
     },
     resolve: {
@@ -58,6 +49,10 @@ angular.module('chronicle.chronicles', [
 
 .controller('ChroniclesCtrl', function($scope, $state, apiService, user, chronicles) {
   $scope.chronicles = chronicles;
+
+  $scope.tapped = function($event) {
+    console.log($event);
+  };
 })
 
 .controller('UserNavCtrl', function($scope, $state){
