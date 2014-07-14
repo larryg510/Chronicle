@@ -49,14 +49,30 @@ router.post('/signup', function(req, res, next){
 });
 
 // get current user's chronicles
-router.get('/chronicles/owned', function(req, res, next){
-  Chronicle.findQ({ user: req.login && req.login._id}).then(res.success).catch(res.error);
-});
+// router.get('/chronicles/owned', function(req, res, next){
+//   Chronicle.find({ user: req.login && req.login._id}).populate("user").execQ().then(res.success).catch(res.error);
+// });
+
+// router.get('/chronicles/shared', function(req, res, next){
+//   Chronicle.find({ _id: { $in: req.login.read } }).populate('user').execQ().then(function(read){
+//     return Chronicle.find({ _id: { $in: req.login.edit } }).populate('user').execQ().then(function(edit){
+//       return {
+//         read: read,
+//         edit: edit
+//       }
+//     })
+//   }).then(res.success).catch(res.error);
+//   console.log("omgmiew");
+
+// });
 
 // get all chronicles
 router.get('/chronicles', function(req, res, next){
-  //Chronicle.findQ({ user: req.login && req.login._id }).then(res.success).catch(res.error);
-  Chronicle.find({}).populate("user").execQ().then(res.success).catch(res.error)
+  if(!req.login) { res.error('Not Logged In', 403); }
+
+  var query = { $or: [{ user: req.login._id }, { read: req.login.id }, { edit: req.login._id }] };
+
+  Chronicle.find(query).populate("user").execQ().then(res.success).catch(res.error);
 });
 
 // post new chronicle to user's chronicle library
@@ -66,8 +82,17 @@ router.post('/chronicles', function(req, res, next){
   chronicle.saveQ().thenResolve(chronicle).then(res.success).catch(res.error);
 });
 
+//get all users for typeahead
+router.get('/users', function(req, res, next){
+  console.log('search', req.query.search);
+  var query = req.query.search ? { name: { $regex: new RegExp('.*' +  req.query.search  + '.*', 'i') } } : {};
+  User.find(query).limit(50).select("name _id").lean().execQ().then(res.success).catch(res.error);
+});
 
-
+router.get('/public', function(req, res, next){
+  Chronicle.find({public : true}).populate("user").execQ().then(res.success).catch(res.error);
+  console.log("please work");
+});
 
 //=====Chronicle Routes===========================================================================
 // map data to req.chronicle using requested chronicle id
@@ -159,6 +184,7 @@ chronicleRouter.post('/event/:event', function(req, res, next){
 // push new content to event in requested chronicle
 chronicleRouter.post('/event/:event/content', function(req, res, next){
   req.body.data.owner = req.login;
+  //if content is added elsewhere other than at the end
   if(req.query.id){
     var content = req.body.data;
     var index = req.event.content.length;
@@ -170,7 +196,6 @@ chronicleRouter.post('/event/:event/content', function(req, res, next){
     }
     console.log(index);
     //must define content before running code
-    console.log(req.event);
     req.event.content.splice(index, 0, content);
     content = req.event.content[index].toObject();
 
@@ -195,6 +220,7 @@ chronicleRouter.post('/event/:event/content', function(req, res, next){
   }
 });
 
+//delete content
 chronicleRouter.delete('/event/:event/content', function(req, res, next){
   console.log("Nyabu");
   console.log(req.query.id);
@@ -214,6 +240,27 @@ chronicleRouter.delete('/event/:event', function(req, res, next){
   Chronicle.findByIdAndUpdateQ(req.chronicle._id,
     { $pull: { 'events': { _id: req.event._id } } }).then(res.success).catch(res.error);
 });
+
+//add user to read array
+chronicleRouter.post('/read', function(req, res, next){
+  console.log(req.body.data._id);
+  console.log(req.chronicle._id);
+  Chronicle.findByIdAndUpdateQ(req.chronicle._id,
+    {$addToSet: {'read': req.body.data._id} }).then(res.success).catch(res.error);
+  /*
+  User.findbyIdAndUpdateQ(req.body.data,
+    { $push: { 'chronicles': { _id: req.chronicle._id } } }).then(res.success).catch(res.error);
+*/
+});
+
+//add user to edit array
+chronicleRouter.post('/edit', function(req, res, next){
+  console.log("Omgmiew");
+  console.log(req.body.data);
+  Chronicle.findByIdAndUpdateQ(req.chronicle._id,
+    {$addToSet: {'edit': req.body.data._id } }).then(res.success).catch(res.error);
+});
+
 
 
 router.use('/chronicle/:chronicle', chronicleRouter);

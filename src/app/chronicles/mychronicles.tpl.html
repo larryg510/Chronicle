@@ -1,0 +1,52 @@
+<div class="container-fluid">
+<div class="col-lg-6 col-lg-offset-3">
+  <div class="btn-group">
+    <button type="button" class="btn btn-default" ng-click="settab(1)">Owned</button>
+    <button type="button" class="btn btn-default" ng-click="settab(2)">Edit</button>
+    <button type="button" class="btn btn-default" ng-click="settab(3)">Read</button>
+  </div>
+  <ul ng-show="owned.length && istab(1)" class="event-list">
+    <li ng-repeat="chronicle in owned" class="event row" id="{{chronicle._id}}">
+      <a ui-sref="app.chronicle({chronicleId: chronicle._id})" style="text-decoration:none">
+        <div class="content" style="border:1px solid black; text-align: center;">
+          <br>
+          <div>{{chronicle.title}}</div>
+
+          <div> {{chronicle.user.name}}</div>
+          <br>
+          <div ng-hide="chronicle.public"> Private </div>
+        </div>
+      </br>
+      </a>
+    </li> 
+  </ul>
+  <ul ng-show="editaccess.length && istab(2)" class="event-list">
+    <li ng-repeat="chronicle in editaccess" class="event row" id="{{chronicle._id}}">
+      <a ui-sref="app.chronicle({chronicleId: chronicle._id})" style="text-decoration:none">
+        <div class="content" style="border:1px solid black; text-align: center;">
+          <br>
+          <div>{{chronicle.title}}</div>
+
+          <div> {{chronicle.user.name}}</div>
+          <br>
+        </div>
+      </br>
+      </a>
+    </li> 
+  </ul>
+  <ul ng-show="readaccess.length && istab(3)" class="event-list">
+    <li ng-repeat="chronicle in readaccess" class="event row" id="{{chronicle._id}}">
+      <a ui-sref="app.chronicle({chronicleId: chronicle._id})" style="text-decoration:none">
+        <div class="content" style="border:1px solid black; text-align: center;">
+          <br>
+          <div>{{chronicle.title}}</div>
+
+          <div> {{chronicle.user.name}}</div>
+          <br>
+        </div>
+      </br>
+      </a>
+    </li> 
+  </ul>
+</div> 
+</div>

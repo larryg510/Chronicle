@@ -24,7 +24,8 @@ angular.module('chronicle.event', [
 
 })
 
-.controller('EventCtrl', function($scope, $state, apiService, $modal) {
+.controller('EventCtrl', function($scope, $state, apiService, $modal, user) {
+  $scope.user = user;
   $scope.events.forEach(function(event){
     if(event._id == $state.params.eventId) {
       $scope.event = event;
@@ -42,10 +43,12 @@ angular.module('chronicle.event', [
   };
   */
 
-
   $scope.$root.$broadcast('scroll-to-event', $scope.event);
-
-
+  $scope.access = (($scope.user._id == $scope.chronicle.user) || ($scope.chronicle.edit.indexOf($scope.user._id) !== -1) || ($scope.chronicle.read.indexOf($scope.user._id) !== -1));
+  if(!($scope.chronicle.public || $scope.access))
+  {
+    $state.go('app.chronicles');
+  }
   $scope.open = function (id) {
     var _chronicle = $scope.chronicle;
     var _event = $scope.event;
