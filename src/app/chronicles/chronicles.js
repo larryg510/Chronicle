@@ -10,6 +10,7 @@ angular.module('chronicle.chronicles', [
     url: 'chronicles',
     views: {
       main: {
+        controller: 'ChroniclesCtrl',
         templateUrl: 'chronicles/mychronicles.tpl.html',
       },
       topnav: {
