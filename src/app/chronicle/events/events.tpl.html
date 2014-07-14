@@ -1,8 +1,45 @@
-<div class="container-fluid">  
+<div class="dropdown pull-right">
+  <a href="#" class="dropdown-toggle">
+    <i class="fa fa-cog"></i>
+  </a>
+  <ul class="dropdown-menu">
+    <li><a ui-sref="^.newchronicle"><i class="fa fa-plus"></i>&nbsp;&nbsp;Add Chronicle</a></li>
+    <li><a ui-sref="^.owned"><i class="fa fa-plus"></i>&nbsp;&nbsp;My Chronicles</a></li>
+    <li><a ui-sref="^.chronicles"><i class="fa fa-plus"></i>&nbsp;&nbsp;All Chronicles</a></li>
+    <li><a ui-sref="app.chronicle.neweventyay"><i class="fa fa-plus"></i>&nbsp;&nbsp;Add Event</a></li>
+    <li><a ui-sref=".events"><i class="fa fa-plus"></i>&nbsp;&nbsp;Events</a></li>
+    <li><a ui-sref=".settings"><i class="fa fa-cog"></i>&nbsp;&nbsp;Settings</a></li>
+    <li><a ui-sref=".edit"><i class="fa fa-cog"></i>&nbsp;&nbsp;Edit this Chronicle</a></li>
+    <li><a ng-click="delete()"><i class="fa fa-cog"></i>&nbsp;&nbsp;Delete this Chronicle</a></li>
+    <li><a ng-click="deleteEvent()"><i class="fa fa-cog"></i>&nbsp;&nbsp;Delete this Event</a></li>
+  </ul>
+</div>
+
+<div class="container-fluid">
+  <div class="col-lg-6 col-lg-offset-3">
+    <ul ng-show="events.length" class="event-list">
+      <li ng-repeat="event in events" class="event row-fluid">
+
+        <div style="text-align: center;"> <a ui-sref="^.neweventyay({currentEvent: event._id})">+</a> </div>
+        <a ui-sref="^.event({eventId: event._id})">
+
+          <div class="img-circular background" style="background-image: url({{event.metadata.photo}});"></div>
+          <div class="metadata">
+            <br> {{event.metadata.title}}
+          </div>
+
+        </a>
+       
+      </li>
+    </ul>
+  </div>
+</div>
+
+<!-- <div class="container-fluid">  
   <div class="col-lg-6 col-lg-offset-3">
     <ul ng-show="events.length" class="event-list">
       <li ng-repeat="event in events" class="event row" id="{{event._id}}">
-          <a ui-sref="^.neweventyay({currentEvent: event._id})">Add Event Here</a>
+        <a ui-sref="^.neweventyay({currentEvent: event._id})">Add Event Here</a>
           {{$index}}
           <a ui-sref="^.event({eventId: event._id})" style="text-decoration:none">
           <div class="background" style="background-image: url({{event.metadata.photo}});">
@@ -22,4 +59,4 @@
       </li>
     </ul>
   </div>
-</div>
+</div> -->

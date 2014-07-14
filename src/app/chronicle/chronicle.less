@@ -1,53 +1,17 @@
 .event {
   position: relative;
   
-  .background-image {
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-  
-    -webkit-filter: blur(15px);
-    -moz-filter: blur(15px);
-    -o-filter: blur(15px);
-    -ms-filter: blur(15px);
-    filter: blur(15px);
-    opacity: 0.25;
-    z-index: -1;
-  }
-  
-  .content {
-    z-index: 1;
-  }
-  
-  .content-item {
-    padding: 15px;
-    background-color: rgba(255, 255, 255, 0.50);
-    border-radius: 3px;
-    max-width: 75%;
-    display: inline-block;
-  }
-  .pull-right {
-    clear: both;
-  }
-  
-  .event-title {
-    font-size: @font-size-large;
-    background-color: rgba(255, 255, 255, 0.50);
-    text-align: center;
-    margin-bottom: 10px;
-  }
-
   .background {
     position: relative;
     left: 0;
     right: 0;
     top: 0;
-    height: 200px;
     background-repeat: no-repeat;
     background-size: cover;
+    margin-left: auto;
+    margin-right: auto;
   }
+
   .metadata {
     position: relative;
     top: 15%;
@@ -55,7 +19,7 @@
     right:0;
     text-align: center;
     background-color: white;
-    opacity: 0.85; 
+    margin-bottom: 15px;
   }
 }
 
@@ -63,6 +27,7 @@
   z-index: 0;
   .list-unstyled;
 }
+
 .event-img {
   margin-left: 20px;
   background-color: hsl(10,100, 50);
@@ -74,3 +39,6 @@
   overflow: auto;
 }
 
+.custom_nav .navbar.navbar-fixed-top .navbar-inner{
+    background: rgba(255, 255, 255, 0.3);
+}
