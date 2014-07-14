@@ -35,10 +35,24 @@ angular.module('chronicle.newchronicle', [
 
 })
 
-.controller('NewChronicleCtrl', function($scope, $state, apiService) {
+.controller('NewChronicleCtrl', function($scope, $state, apiService, user) {
   $scope.state = $state;
   $scope.public = true;
   $scope.$root.$broadcast('scroll-to-event', { title: 'New Chronicle' });
+  
+  $scope.user = user;
+  if($scope.chronicle){
+    $scope.access = ($scope.user._id == $scope.chronicle.user) || ($scope.chronicle.edit.indexOf($scope.user._id) !== -1);
+    if(!$scope.access){
+      if(!$scope.chronicle.public){
+        $state.go('app.chronicles');
+      }
+      else{
+        $state.go('^.events');
+      }
+    }
+  }
+
   
   $scope.create = function(){
     if($scope.chronicle){
@@ -53,7 +67,7 @@ angular.module('chronicle.newchronicle', [
       var chronicle = {
         title: $scope.title,
         events: [],
-        public: true
+        public: $scope.public
       };
       
       return apiService.chronicles(chronicle).then(function(chronicle){

@@ -18,7 +18,14 @@ angular.module('chronicle.events', [
   });
 })
 
-.controller('EventsCtrl', function($scope, $state, apiService) {
+.controller('EventsCtrl', function($scope, $state, apiService, user) {
+  $scope.user = user;
+  $scope.access = (($scope.user._id == $scope.chronicle.user) || ($scope.chronicle.edit.indexOf($scope.user._id) !== -1) || ($scope.chronicle.read.indexOf($scope.user._id) !== -1));
+  if(!($scope.chronicle.public || $scope.access))
+  {
+    $state.go('app.chronicles');
+  }
+
   $scope.searchUsers = function(search){
     return apiService.users(search);
   };
