@@ -91,7 +91,6 @@ router.get('/users', function(req, res, next){
 
 router.get('/public', function(req, res, next){
   Chronicle.find({public : true}).populate("user").execQ().then(res.success).catch(res.error);
-  console.log("please work");
 });
 
 //=====Chronicle Routes===========================================================================

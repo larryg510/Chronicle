@@ -2,29 +2,34 @@
   <div class="text-right"><a ui-sref="^.login" style="text-decoration:none">
     <i class="fa fa-cog"></i></a>
   </div>
-  <div class="row-fluid" style="margin-left:39%">
-    <button class="bt btn-primary" hm-tap="tapped($event)">
-    <button class="btn btn-sm btn-primary" ui-sref="^.public">all</button>
-    <button class="btn btn-sm btn-primary" ui-sref="^.chronicles">my</button>
+  <div class="row-fluid" style="margin-left:35%">
+    <button class="btn btn-sm btn-primary" ui-sref="^.public">public</button>
+    <button class="btn btn-sm btn-primary" ui-sref="^.chronicles">private</button>
   </div>
   <div class="row-fluid">
-    <div class="col-xs-6 chronicle-thumbnail">
-
+    <div class="col-xs-6">
       <a ui-sref="^.newchronicle" style="text-decoration:none">
-        <div class="img-circular">
-   <!-- <div class="circle">&#x25EF;</div> -->
-        <div class="content-add">ADD<br>NEW</div>
-        </div>
+      <div class="material-display-flex material-flex-h">
+        <material-whiteframe class="material-flex material-display-flex material-flex-center material-whiteframe-z2">
+          <div class="material-flex">
+            <div class="content-add">ADD<br>NEW</div>
+          </div>
+        </material-whiteframe>
+      </div>
       </a>
     </div>
     <div class="col-xs-6" ng-repeat="chronicle in chronicles">
         <a ui-sref="app.chronicle({chronicleId: chronicle._id})" style="text-decoration:none">
-          <div class="img-circular"></div>
-          <br>
-          <div class="content">{{chronicle.title}}<br>
-          {{chronicle.user.name}}</div>
-          <br>
+          <div class="material-display-flex material-flex-h" hm-hold="edit(chronicle)" hm-swipeleft="delete(chronicle)">
+            <material-whiteframe class="material-flex material-display-flex material-flex-center material-whiteframe-z2">
+              <div class="material-flex">
+              <br><br><br><br><br>
+              </div>
+            </material-whiteframe>
+          </div>
         </a>
+          <div ng-swipe-left="test()" class="content">{{chronicle.title}}<br>
+          {{chronicle.user.name}}</div>
     </div>
   </div>
 </div>

@@ -2,6 +2,7 @@ angular.module('chronicle.chronicles', [
   'chronicle.api',
   'ui.router',
   'ui.bootstrap',
+  'angular-gestures'
 ])
 
 .config(function($stateProvider) {
@@ -61,11 +62,9 @@ angular.module('chronicle.chronicles', [
   };
   $scope.chronicles = chronicles;
   $scope.user = user;
-  console.log($scope.user);
   $scope.owned = chronicles.filter(function(chronicle){
     return chronicle.user._id == $scope.user._id;
   });
-  console.log($scope.owned);
 
   $scope.readaccess = chronicles.filter(function(chronicle){
     return chronicle.read.indexOf($scope.user._id) !== -1;
@@ -80,6 +79,17 @@ angular.module('chronicle.chronicles', [
   $scope.chronicles = chronicles;
   $scope.user = user;
 
+  $scope.test = function() {
+    console.log('THIS WORKS');
+  };
+
+  $scope.edit = function(chronicle) {
+    $state.go('app.chronicle.edit', { chronicleId: chronicle._id });
+  };
+
+  $scope.delete = function(chronicle) {
+    console.log(chronicle);
+  };
 })
 
 .controller('UserNavCtrl', function($scope, $state){
