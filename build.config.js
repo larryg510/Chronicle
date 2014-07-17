@@ -66,13 +66,9 @@ module.exports = {
       'vendor/angular-ui-utils/ui-utils.min.js',
       'vendor/moment/moment.js',
       'vendor/showdown/showdown.js',
-      'vendor/angular-gestures-master/dist/gestures.js',
-      'vendor/angular-material/angular-animate-sequence.js',
-      'vendor/angular-material/angular-animate-stylers.js',
-      'vendor/angular-material/material-design.js'
+      'vendor/angular-gestures-master/dist/gestures.js'
     ],
     css: [
-      'vendor/angular-material/material-design.css'
     ],
     assets: [
     ]

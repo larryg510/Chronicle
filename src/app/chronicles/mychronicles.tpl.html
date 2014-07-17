@@ -4,49 +4,63 @@
     <button type="button" class="btn btn-default" ng-click="settab(1)">Owned</button>
     <button type="button" class="btn btn-default" ng-click="settab(2)">Edit</button>
     <button type="button" class="btn btn-default" ng-click="settab(3)">Read</button>
+    <button class="btn btn-sm btn-primary" ui-sref="^.public">public</button>
   </div>
   <ul ng-show="owned.length && istab(1)" class="event-list">
-    <li ng-repeat="chronicle in owned" class="event row" id="{{chronicle._id}}">
-      <a ui-sref="app.chronicle({chronicleId: chronicle._id})" style="text-decoration:none">
-        <div class="content" style="border:1px solid black; text-align: center;">
-          <br>
-          <div>{{chronicle.title}}</div>
-
-          <div> {{chronicle.user.name}}</div>
-          <br>
-          <div ng-hide="chronicle.public"> Private </div>
-        </div>
-      </br>
-      </a>
-    </li> 
+    <div class="row-fluid">
+      <div class="col-xs-6 chronicle-thumbnail">
+        <a ui-sref="^.newchronicle" style="text-decoration:none">
+          <div class="img-circular">
+            <div class="content-add">ADD<br>NEW</div>
+          </div>
+        </a>
+      </div>
+      <div class="col-xs-6" ng-repeat="chronicle in owned" hm-hold="edit(chronicle)" hm-swipeleft="delete(chronicle)">
+        <a ui-sref="app.chronicle({chronicleId: chronicle._id})" style="text-decoration:none">
+          <div class="img-circular"></div><br>
+        </a>
+        <div class="content" ng-swipe-left="test()">{{chronicle.title}}<br>
+          {{chronicle.user.name}}</div>
+      </div>
+    </div>
   </ul>
-  <ul ng-show="editaccess.length && istab(2)" class="event-list">
-    <li ng-repeat="chronicle in editaccess" class="event row" id="{{chronicle._id}}">
-      <a ui-sref="app.chronicle({chronicleId: chronicle._id})" style="text-decoration:none">
-        <div class="content" style="border:1px solid black; text-align: center;">
-          <br>
-          <div>{{chronicle.title}}</div>
-
-          <div> {{chronicle.user.name}}</div>
-          <br>
+    <ul ng-show="editaccess.length && istab(2)" class="event-list">
+      <div class="row-fluid">
+        <div class="col-xs-6 chronicle-thumbnail">
+          <a ui-sref="^.newchronicle" style="text-decoration:none">
+            <div class="img-circular">
+              <div class="content-add">ADD<br>NEW</div>
+            </div>
+          </a>
         </div>
-      </br>
-      </a>
-    </li> 
+      <div class="col-xs-6" ng-repeat="chronicle in editaccess">
+        <a ui-sref="app.chronicle({chronicleId: chronicle._id})" style="text-decoration:none">
+          <div class="img-circular" hm-hold="edit(chronicle)" hm-swipeleft="delete(chronicle)"></div>
+          <br>
+        </a>
+        <div class="content" ng-swipe-left="test()">{{chronicle.title}}<br>
+          {{chronicle.user.name}}</div>
+      </div>
+    </div>
   </ul>
   <ul ng-show="readaccess.length && istab(3)" class="event-list">
-    <li ng-repeat="chronicle in readaccess" class="event row" id="{{chronicle._id}}">
-      <a ui-sref="app.chronicle({chronicleId: chronicle._id})" style="text-decoration:none">
-        <div class="content" style="border:1px solid black; text-align: center;">
-          <br>
-          <div>{{chronicle.title}}</div>
-
-          <div> {{chronicle.user.name}}</div>
-          <br>
+      <div class="row-fluid">
+        <div class="col-xs-6 chronicle-thumbnail">
+          <a ui-sref="^.newchronicle" style="text-decoration:none">
+            <div class="img-circular">
+              <div class="content-add">ADD<br>NEW</div>
+            </div>
+          </a>
         </div>
-      </br>
-      </a>
-    </li> 
+      <div class="col-xs-6" ng-repeat="chronicle in readaccess">
+        <a ui-sref="app.chronicle({chronicleId: chronicle._id})" style="text-decoration:none">
+          <div class="img-circular" hm-hold="edit(chronicle)" hm-swipeleft="delete(chronicle)"></div>
+          <br>
+        </a>
+        <div class="content" ng-swipe-left="test()">{{chronicle.title}}<br>
+          {{chronicle.user.name}}</div>
+      </div>
+    </div>
   </ul>
 </div> 
 </div>

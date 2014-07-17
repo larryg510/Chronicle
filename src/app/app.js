@@ -8,8 +8,6 @@ angular.module('chronicle', [
   'chronicle.login',
   'ngSanitize',
   'ngTouch',
-  'ngAnimate',
-  'ngMaterial',
   'angular-gestures',
   'ui.bootstrap',
   'ui.router',
