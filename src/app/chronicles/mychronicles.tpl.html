@@ -15,11 +15,11 @@
           </div>
         </a>
       </div>
-      <div class="col-xs-6" ng-repeat="chronicle in owned" hm-hold="edit(chronicle)" hm-swipeleft="delete(chronicle)">
+      <div class="col-xs-6" ng-repeat="chronicle in owned" hm-hold="edit(chronicle)">
         <a ui-sref="app.chronicle({chronicleId: chronicle._id})" style="text-decoration:none">
           <div class="img-circular"></div><br>
         </a>
-        <div class="content" ng-swipe-left="test()">{{chronicle.title}}<br>
+        <div class="content">{{chronicle.title}}<br>
           {{chronicle.user.name}}</div>
       </div>
     </div>
@@ -35,10 +35,10 @@
         </div>
       <div class="col-xs-6" ng-repeat="chronicle in editaccess">
         <a ui-sref="app.chronicle({chronicleId: chronicle._id})" style="text-decoration:none">
-          <div class="img-circular" hm-hold="edit(chronicle)" hm-swipeleft="delete(chronicle)"></div>
+          <div class="img-circular" hm-hold="edit(chronicle)"></div>
           <br>
         </a>
-        <div class="content" ng-swipe-left="test()">{{chronicle.title}}<br>
+        <div class="content">{{chronicle.title}}<br>
           {{chronicle.user.name}}</div>
       </div>
     </div>
@@ -54,10 +54,10 @@
         </div>
       <div class="col-xs-6" ng-repeat="chronicle in readaccess">
         <a ui-sref="app.chronicle({chronicleId: chronicle._id})" style="text-decoration:none">
-          <div class="img-circular" hm-hold="edit(chronicle)" hm-swipeleft="delete(chronicle)"></div>
+          <div class="img-circular" hm-hold="edit(chronicle)"></div>
           <br>
         </a>
-        <div class="content" ng-swipe-left="test()">{{chronicle.title}}<br>
+        <div class="content">{{chronicle.title}}<br>
           {{chronicle.user.name}}</div>
       </div>
     </div>

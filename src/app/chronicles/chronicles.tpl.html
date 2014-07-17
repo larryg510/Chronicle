@@ -15,10 +15,10 @@
     </div>
     <div class="col-xs-6" ng-repeat="chronicle in chronicles">
         <a ui-sref="app.chronicle({chronicleId: chronicle._id})" style="text-decoration:none">
-          <div class="img-circular" hm-hold="edit(chronicle)" hm-swipeleft="delete(chronicle)"></div>
+          <div class="img-circular" hm-hold="open(chronicle)"></div>
           <br>
         </a>
-          <div class="content" ng-swipe-left="test()">{{chronicle.title}}<br>
+          <div class="content">{{chronicle.title}}<br>
           {{chronicle.user.name}}</div>
     </div>
   </div>

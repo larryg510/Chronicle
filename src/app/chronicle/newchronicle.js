@@ -57,7 +57,7 @@ angular.module('chronicle.newchronicle', [
   $scope.create = function(){
     if($scope.chronicle){
       return apiService.chronicle($scope.chronicle._id).update($scope.title).then(function(){
-        $state.go('app.chronicle.events');
+        $state.go('app.chronicles');
       });
     }else {
       var hue = Math.floor(Math.random()*360);
