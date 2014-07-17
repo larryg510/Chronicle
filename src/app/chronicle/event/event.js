@@ -79,6 +79,7 @@ angular.module('chronicle.event', [
             format: activeTab.format,
             content: activeTab.content
           }, id.id).then(function(content){
+            apiService.chronicle(_chronicle._id).event(_event._id).trackupdates({format: activeTab.format, content: activeTab.content}).then(function(){});
             for(var i = 0; i < _event.content.length; i++){
               if(_event.content[i]._id == id.id){
                 var index = i;
@@ -94,6 +95,7 @@ angular.module('chronicle.event', [
             format: activeTab.format,
             content: activeTab.content
           }).then(function(content){
+            apiService.chronicle(_chronicle._id).event(_event._id).trackupdates({format: activeTab.format, content: activeTab.content}).then(function(){});
             _event.content.push(content);
           });
         }

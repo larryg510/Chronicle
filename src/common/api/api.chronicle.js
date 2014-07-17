@@ -32,6 +32,9 @@
         },
         editaccess: function(addeduser){
           return this.http.post('/edit', addeduser);
+        },
+        trackupdates: function(title){
+          return this.http.post('/trackupdates', title);
         }
       };
       
