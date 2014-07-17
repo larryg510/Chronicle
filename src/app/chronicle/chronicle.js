@@ -73,7 +73,6 @@ angular.module('chronicle.chronicle', [
     });
   };
 
-  
   $scope.$on('scroll-to-event', function(e, event){
     $scope.event = event;
   });
