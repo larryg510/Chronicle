@@ -2,6 +2,7 @@ angular.module('chronicle.chronicles', [
   'chronicle.api',
   'ui.router',
   'ui.bootstrap',
+  'angular-gestures'
 ])
 
 .config(function($stateProvider) {
@@ -12,10 +13,6 @@ angular.module('chronicle.chronicles', [
       main: {
         controller: 'ChroniclesCtrl',
         templateUrl: 'chronicles/mychronicles.tpl.html',
-      },
-      topnav: {
-        controller: 'UserNavCtrl',
-        templateUrl: 'user/user-nav.tpl.html',
       }
     }, 
     resolve: {
@@ -65,11 +62,9 @@ angular.module('chronicle.chronicles', [
   };
   $scope.chronicles = chronicles;
   $scope.user = user;
-  console.log($scope.user);
   $scope.owned = chronicles.filter(function(chronicle){
     return chronicle.user._id == $scope.user._id;
   });
-  console.log($scope.owned);
 
   $scope.readaccess = chronicles.filter(function(chronicle){
     return chronicle.read.indexOf($scope.user._id) !== -1;
@@ -77,12 +72,38 @@ angular.module('chronicle.chronicles', [
   $scope.editaccess = chronicles.filter(function(chronicle){
     return chronicle.edit.indexOf($scope.user._id) !== -1;
   });
-  
+
 })
 
-.controller('PublicChroniclesCtrl', function($scope, $state, apiService, user, chronicles){
+.controller('PublicChroniclesCtrl', function($scope, $state, $modal, apiService, user, chronicles){
   $scope.chronicles = chronicles;
   $scope.user = user;
+
+  $scope.open = function(chronicle) {
+    $scope.chronicle = chronicle;
+
+    var modalInstance = $modal.open({
+      templateUrl: 'chronicles/modal.tpl.html',
+      scope: $scope,
+      controller: function ($scope, $modalInstance) {
+        $scope.edit = function () {
+          $state.go('app.chronicle.edit', { chronicleId: $scope.chronicle._id });
+          $modalInstance.dismiss('cancel');
+        }; 
+
+        $scope.cancel = function () {
+          $modalInstance.dismiss('cancel');
+        };
+
+        $scope.delete = function (chronicle) {
+          apiService.chronicle($scope.chronicle._id).delete().then(function(){
+            $state.go('app.chronicles');
+            $modalInstance.dismiss('cancel');
+          });
+        };
+      }
+    });
+  };
 
 })
 

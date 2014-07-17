@@ -65,7 +65,8 @@ module.exports = {
       'vendor/angular-ui-router/release/angular-ui-router.js',
       'vendor/angular-ui-utils/ui-utils.min.js',
       'vendor/moment/moment.js',
-      'vendor/showdown/showdown.js'
+      'vendor/showdown/showdown.js',
+      'vendor/angular-gestures-master/dist/gestures.js'
     ],
     css: [
     ],

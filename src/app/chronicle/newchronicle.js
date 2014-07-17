@@ -59,7 +59,8 @@ angular.module('chronicle.newchronicle', [
       return apiService.chronicle($scope.chronicle._id).update($scope.title).then(function(){
         //update the update array within Users for use in notifications
         apiService.chronicle($scope.chronicle._id).trackupdates($scope.title).then(function(){});
-        $state.go('app.chronicle.events');
+        $state.go('app.chronicles');
+
       });
     }else {
       var hue = Math.floor(Math.random()*360);
