@@ -38,6 +38,10 @@ angular.module('chronicle.chronicles', [
       main: {
         controller: 'PublicChroniclesCtrl',
         templateUrl: 'chronicles/chronicles.tpl.html'
+      },
+      topnav: {
+        controller: 'UserNavCtrl',
+        templateUrl: 'user/user-nav.tpl.html',
       }
     },
     resolve: {

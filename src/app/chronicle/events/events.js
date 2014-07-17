@@ -43,6 +43,7 @@ angular.module('chronicle.events', [
         //maybe I should have page reloaded at the end of adduser
       });
     }
+    $state.go($state.current, {}, {reload: true});
   };
 })
 
