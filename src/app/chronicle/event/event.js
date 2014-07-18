@@ -111,6 +111,18 @@ angular.module('chronicle.event', [
   };
     $scope.deleteContent = function (id) {
     console.log(id.id);
+    for(var i = 0; i< $scope.event.content.length; i++){
+      if($scope.event.content[i]._id == id.id)
+      {
+        if($scope.event.content[i].owner == $scope.user._id)
+        {
+          var index = i;
+          $scope.event.content.splice(index, 1);
+          apiService.chronicle($scope.chronicle._id).event($scope.event._id).deleteContent(id).then();
+        }
+      }
+    }
+    /*
     apiService.chronicle($scope.chronicle._id).event($scope.event._id).deleteContent(id).then(function(){
       for(var i = 0; i < $scope.event.content.length; i++){
         if($scope.event.content[i]._id == id.id){
@@ -119,6 +131,7 @@ angular.module('chronicle.event', [
         }
       }
     });
+    */
   };
 
 
