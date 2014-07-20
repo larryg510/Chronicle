@@ -52,7 +52,7 @@ angular.module('chronicle.chronicles', [
   });
 })
 
-.controller('ChroniclesCtrl', function($scope, $state, apiService, user, chronicles) {
+.controller('ChroniclesCtrl', function($scope, $state, $modal, apiService, user, chronicles) {
   $scope.currenttab = 1;
   $scope.settab = function(chosentab){
     $scope.currenttab = chosentab;
@@ -72,6 +72,33 @@ angular.module('chronicle.chronicles', [
   $scope.editaccess = chronicles.filter(function(chronicle){
     return chronicle.edit.indexOf($scope.user._id) !== -1;
   });
+
+
+  $scope.open = function(chronicle) {
+    $scope.chronicle = chronicle;
+
+    var modalInstance = $modal.open({
+      templateUrl: 'chronicles/modal.tpl.html',
+      scope: $scope,
+      controller: function ($scope, $modalInstance) {
+        $scope.edit = function () {
+          $state.go('app.chronicle.edit', { chronicleId: $scope.chronicle._id });
+          $modalInstance.dismiss('cancel');
+        }; 
+
+        $scope.cancel = function () {
+          $modalInstance.dismiss('cancel');
+        };
+
+        $scope.delete = function (chronicle) {
+          apiService.chronicle($scope.chronicle._id).delete().then(function(){
+            $state.go('app.chronicles');
+            $modalInstance.dismiss('cancel');
+          });
+        };
+      }
+    });
+  };
 
 })
 
