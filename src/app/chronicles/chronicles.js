@@ -13,6 +13,10 @@ angular.module('chronicle.chronicles', [
       main: {
         controller: 'ChroniclesCtrl',
         templateUrl: 'chronicles/mychronicles.tpl.html',
+      },
+      topnav: {
+        controller: 'UserNavCtrl',
+        templateUrl: 'user/user-nav.tpl.html',
       }
     }, 
     resolve: {
@@ -28,6 +32,10 @@ angular.module('chronicle.chronicles', [
       main: {
         controller: 'ChroniclesCtrl',
         templateUrl: 'chronicles/chronicles.tpl.html',
+      }, 
+      topnav: {
+        controller: 'UserNavCtrl',
+        templateUrl: 'user/user-nav.tpl.html',
       }
     }
   });
