@@ -14,7 +14,7 @@
           </div>
         </a>
       </div>
-      <div class="col-xs-6" ng-repeat="chronicle in owned" hm-hold="edit(chronicle)">
+      <div class="col-xs-6" ng-repeat="chronicle in owned" hm-hold="settings(chronicle)">
         <a ui-sref="app.chronicle({chronicleId: chronicle._id})" style="text-decoration:none">
           <div class="img-circular"></div><br>
         </a>
@@ -34,7 +34,7 @@
         </div>
       <div class="col-xs-6" ng-repeat="chronicle in editaccess">
         <a ui-sref="app.chronicle({chronicleId: chronicle._id})" style="text-decoration:none">
-          <div class="img-circular" hm-hold="edit(chronicle)"></div>
+          <div class="img-circular" hm-hold="settings(chronicle)"></div>
           <br>
         </a>
         <div class="content">{{chronicle.title}}<br>
@@ -53,7 +53,7 @@
         </div>
       <div class="col-xs-6" ng-repeat="chronicle in readaccess">
         <a ui-sref="app.chronicle({chronicleId: chronicle._id})" style="text-decoration:none">
-          <div class="img-circular" hm-hold="edit(chronicle)"></div>
+          <div class="img-circular" hm-hold="settings(chronicle)"></div>
           <br>
         </a>
         <div class="content">{{chronicle.title}}<br>

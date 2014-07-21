@@ -1,4 +1,9 @@
 <div class="container-fluid">
+
+  <script type="text/ng-template" id="search-users.html">
+    <a>{{(match.model).name}}</a>
+  </script>
+
 <div class="text-right"><a href="javascript:history.back()" style="text-decoration:none">
   <i class="fa fa-times"></i></a>
 </div>
@@ -20,4 +25,28 @@
         </div>
     	</div>
 </form>
+
+<div ng-show="!first">
+
+  <div class="control-group">
+    <div class="col-sm-offset-2 col-sm-10" >
+      <input id="text" class="form-control" typeahead="user as user.name for user in searchUsers($viewValue) | limitTo: 8" placeholder="Give Read Access" ng-model="read"
+      typeahead-template-url="search-users.html">
+    </div>
+    <div class="col-sm-offset-3 col-sm-10">
+      <button class="btn btn-primary" ng-show="read" ng-click="adduser()"> Add User </button>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <div class="col-sm-offset-2 col-sm-10" >
+      <input id="text" class="form-control" typeahead="user as user.name for user in searchUsers($viewValue) | limitTo: 8" placeholder="Give Edit Access" ng-model="edit">
+    </div>
+    <div class="col-sm-offset-3 col-sm-10">
+      <button class="btn btn-primary" ng-show="edit" ng-click="adduser()"> Add User </button>
+    </div>
+  </div>
 </div>
+
+</div>
+
