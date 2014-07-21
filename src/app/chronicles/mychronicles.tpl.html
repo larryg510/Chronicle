@@ -1,10 +1,10 @@
 <div class="container-fluid">
 <div class="col-lg-6 col-lg-offset-3">
-  <div class="btn-group">
+  <div class="btn-group col-lg-6 col-lg-offset-3">
     <button type="button" class="btn btn-default" ng-click="settab(1)">Owned</button>
     <button type="button" class="btn btn-default" ng-click="settab(2)">Edit</button>
     <button type="button" class="btn btn-default" ng-click="settab(3)">Read</button>
-    <button class="btn btn-sm btn-primary" ui-sref="^.public">public</button>
+    <button type="button" class="btn" ui-sref="^.public">Public</button>
   </div>
   <ul ng-show="owned.length && istab(1)" class="event-list">
     <div class="row-fluid">
