@@ -62,6 +62,7 @@ angular.module('chronicle.chronicle', [
   $scope.chronicle = chronicle;
   $scope.events = events;
   $scope.event = events[0];
+  $scope.$state = $state;
 
   $scope.delete = function() {
     apiService.chronicle(chronicle._id).delete().then(function(){
