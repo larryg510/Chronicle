@@ -1,21 +1,22 @@
 <div class="container-fluid">
-<div class="col-lg-6 col-lg-offset-3">
-  <div class="btn-group col-lg-6 col-lg-offset-3">
+  <div class="btn-group" style="margin-top:10%">
     <button type="button" class="btn btn-default" ng-click="settab(1)">Owned</button>
     <button type="button" class="btn btn-default" ng-click="settab(2)">Edit</button>
     <button type="button" class="btn btn-default" ng-click="settab(3)">Read</button>
     <button type="button" class="btn" ui-sref="^.public">Public</button>
   </div>
+<div class="row-fluid">
+  <div class="col-xs-6">
+    <a ui-sref="^.newchronicle" style="text-decoration:none">
+      <div class="img-circular">
+        <div class="content-add">ADD<br>NEW</div>
+      </div>
+    </a>
+  </div>
+</div>
   <ul ng-show="owned.length && istab(1)" class="event-list">
     <div class="row-fluid">
-      <div class="col-xs-6 chronicle-thumbnail">
-        <a ui-sref="^.newchronicle" style="text-decoration:none">
-          <div class="img-circular">
-            <div class="content-add">ADD<br>NEW</div>
-          </div>
-        </a>
-      </div>
-      <div class="col-xs-6" ng-repeat="chronicle in owned" hm-hold="edit(chronicle)">
+      <div class="col-xs-6" ng-repeat="chronicle in owned" hm-hold="settings(chronicle)">
         <a ui-sref="app.chronicle({chronicleId: chronicle._id})" style="text-decoration:none">
           <div class="img-circular"></div><br>
         </a>
@@ -26,16 +27,9 @@
   </ul>
     <ul ng-show="editaccess.length && istab(2)" class="event-list">
       <div class="row-fluid">
-        <div class="col-xs-6 chronicle-thumbnail">
-          <a ui-sref="^.newchronicle" style="text-decoration:none">
-            <div class="img-circular">
-              <div class="content-add">ADD<br>NEW</div>
-            </div>
-          </a>
-        </div>
       <div class="col-xs-6" ng-repeat="chronicle in editaccess">
         <a ui-sref="app.chronicle({chronicleId: chronicle._id})" style="text-decoration:none">
-          <div class="img-circular" hm-hold="edit(chronicle)"></div>
+          <div class="img-circular" hm-hold="settings(chronicle)"></div>
           <br>
         </a>
         <div class="content">{{chronicle.title}}<br>
@@ -45,16 +39,9 @@
   </ul>
   <ul ng-show="readaccess.length && istab(3)" class="event-list">
       <div class="row-fluid">
-        <div class="col-xs-6 chronicle-thumbnail">
-          <a ui-sref="^.newchronicle" style="text-decoration:none">
-            <div class="img-circular">
-              <div class="content-add">ADD<br>NEW</div>
-            </div>
-          </a>
-        </div>
       <div class="col-xs-6" ng-repeat="chronicle in readaccess">
         <a ui-sref="app.chronicle({chronicleId: chronicle._id})" style="text-decoration:none">
-          <div class="img-circular" hm-hold="edit(chronicle)"></div>
+          <div class="img-circular" hm-hold="settings(chronicle)"></div>
           <br>
         </a>
         <div class="content">{{chronicle.title}}<br>
@@ -63,4 +50,3 @@
     </div>
   </ul>
 </div> 
-</div>

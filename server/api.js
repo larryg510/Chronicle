@@ -70,7 +70,7 @@ router.post('/signup', function(req, res, next){
 router.get('/chronicles', function(req, res, next){
   if(!req.login) { res.error('Not Logged In', 403); }
 
-  var query = { $or: [{ user: req.login._id }, { read: req.login.id }, { edit: req.login._id }] };
+  var query = { $or: [{ user: req.login._id }, { read: req.login._id }, { edit: req.login._id }] };
 
   Chronicle.find(query).populate("user").execQ().then(res.success).catch(res.error);
 });
@@ -123,16 +123,18 @@ chronicleRouter.get('/events', function(req, res, next){
 
 // edit chronicle title
 chronicleRouter.post('/', function(req, res, next){
-  console.log("Miew");
-  req.chronicle.title = req.body.data;
+  var users = req.chronicle.read.concat(req.chronicle.edit).concat(req.chronicle.user);
+  req.chronicle.title = req.body.data.title;
+  req.chronicle.public = req.body.data.public;
   Chronicle.findOneAndUpdateQ( { _id: req.chronicle._id } ,
-    { $set: { 'title': req.chronicle.title } }).then(res.success).catch(res.error);
+    { $set: { 'title': req.chronicle.title, 'public': req.chronicle.public } }).then(User.updateQ({_id: {$in: users}},{$push: {'updates': {chronicle: req.chronicle._id, chronicletitle: req.chronicle.title, user: req.login.name}}}, {multi: true})).then(res.success).catch(res.error);
 });
+
 
 // push new event to requested chronicle
 chronicleRouter.post('/events', function(req, res, next){
-  var event = { owner: req.user, metadata: req.body.data };
-
+  var event = { metadata: req.body.data };
+  var users = req.chronicle.read.concat(req.chronicle.edit).concat(req.chronicle.user);
   console.log(req.query.before);
 
   if(req.query.before){
@@ -148,7 +150,10 @@ chronicleRouter.post('/events', function(req, res, next){
     req.chronicle.events.splice(index , 0, event);
     event = req.chronicle.events[index];
 
-    Q.ninvoke(Chronicle.collection, 'update', {_id: req.chronicle._id}, { $push : { 'events' : { $each: [event.toObject()], $position: index } } }).thenResolve(event).then(res.success).catch(res.error);
+    Q.ninvoke(Chronicle.collection, 'update', {_id: req.chronicle._id}, { $push : { 'events' : { $each: [event.toObject()], $position: index } } }).then(User.updateQ({_id: {$in: users}}, {$push: {'updates': {chronicle: req.chronicle._id, chronicletitle: req.chronicle.title, user: req.login.name, event: event._id, eventtitle: event.metadata.title, eventedit: false}}}, {multi: true})).thenResolve(event).then(res.success).catch(res.error);
+
+
+    //User.updateQ({_id: {$in: users}}, {$push: {'updates': {chronicle: req.chronicle._id, user: req.login.name, event: req.event._id, eventedit: true}}}, {multi: true}).
     // Chronicle.collection.update({_id: req.chronicle._id}, { $push : { 'events' : { $each: [event.toObject()], $position: index } } }, function(error){
     //   console.log(arguments);
     //   if (error) {return res.error(error);} 
@@ -158,10 +163,13 @@ chronicleRouter.post('/events', function(req, res, next){
 
 
   }else {
-    req.chronicle.updateQ({ $push: { 'events': event }}).then(function() {
-      req.chronicle.events.push({ owner: req.user, metadata: req.body.data});
+    var index = req.chronicle.events.length;
+    req.chronicle.events.push({metadata: req.body.data});
+    event = req.chronicle.events[index];
+    console.log(event);
+    req.chronicle.updateQ({ $push: { 'events': event}}).then(function() {
       res.json(event);
-    });
+    }).then(User.updateQ({_id: {$in: users}}, {$push: {'updates': {chronicle: req.chronicle._id, chronicletitle: req.chronicle.title, user: req.login.name, event: event._id, eventtitle: event.metadata.title, eventedit: false}}}, {multi: true}));
   }
 
 });
@@ -174,8 +182,9 @@ chronicleRouter.get('/event/:event', function(req, res, next){
 // edit metadata from specific event in requested chronicle
 chronicleRouter.post('/event/:event', function(req, res, next){
   req.event.metadata = req.body.data;
+  var users = req.chronicle.read.concat(req.chronicle.edit).concat(req.chronicle.user);
   Chronicle.findOneAndUpdateQ({ events: { $elemMatch: { _id: req.event._id } } },
-    { $set: { 'events.$.metadata': req.event.metadata.toObject() } }).then(function() {
+    { $set: { 'events.$.metadata': req.event.metadata.toObject() } }).then(User.updateQ({_id: {$in: users}}, {$push: {'updates': {chronicle: req.chronicle._id, chronicletitle: req.chronicle.title, user: req.login.name, event: req.event._id, eventtitle: req.event.metadata.title, eventedit: true}}}, {multi: true})).then(function() {
     res.json(req.event);
   });
 });
@@ -183,6 +192,7 @@ chronicleRouter.post('/event/:event', function(req, res, next){
 // push new content to event in requested chronicle
 chronicleRouter.post('/event/:event/content', function(req, res, next){
   req.body.data.owner = req.login;
+  var users = req.chronicle.read.concat(req.chronicle.edit).concat(req.chronicle.user);
   //if content is added elsewhere other than at the end
   if(req.query.id){
     var content = req.body.data;
@@ -204,7 +214,7 @@ chronicleRouter.post('/event/:event/content', function(req, res, next){
         var response = content;
         response.owner = req.login.toObject();
         res.json(response);
-      }).catch(console.log);
+      }).then(User.updateQ({_id: {$in: users}}, {$push: {'updates': {chronicle: req.chronicle._id, user: req.login.name, event: req.event.metadata.title, content: req.body.data}}}, {multi: true})).catch(console.log);
   }
   else{
   
@@ -214,14 +224,14 @@ chronicleRouter.post('/event/:event/content', function(req, res, next){
       var response = content.toObject();
       response.owner = req.login.toObject();
       res.json(response);
-     }).catch(console.log);
+     }).then(User.updateQ({_id: {$in: users}}, {$push: {'updates': {chronicle: req.chronicle._id, user: req.login.name, event: req.event._id.metadata.title, content: req.body.data}}}, {multi: true})).catch(console.log);
   //req.chronicle.event.updateQ({ $push: { content: content } }).then(function(){
+  
   }
 });
 
 //delete content
 chronicleRouter.delete('/event/:event/content', function(req, res, next){
-  console.log("Nyabu");
   console.log(req.query.id);
   Chronicle.findOneAndUpdateQ({events: {$elemMatch: {_id: req.event._id} } }, 
     { $pull: { 'events.$.content': { _id: req.query.id } } }).then(res.success).catch(res.error)
@@ -254,13 +264,61 @@ chronicleRouter.post('/read', function(req, res, next){
 
 //add user to edit array
 chronicleRouter.post('/edit', function(req, res, next){
-  console.log("Omgmiew");
   console.log(req.body.data);
   Chronicle.findByIdAndUpdateQ(req.chronicle._id,
     {$addToSet: {'edit': req.body.data._id } }).then(res.success).catch(res.error);
 });
 
 
+/*
+***************************** DON"T NEED THIS ANYMORE *************************************
+
+//update array within User for notifications
+chronicleRouter.post('/trackupdates', function(req, res, next){
+  console.log("WEH");
+  console.log(req.body.data);
+  console.log(req.chronicle._id);
+  var users = req.chronicle.read.concat(req.chronicle.edit).concat(req.chronicle.user);
+  console.log(users);
+  User.updateQ({_id: {$in: users}},
+    {$push: {'updates': {chronicle: req.chronicle._id, user: req.login.name} }
+    },
+    {multi: true}
+  ).then(res.success).catch(console.log);
+  // for reference
+  // var query = { $or: [{ user: req.login._id }, { read: req.login.id }, { edit: req.login._id }] };
+  // Chronicle.find(query).populate("user").execQ().then(res.success).catch(res.error);
+});
+
+chronicleRouter.post('/event/:event/trackupdates', function(req, res, next){
+  console.log("Rawr");
+  console.log(req.body.data);
+  console.log(req.event);
+  var users = req.chronicle.read.concat(req.chronicle.edit).concat(req.chronicle.user);
+  if(req.body.data == 1){
+    User.updateQ({_id: {$in: users}},
+      {$push: {'updates': {chronicle: req.chronicle._id, user: req.login.name, event: req.event._id, eventedit: true}}
+      },
+      {multi: true}
+    ).then(res.success).catch(console.log);
+  }
+  else if(req.body.data == 2){
+    User.updateQ({_id: {$in: users}},
+      {$push: {'updates': {chronicle: req.chronicle._id, user: req.login.name, event: req.event._id, eventedit: false}}
+      },
+      {multi: true}
+    ).then(res.success).catch(console.log);
+  }
+  else{
+    console.log(req.login.name);
+    User.updateQ({_id: {$in: users}},
+      {$push: {'updates': {chronicle: req.chronicle._id, user: req.login.name, event: req.event._id, content: req.body.data}}
+      },
+      {multi: true}
+    ).then(res.success).catch(console.log);
+  }
+});
+*/
 
 router.use('/chronicle/:chronicle', chronicleRouter);
 

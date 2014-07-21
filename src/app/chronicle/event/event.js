@@ -79,6 +79,7 @@ angular.module('chronicle.event', [
             format: activeTab.format,
             content: activeTab.content
           }, id.id).then(function(content){
+            apiService.chronicle(_chronicle._id).event(_event._id).trackupdates({format: activeTab.format, content: activeTab.content}).then(function(){});
             for(var i = 0; i < _event.content.length; i++){
               if(_event.content[i]._id == id.id){
                 var index = i;
@@ -94,6 +95,7 @@ angular.module('chronicle.event', [
             format: activeTab.format,
             content: activeTab.content
           }).then(function(content){
+            apiService.chronicle(_chronicle._id).event(_event._id).trackupdates({format: activeTab.format, content: activeTab.content}).then(function(){});
             _event.content.push(content);
           });
         }
@@ -109,6 +111,18 @@ angular.module('chronicle.event', [
   };
     $scope.deleteContent = function (id) {
     console.log(id.id);
+    for(var i = 0; i< $scope.event.content.length; i++){
+      if($scope.event.content[i]._id == id.id)
+      {
+        if($scope.event.content[i].owner == $scope.user._id)
+        {
+          var index = i;
+          $scope.event.content.splice(index, 1);
+          apiService.chronicle($scope.chronicle._id).event($scope.event._id).deleteContent(id).then();
+        }
+      }
+    }
+    /*
     apiService.chronicle($scope.chronicle._id).event($scope.event._id).deleteContent(id).then(function(){
       for(var i = 0; i < $scope.event.content.length; i++){
         if($scope.event.content[i]._id == id.id){
@@ -117,6 +131,7 @@ angular.module('chronicle.event', [
         }
       }
     });
+    */
   };
 
 

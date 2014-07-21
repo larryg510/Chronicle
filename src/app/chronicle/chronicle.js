@@ -52,10 +52,17 @@ angular.module('chronicle.chronicle', [
   }
 })
 
+
+
+
+
+
+
 .controller('ChronicleTopNavCtrl', function($scope, $state, apiService, chronicle, events) {
   $scope.chronicle = chronicle;
   $scope.events = events;
   $scope.event = events[0];
+  $scope.$state = $state;
 
   $scope.delete = function() {
     apiService.chronicle(chronicle._id).delete().then(function(){
@@ -73,7 +80,11 @@ angular.module('chronicle.chronicle', [
     });
   };
 
-  
+  $scope.miew = function() {
+    console.log("miew");
+    $state.go("^");
+  };
+
   $scope.$on('scroll-to-event', function(e, event){
     $scope.event = event;
   });

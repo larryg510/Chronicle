@@ -91,6 +91,8 @@ angular.module('chronicle.event.edit', [
 
     if($scope.event._id){
       return apiService.chronicle($scope.chronicle._id).event($scope.event._id).update($scope.event.metadata).then(function(){
+        //Add Putting UserID of dude into UpdateID and Add Date into UpdateDate
+        //apiService.chronicle($scope.chronicle._id).event($scope.event._id).trackupdates(1).then(function(){});
         $state.go('^');
         $scope.$root.$broadcast('scroll-to-event', event);
       });
@@ -102,14 +104,15 @@ angular.module('chronicle.event.edit', [
         for (var i = 0; i < $scope.events.length; i ++){
           if ($scope.events[i]._id == $state.params.currentEvent){index = i; console.log("found");}
         }
-        
         $scope.events.splice(index, 0, event);
+        //apiService.chronicle($scope.chronicle._id).event($scope.event._id).trackupdates(2).then(function(){});
         $state.go('^.events');
         $scope.$root.$broadcast('scroll-to-event', event);
       });
     }else{
       return apiService.chronicle($scope.chronicle._id).events($scope.event.metadata).then(function(event){
         $scope.events.push(event);
+        //apiService.chronicle($scope.chronicle._id).event($scope.event._id).trackupdates(2).then(function(){});
         $state.go('^.events');
         $scope.$root.$broadcast('scroll-to-event', event);
       });
