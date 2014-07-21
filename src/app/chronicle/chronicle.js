@@ -52,6 +52,12 @@ angular.module('chronicle.chronicle', [
   }
 })
 
+
+
+
+
+
+
 .controller('ChronicleTopNavCtrl', function($scope, $state, apiService, chronicle, events) {
   $scope.chronicle = chronicle;
   $scope.events = events;
@@ -71,6 +77,11 @@ angular.module('chronicle.chronicle', [
       }
       $state.go($scope.events.length ? 'app.chronicle.events' : 'app.chronicle.newevent');
     });
+  };
+
+  $scope.miew = function() {
+    console.log("miew");
+    $state.go("^");
   };
 
   $scope.$on('scroll-to-event', function(e, event){

@@ -77,10 +77,9 @@ angular.module('chronicle.newchronicle', [
 
   $scope.create = function(){
     if($scope.chronicle){
-
       return apiService.chronicle($scope.chronicle._id).update({title: $scope.title, public: $scope.public}).then(function(){
         //update the update array within Users for use in notifications
-        apiService.chronicle($scope.chronicle._id).trackupdates($scope.title).then(function(){});
+        apiService.chronicle($scope.chronicle._id).trackupdates($scope.chronicle.title).then(function(){});
         $state.go('app.chronicles');
 
       });
@@ -88,10 +87,11 @@ angular.module('chronicle.newchronicle', [
 
       var hue = Math.floor(Math.random()*360);
       var background = "background:hsl(" + hue + ", 50%, 90%)";
+      //console.log($scope.title);
       
       // sent to apiService
       var chronicle = {
-        title: $scope.title,
+        title: $scope.chronicle.title,
         events: [],
         public: $scope.public
       };

@@ -5,7 +5,8 @@
     </a>
     <span class="navbar-text" style="color:#FFFFFF" >
       <ul class="breadcrumb">
-        <li><a href="#">{{chronicle.title}}</a></li>
+        <li><a ui-sref="app.chronicles"> All Chronicles </a></li>
+        <li><a ui-sref="app.chronicle.events">{{chronicle.title}}</a></li>
         <li>{{event.metadata.title}}</li>
       </ul>
     </span>
