@@ -43,6 +43,7 @@ angular.module('chronicle.user', [
 })
 
 .controller('UserTopNavCtrl', function($scope, $state, apiService, user, chronicles) {
+  $scope.user = user;
 })
 
 /* .controller('ChronicleBottomNavCtrl', function($scope, $state, apiService, chronicle, events) {
