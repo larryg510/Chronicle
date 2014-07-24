@@ -69,7 +69,7 @@ router.post('/signup', function(req, res, next){
 
 // get all chronicles
 router.get('/chronicles', function(req, res, next){
-  if(!req.login) { res.error('Not Logged In', 403); }
+  if(!req.login) { res.error({}, 403); }
 
   var query = { $or: [{ user: req.login._id }, { read: req.login._id }, { edit: req.login._id }] };
 
@@ -434,7 +434,7 @@ userRouter.param('user', function(req, res, next, id) {
 
 // get current user info
 userRouter.get('/', function(req, res, next){
-  res.success(req.login || 'not logged in');
+  res.success(req.login || {});
 });
 
 // get requested user's personal profile
