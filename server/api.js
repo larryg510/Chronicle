@@ -144,8 +144,6 @@ chronicleRouter.get('/events', function(req, res, next){
 
 // edit chronicle title
 chronicleRouter.post('/', function(req, res, next){
-<<<<<<< HEAD
-  console.log("Miew");
   // NOT SURE IF IT WORKS 
   var d = new Date();
   var update = new Update({
