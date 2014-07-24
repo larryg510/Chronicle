@@ -1,3 +1,7 @@
+<br>
+<br>
+<br>
+<br>
 <div>
   <div class="row">
   <ul>
@@ -20,7 +24,7 @@
   </div>
   <div class="contentrow">
     <div class="evcontent" ng-repeat="content in event.content" id="event._id">
-    <br><button class="btn btn-primary" ng-click="open({id: content._id})">Add content here </button>
+    <br><a ng-click="open({id: content._id})"> + </a>
         <div class="text" ng-show="content.format === 'text'">
           <br><div>{{content.content}}</div>                                                                                                
         </div>
@@ -29,8 +33,9 @@
         </div>
         <div class="photo" ng-show="content.format === 'image'">
           <br><img src="{{content.content}}" style="max-width:100%"/>
-        </div> {{content.owner.name}} <button class="btn btn-primary" ng-click="deleteContent({id: content._id})">Delete</button>
+        </div> 
+        <div class="content-small"> {{content.owner.name}} </div><br><a class="content-small" ng-click="deleteContent({id: content._id})"> delete </a>
     </div>
-    <br><button class="btn btn-primary" style="text-align:center" ng-click="open()">Add content!</button>
+    <br><a ng-click="open()">Add Content!</a>
   </div>
 </div>

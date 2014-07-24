@@ -61,7 +61,7 @@ angular.module('chronicle.event', [
         $scope.tabs = [
           { title:'Text Content', thing:'Comment', format: 'text', content: '' },
           { title:'Quote', thing:'Quote', format: 'quote', content: ''},
-          { title:'Image', thing:'Upload (Must be a file <68 KB large)', format: 'image', content: '' }
+          { title:'Image', thing:'Upload', format: 'image', content: '' }
         ];
 
         $scope.getActiveTab = function(){

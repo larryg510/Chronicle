@@ -1,15 +1,15 @@
 <nav class="navbar navbar-default navbar-fixed-top" style="background-color:#33CCFF" role="navigation">
   <div class="container-fluid">
-    <a ui-sref="^.chronicles" class="navbar-brand navbar-left" style="color:#FFFFFF;">
+    <a href="javascript:history.back()" class="navbar-brand navbar-left" style="color:#FFFFFF;">
       <i class="fa fa-angle-left"></i>
     </a>
-    <span class="navbar-text" style="color:#FFFFFF" >
+    <div class="navbar-text" style="color:#FFFFFF;" >
       <ul class="breadcrumb">
-        <li><a ui-sref="app.chronicles"> All Chronicles </a></li>
-        <li><a ui-sref="app.chronicle.events">{{chronicle.title}}</a></li>
-        <li>{{event.metadata.title}}</li>
+        <li style="text-overflow:clip; width: 85px;"><a ui-sref="app.chronicles"> All Chronicles </a></li>
+        <!-- <li><a ui-sref="app.chronicle.events">{{chronicle.title}}</a></li> -->
+        <li style="width:100px; text-overflow:ellipsis">{{event.metadata.title}}</li>
       </ul>
-    </span>
+    </div>
     
     
     <!-- Actions -->
@@ -27,5 +27,6 @@
         </ul>
       </li>
     </ul>
+    
   </div>
 </nav>

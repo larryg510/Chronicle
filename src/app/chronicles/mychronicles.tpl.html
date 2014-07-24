@@ -1,15 +1,17 @@
+<div class="content-main"> My Chronicles </div>
 <div class="container-fluid">
   <div class="btn-group" style="margin-top:10%">
-    <button type="button" class="btn btn-default" ng-click="settab(1)">Owned</button>
-    <button type="button" class="btn btn-default" ng-click="settab(2)">Edit</button>
-    <button type="button" class="btn btn-default" ng-click="settab(3)">Read</button>
-    <button type="button" class="btn" ui-sref="^.public">Public</button>
+
+    <button type="button" class="btn btn-default" ng-click="settab(1)">Mine</button>
+    <button type="button" class="btn btn-default" ng-click="settab(2)">Shared with me </button>
+    <button type="button" class="btn btn-default" ui-sref="^.public">Public</button>
+
   </div>
 <div class="row-fluid">
   <div class="col-xs-6">
     <a ui-sref="^.newchronicle" style="text-decoration:none">
       <div class="img-circular">
-        <div class="content-add">ADD<br>NEW</div>
+        <div class="content-add">New<br>Chronicle</div>
       </div>
     </a>
   </div>
@@ -21,7 +23,7 @@
           <div class="img-circular"></div><br>
         </a>
         <div class="content">{{chronicle.title}}<br>
-          {{chronicle.user.name}}</div>
+<!--           {{chronicle.user.name}}</div> -->
       </div>
     </div>
   </ul>
@@ -32,12 +34,11 @@
           <div class="img-circular" hm-hold="settings(chronicle)"></div>
           <br>
         </a>
-        <div class="content">{{chronicle.title}}<br>
-          {{chronicle.user.name}}</div>
+        <div class="content">{{chronicle.title}}<br> <small>{{chronicle.user.name}}</small></div> 
       </div>
     </div>
   </ul>
-  <ul ng-show="readaccess.length && istab(3)" class="event-list">
+  <ul ng-show="readaccess.length && istab(2)" class="event-list">
       <div class="row-fluid">
       <div class="col-xs-6" ng-repeat="chronicle in readaccess">
         <a ui-sref="app.chronicle({chronicleId: chronicle._id})" style="text-decoration:none">
@@ -45,7 +46,7 @@
           <br>
         </a>
         <div class="content">{{chronicle.title}}<br>
-          {{chronicle.user.name}}</div>
+          Owned by: {{chronicle.user.name}}</div>
       </div>
     </div>
   </ul>

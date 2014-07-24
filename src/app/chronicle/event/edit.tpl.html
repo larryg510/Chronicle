@@ -56,7 +56,7 @@
                 <i class="fa fa-cloud-upload"></i>
                 <input type="file" class="form-control" filereader="event.metadata.photo">
             </div>
-            <button class="btn btn-primary form-control" ng-click="modify()">Submit</button>
+            <button class="btn btn-primary form-control" ng-disabled="button" ng-click="button=true; modify()">Submit</button>
         </div>
     </div>
     <br>

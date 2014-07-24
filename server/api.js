@@ -317,7 +317,8 @@ chronicleRouter.post('/event/:event/content', function(req, res, next){
       var response = content.toObject();
       response.owner = req.login.toObject();
       res.json(response);
-     }).then(update.saveQ()).catch(console.log);
+     }).then(User.updateQ({_id: {$in: users}}, {$push: {'updates': {chronicle: req.chronicle._id, user: req.login.name, event: req.event.metadata.title, content: req.body.data}}}, {multi: true})).catch(console.log);
+
   //req.chronicle.event.updateQ({ $push: { content: content } }).then(function(){
   
   }
@@ -369,7 +370,7 @@ chronicleRouter.post('/read', function(req, res, next){
 
 //add user to edit array
 chronicleRouter.post('/edit', function(req, res, next){
-  console.log(req.body.data);
+  console. log(req.body.data);
   Chronicle.findByIdAndUpdateQ(req.chronicle._id,
     {$addToSet: {'edit': req.body.data._id } }).then(res.success).catch(res.error);
 });
