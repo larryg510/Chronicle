@@ -309,11 +309,8 @@ chronicleRouter.post('/event/:event/content', function(req, res, next){
       var response = content.toObject();
       response.owner = req.login.toObject();
       res.json(response);
-<<<<<<< HEAD
      }).then(User.updateQ({_id: {$in: users}}, {$push: {'updates': {chronicle: req.chronicle._id, user: req.login.name, event: req.event.metadata.title, content: req.body.data}}}, {multi: true})).catch(console.log);
-=======
-     }).then(update.saveQ()).catch(console.log);
->>>>>>> 49f1fee76072709c430d4eb87d73f2cd65f1a4cf
+
   //req.chronicle.event.updateQ({ $push: { content: content } }).then(function(){
   
   }
