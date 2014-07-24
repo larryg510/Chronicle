@@ -15,8 +15,8 @@
         templateUrl: 'chronicles/mychronicles.tpl.html',
       },
       topnav: {
-        controller: 'ChronicleTopNavCtrl',
-        templateUrl: 'chronicle/chronicle-nav.tpl.html',
+        controller: 'UserNavCtrl',
+        templateUrl: 'user/user-nav.tpl.html',
       }
     }, 
     resolve: {
@@ -34,8 +34,8 @@
         templateUrl: 'chronicles/chronicles.tpl.html',
       }, 
       topnav: {
-        controller: 'ChronicleTopNavCtrl',
-        templateUrl: 'chronicle/chronicle-nav.tpl.html',
+        controller: 'UserNavCtrl',
+        templateUrl: 'user/user-nav.tpl.html',
       }
     }
   });
@@ -48,8 +48,8 @@
         templateUrl: 'chronicles/chronicles.tpl.html'
       },
       topnav: {
-        controller: 'ChronicleTopNavCtrl',
-        templateUrl: 'chronicle/chronicle-nav.tpl.html',
+        controller: 'UserNavCtrl',
+        templateUrl: 'user/user-nav.tpl.html',
       }
     },
     resolve: {
@@ -140,19 +140,13 @@
 
 })
 
-.controller('ChronicleTopNavCtrl', function($scope, $state, apiService, user, chronicles) {
+.controller('UserNavCtrl', function($scope, $state, apiService, user, chornicles){
+  console.log("ew");
   $scope.$state = $state;
-  $scope.user = user;
   $scope.logout = function(){
+    console.log($scope.user);
     apiService.logout($scope.user);
     $state.go('app.login');
   };
-
-  $scope.$on('scroll-to-event', function(e, event){
-    $scope.event = event;
-  });
-})
-
-.controller('UserNavCtrl', function($scope, $state){
 })
 ;

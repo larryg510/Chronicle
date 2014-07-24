@@ -44,6 +44,7 @@ angular.module('chronicle.newchronicle', [
   if($scope.chronicle){
     $scope.first = false;
     $scope.access = ($scope.user._id == $scope.chronicle.user) || ($scope.chronicle.edit.indexOf($scope.user._id) !== -1);
+    console.log($scope.access);
     if(!$scope.access){
       if(!$scope.chronicle.public){
         $state.go('app.chronicles');

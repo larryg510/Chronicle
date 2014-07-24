@@ -44,6 +44,12 @@ angular.module('chronicle.user', [
 
 .controller('UserTopNavCtrl', function($scope, $state, apiService, user, chronicles) {
   $scope.user = user;
+  console.log("please");
+  $scope.logout = function(){
+    console.log($scope.user);
+    apiService.logout($scope.user);
+    $state.go('app.login');
+  };
 })
 
 /* .controller('ChronicleBottomNavCtrl', function($scope, $state, apiService, chronicle, events) {
