@@ -22,6 +22,9 @@ angular.module('chronicle.api', ['chronicle.api.user', 'chronicle.api.chronicle'
         },
         public: function(){
           return http.get('public');
+        },
+        updates : function(){
+          return http.get('updates');
         }
         // mychronicles: function(){
         //   return http.get('/chronicles/owned');

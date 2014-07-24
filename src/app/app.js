@@ -6,6 +6,7 @@ angular.module('chronicle', [
   'chronicle.chronicles',
   'chronicle.chronicle',
   'chronicle.login',
+  'chronicle.updates',
   'ngSanitize',
   'ngTouch',
   'angular-gestures',
