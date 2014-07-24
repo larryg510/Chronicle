@@ -1,0 +1,40 @@
+<div class="container-fluid fill">
+  <div class="text-right"><a ui-sref="^.login" style="text-decoration:none">
+    <i class="fa fa-cog"></i></a>
+  </div>
+  <div class="row-fluid" style="margin-left:35%">
+    <button class="btn btn-sm btn-primary" ui-sref="^.chronicles">my chronicles</button>
+  </div>
+  <div class="col-lg-6 col-lg-offset-3">
+ 		<ul ng-show="myupdates.length" class="event-list">
+    <li ng-repeat="update in myupdates"> 
+ 			<a ui-sref="app.chronicle({chronicleId: update.chronicle._id})" ng-if="update.target == 'chronicle'">
+    			<div class="content" ng-if="update.verb == 'add'">
+    				{{update.user.name}} added the chronicle "{{update.chronicle.title}}"
+    			</div>
+					<div class="content" ng-if="update.verb == 'edit'">
+    				{{update.user.name}} changed the name of the chronicle "{{update.obj.old}}" to "{{update.obj.new}}"
+    			</div> 
+    	</a>
+			<a ui-sref="app.chronicle({chronicleId: update.chronicle._id}).event({eventId: update.event})" style="text-decoration:none" ng-if="update.target == 'event'">
+    		<div class="content" ng-if="update.verb == 'add'">
+    				{{update.user.name}} added "{{update.obj.metadata.title}}" to the chronicle "{{update.chronicle.title}}" 
+    			</div>
+    			<div class="content" ng-if="update.verb == 'edit'">
+    				{{update.user.name}} edited "{{update.obj.metadata.title}}" in the chronicle "{{update.chronicle.title}}"
+    			</div>
+    			<div class="content" ng-if="update.verb == 'addcontent' && update.obj.format == 'img'">
+    				{{update.user.name}} added picture content to the event "{{update.obj.title}}" in the chronicle "{{update.chronicle.title}}"
+    			</div>
+    			<div class="content" ng-if="update.verb == 'addcontent' && update.obj.format == 'text'">
+    				{{update.user.name}} added text content to the event "{{update.obj.title}}" in the chronicle "{{update.chronicle.title}}"
+    			</div>
+    			<div class="content" ng-if="update.verb == 'addcontent' && update.obj.format == 'quote'">
+    				{{update.user.name}} added quote content to the event "{{update.obj.title}}" in the chronicle "{{update.chronicle.title}}"
+    			</div> 
+    		</a>  
+    </li> 
+    </ul> 
+  </div>
+</div>
+
