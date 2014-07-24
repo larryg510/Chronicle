@@ -32,6 +32,7 @@
         editaccess: function(addeduser){
           return this.http.post('/edit', addeduser);
         }
+        
       };
       
       return function(id, prefix){

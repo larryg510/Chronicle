@@ -1,4 +1,4 @@
-angular.module('chronicle.chronicles', [
+  angular.module('chronicle.chronicles', [
   'chronicle.api',
   'ui.router',
   'ui.bootstrap',

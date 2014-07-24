@@ -84,6 +84,9 @@ angular.module('chronicle.chronicle', [
     console.log("miew");
     $state.go("^");
   };
+  $scope.logout = function(){
+    apiService.logout($scope.user);
+  };
 
   $scope.$on('scroll-to-event', function(e, event){
     $scope.event = event;

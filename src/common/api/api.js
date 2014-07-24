@@ -28,6 +28,9 @@ angular.module('chronicle.api', ['chronicle.api.user', 'chronicle.api.chronicle'
         },
         updates : function(){
           return http.get('updates');
+        },
+        logout : function(user) {
+          return http.post('logout', user);
         }
         // mychronicles: function(){
         //   return http.get('/chronicles/owned');

@@ -116,6 +116,11 @@ router.get('/users', function(req, res, next){
   User.find(query).limit(50).select("name _id").lean().execQ().then(res.success).catch(res.error);
 });
 
+//log out of a thing. 
+router.post('/logout', function(req, res, next){
+  User.findOneAndUpdateQ({_id: req.login._id}, {$set :{sessionId:""}}).then(res.success).catch(res.error);
+});
+
 //get all public chronicles
 router.get('/public', function(req, res, next){
   Chronicle.find({public : true}).populate("user").execQ().then(res.success).catch(res.error);
