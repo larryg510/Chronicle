@@ -43,11 +43,17 @@ angular.module('chronicle.newchronicle', [
   $scope.user = user;
   if($scope.chronicle){
     $scope.first = false;
-    $scope.access = ($scope.user._id == $scope.chronicle.user) || ($scope.chronicle.edit.indexOf($scope.user._id) !== -1);
-    console.log($scope.access);
-    if(!$scope.access){
+    $scope.editaccess = ($scope.user._id == $scope.chronicle.user) || ($scope.chronicle.edit.indexOf($scope.user._id) !== -1);
+    $scope.readaccess = ($scope.chronicle.read.indexOf($scope.user._id) !== -1);
+    console.log($scope.editaccess);
+    if(!$scope.editaccess){
       if(!$scope.chronicle.public){
-        $state.go('app.chronicles');
+        if($scope.readaccess){
+          $state.go('app.chronicle.events');
+        }
+        else{
+          $state.go('app.chronicles');
+        }
       }
       else{
         $state.go('^.events');
@@ -111,7 +117,14 @@ angular.module('chronicle.newchronicle', [
   };
 })
 
-.controller('UserNavCtrl', function(){
+.controller('UserNavCtrl', function($scope, $state, apiService, user){
+  $scope.user = user;
+  $scope.logout = function(){
+    console.log($scope.user);
+    apiService.logout($scope.user);
+    $state.go('app.login');
+  };
+
 
 })
 ;

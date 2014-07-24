@@ -66,10 +66,10 @@ angular.module('chronicle.event.edit', [
     $scope.event = {};
   }
   $scope.user = user;
-  $scope.access = ($scope.user._id == $scope.chronicle.user) || ($scope.chronicle.edit.indexOf($scope.user._id) !== -1);
+  $scope.editaccess = ($scope.user._id == $scope.chronicle.user) || ($scope.chronicle.edit.indexOf($scope.user._id) !== -1);
   $scope.readaccess = ($scope.chronicle.read.indexOf($scope.user._id) != -1);
   if($scope.event._id || $state.params.currentEvent){
-    if(!$scope.access)
+    if(!$scope.editaccess)
     {
       if(!$scope.chronicle.public)
       {
@@ -86,7 +86,7 @@ angular.module('chronicle.event.edit', [
     }
   }
   else{
-    if(!$scope.access)
+    if(!$scope.editaccess)
     {
       if(!$scope.chronicle.public)
       {

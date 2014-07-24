@@ -143,6 +143,7 @@
 .controller('UserNavCtrl', function($scope, $state, apiService, user, chornicles){
   console.log("ew");
   $scope.$state = $state;
+  $scope.user = user;
   $scope.logout = function(){
     console.log($scope.user);
     apiService.logout($scope.user);

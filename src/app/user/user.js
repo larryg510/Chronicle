@@ -23,7 +23,7 @@ angular.module('chronicle.user', [
         templateUrl: 'user/user.tpl.html',
       },
       topnav: {
-        controller: 'UserTopNavCtrl',
+        controller: 'UserNavCtrl',
         templateUrl: 'user/user-nav.tpl.html',
       }
       /* bottomnav: {
@@ -42,7 +42,7 @@ angular.module('chronicle.user', [
   }
 })
 
-.controller('UserTopNavCtrl', function($scope, $state, apiService, user, chronicles) {
+.controller('UserNavCtrl', function($scope, $state, apiService, user, chronicles) {
   $scope.user = user;
   console.log("please");
   $scope.logout = function(){

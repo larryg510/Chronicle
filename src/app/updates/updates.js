@@ -38,6 +38,13 @@ angular.module('chronicle.updates', [
 
 })
 
-.controller('UserNavCtrl', function($scope, $state){
+.controller('UserNavCtrl', function($scope, $state, apiService, user){
 	$scope.state = $state;
+	console.log("Wat");
+	$scope.user = user;
+	$scope.logout = function(){
+		console.log($scope.user);
+		apiService.logout($scope.user);
+		$state.go('app.login');
+	};
 });
