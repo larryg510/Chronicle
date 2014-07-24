@@ -1,9 +1,14 @@
 <div class="container-fluid">
+
+  <script type="text/ng-template" id="search-users.html">
+    <a>{{(match.model).name}}</a>
+  </script>
+
 <div class="text-right"><a href="javascript:history.back()" style="text-decoration:none">
   <i class="fa fa-times"></i></a>
 </div>
 <div class="text-center">
-    <h1 class="control-label col-sm-10 col-sm-offset-2"> <font color=#33CCFF size=200pt> Create a new chronicle </font> </h1>
+    <h1 class="control-label col-sm-10 col-sm-offset-1"> <font color=#33CCFF size=200pt> Create a new chronicle </font> </h1>
 </div>
 <form class="form-horizontal" role="form">
   	<br>
@@ -13,11 +18,34 @@
       <div class="col-sm-offset-2 col-sm-10">
         Public: <input type="checkbox" ng-model="public"> 
     	</div>
-    <br>
     	<div class="control-group">
-        <div class="col-sm-offset-2 col-sm-10">
+        <div class="col-sm-10 col-sm-offset-1">
           <button class="btn btn-primary form-control" ng-click="create()">Submit</button>
         </div>
     	</div>
 </form>
+
+<div ng-show="!first">
+
+  <div class="control-group">
+    <div class="col-sm-offset-2 col-sm-10" >
+      <input id="text" class="form-control" typeahead="user as user.name for user in searchUsers($viewValue) | limitTo: 8" placeholder="Give Read Access" ng-model="read"
+      typeahead-template-url="search-users.html">
+    </div>
+    <div class="col-sm-offset-3 col-sm-10">
+      <button class="btn btn-primary" ng-show="read" ng-click="adduser()"> Add User </button>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <div class="col-sm-offset-2 col-sm-10" >
+      <input id="text" class="form-control" typeahead="user as user.name for user in searchUsers($viewValue) | limitTo: 8" placeholder="Give Edit Access" ng-model="edit">
+    </div>
+    <div class="col-sm-offset-3 col-sm-10">
+      <button class="btn btn-primary" ng-show="edit" ng-click="adduser()"> Add User </button>
+    </div>
+  </div>
 </div>
+
+</div>
+

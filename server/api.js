@@ -144,6 +144,7 @@ chronicleRouter.get('/events', function(req, res, next){
 
 // edit chronicle title
 chronicleRouter.post('/', function(req, res, next){
+<<<<<<< HEAD
   console.log("Miew");
   // NOT SURE IF IT WORKS 
   var d = new Date();
@@ -157,9 +158,11 @@ chronicleRouter.post('/', function(req, res, next){
     target : 'chronicle',
     date : d
   });
-  req.chronicle.title = req.body.data;
+  req.chronicle.title = req.body.data.title;
+  req.chronicle.public = req.body.data.public;
   Chronicle.findOneAndUpdateQ( { _id: req.chronicle._id } ,
-    { $set: { 'title': req.chronicle.title } }).then(update.saveQ()).then(res.success).catch(res.error);
+    { $set: { 'title': req.chronicle.title, 'public' : req.chronicle.public } }).then(update.saveQ()).then(res.success).catch(res.error);
+
 });
 
 
@@ -316,7 +319,6 @@ chronicleRouter.post('/event/:event/content', function(req, res, next){
 
 //delete content
 chronicleRouter.delete('/event/:event/content', function(req, res, next){
-  console.log("Nyabu");
   console.log(req.query.id);
   Chronicle.findOneAndUpdateQ({events: {$elemMatch: {_id: req.event._id} } }, 
     { $pull: { 'events.$.content': { _id: req.query.id } } }).then(res.success).catch(res.error)
@@ -361,7 +363,6 @@ chronicleRouter.post('/read', function(req, res, next){
 
 //add user to edit array
 chronicleRouter.post('/edit', function(req, res, next){
-  console.log("Omgmiew");
   console.log(req.body.data);
   Chronicle.findByIdAndUpdateQ(req.chronicle._id,
     {$addToSet: {'edit': req.body.data._id } }).then(res.success).catch(res.error);

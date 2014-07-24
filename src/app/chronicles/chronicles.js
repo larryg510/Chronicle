@@ -13,6 +13,10 @@ angular.module('chronicle.chronicles', [
       main: {
         controller: 'ChroniclesCtrl',
         templateUrl: 'chronicles/mychronicles.tpl.html',
+      },
+      topnav: {
+        controller: 'UserNavCtrl',
+        templateUrl: 'user/user-nav.tpl.html',
       }
     }, 
     resolve: {
@@ -28,6 +32,10 @@ angular.module('chronicle.chronicles', [
       main: {
         controller: 'ChroniclesCtrl',
         templateUrl: 'chronicles/chronicles.tpl.html',
+      }, 
+      topnav: {
+        controller: 'UserNavCtrl',
+        templateUrl: 'user/user-nav.tpl.html',
       }
     }
   });
@@ -73,8 +81,7 @@ angular.module('chronicle.chronicles', [
     return chronicle.edit.indexOf($scope.user._id) !== -1;
   });
 
-
-  $scope.open = function(chronicle) {
+  $scope.settings = function(chronicle) {
     $scope.chronicle = chronicle;
 
     var modalInstance = $modal.open({
@@ -99,14 +106,13 @@ angular.module('chronicle.chronicles', [
       }
     });
   };
-
 })
 
 .controller('PublicChroniclesCtrl', function($scope, $state, $modal, apiService, user, chronicles){
   $scope.chronicles = chronicles;
   $scope.user = user;
-
-  $scope.open = function(chronicle) {
+ 
+  $scope.settings = function(chronicle) {
     $scope.chronicle = chronicle;
 
     var modalInstance = $modal.open({
@@ -124,7 +130,7 @@ angular.module('chronicle.chronicles', [
 
         $scope.delete = function (chronicle) {
           apiService.chronicle($scope.chronicle._id).delete().then(function(){
-            $state.go('app.chronicles');
+            $state.go('app.public');
             $modalInstance.dismiss('cancel');
           });
         };

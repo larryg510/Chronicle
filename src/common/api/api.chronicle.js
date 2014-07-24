@@ -12,7 +12,6 @@
         },
         events: function(metadata, before){
           if(metadata){
-            console.log(before);
             return this.http.post('/events' + (before ? '?before=' + before : ''), metadata);
           }else {
             return this.http.get('/events');
@@ -21,8 +20,8 @@
         event: function(eventId){
           return apiEvent(eventId, this.http.prefix);
         },
-        update: function(title){
-          return this.http.post('', title);
+        update: function(info){
+          return this.http.post('', info);
         },
         delete: function(){
           return this.http.delete('/');

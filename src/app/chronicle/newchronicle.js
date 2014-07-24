@@ -42,6 +42,7 @@ angular.module('chronicle.newchronicle', [
   
   $scope.user = user;
   if($scope.chronicle){
+    $scope.first = false;
     $scope.access = ($scope.user._id == $scope.chronicle.user) || ($scope.chronicle.edit.indexOf($scope.user._id) !== -1);
     if(!$scope.access){
       if(!$scope.chronicle.public){
@@ -52,18 +53,38 @@ angular.module('chronicle.newchronicle', [
       }
     }
   }
+  else{
+    $scope.first = true;
+  }
 
-  
+  $scope.searchUsers = function(search){
+    return apiService.users(search);
+  };
+  $scope.adduser = function() {
+    if($scope.read){
+      apiService.chronicle($scope.chronicle._id).readaccess($scope.read).then(function(){
+        //have it reload the page
+      });
+    }
+    if($scope.edit){
+      apiService.chronicle($scope.chronicle._id).editaccess($scope.edit).then(function(){
+        //have it reload the page
+        //maybe I should have page reloaded at the end of adduser
+      });
+    }
+    $state.go($state.current, {}, {reload: true});
+  };
+
   $scope.create = function(){
-    console.log($scope.chronicle._id);
     if($scope.chronicle._id){
-      return apiService.chronicle($scope.chronicle._id).update($scope.chronicle.title).then(function(){
+      return apiService.chronicle($scope.chronicle._id).update({title: $scope.title, public: $scope.public}).then(function(){
         //update the update array within Users for use in notifications
         apiService.chronicle($scope.chronicle._id).trackupdates($scope.chronicle.title).then(function(){});
         $state.go('app.chronicles');
 
       });
     }else {
+
       var hue = Math.floor(Math.random()*360);
       var background = "background:hsl(" + hue + ", 50%, 90%)";
       //console.log($scope.title);

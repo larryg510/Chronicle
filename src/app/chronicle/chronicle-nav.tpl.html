@@ -1,11 +1,12 @@
 <nav class="navbar navbar-default navbar-fixed-top" style="background-color:#33CCFF" role="navigation">
   <div class="container-fluid">
-    <a class="navbar-brand navbar-left" style="color:#FFFFFF;" href="javascript:history.back()">
+    <a ui-sref="^.chronicles" class="navbar-brand navbar-left" style="color:#FFFFFF;">
       <i class="fa fa-angle-left"></i>
     </a>
     <span class="navbar-text" style="color:#FFFFFF" >
       <ul class="breadcrumb">
-        <li><a href="#">{{chronicle.title}}</a></li>
+        <li><a ui-sref="app.chronicles"> All Chronicles </a></li>
+        <li><a ui-sref="app.chronicle.events">{{chronicle.title}}</a></li>
         <li>{{event.metadata.title}}</li>
       </ul>
     </span>
@@ -18,16 +19,11 @@
           <i class="fa fa-bars"></i>
         </a>
         <ul class="dropdown-menu">
-          <li><a ui-sref="^.newchronicle"><i class="fa fa-plus"></i>&nbsp;&nbsp;Add Chronicle</a></li>
-          <li><a ui-sref="^.chronicles"><i class="fa fa-plus"></i>&nbsp;&nbsp;My Chronicles</a></li>
-          <li><a ui-sref="^.public"><i class="fa fa-plus"></i>&nbsp;&nbsp;All Chronicles</a></li>
-          <li><a ui-sref=".newevent"><i class="fa fa-plus"></i>&nbsp;&nbsp;Add Event</a></li>
-          <li><a ui-sref=".events"><i class="fa fa-plus"></i>&nbsp;&nbsp;Events</a></li>
-          <li><a ui-sref="app.updates"><i class="fa fa-plus"></i>&nbsp;&nbsp;Updates</a></li>
-          <li><a ui-sref=".settings"><i class="fa fa-cog"></i>&nbsp;&nbsp;Settings</a></li>
+         <li><a ui-sref="app.updates"><i class="fa fa-plus"></i>&nbsp;&nbsp;Updates</a></li>
+          <!-- <li><a ui-sref=".settings"><i class="fa fa-cog"></i>&nbsp;&nbsp;Settings</a></li> -->
           <li><a ui-sref=".edit"><i class="fa fa-cog"></i>&nbsp;&nbsp;Edit this Chronicle</a></li>
           <li><a ng-click="delete()"><i class="fa fa-cog"></i>&nbsp;&nbsp;Delete this Chronicle</a></li>
-          <li><a ng-click="deleteEvent()"><i class="fa fa-cog"></i>&nbsp;&nbsp;Delete this Event</a></li>
+          <li ng-show="$state.is('app.chronicle.event')"><a ng-click="deleteEvent()" ><i class="fa fa-cog"></i>&nbsp;&nbsp;Delete this Event</a></li>
         </ul>
       </li>
     </ul>

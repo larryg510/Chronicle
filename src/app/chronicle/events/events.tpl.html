@@ -3,50 +3,14 @@
     <i class="fa fa-cog"></i>
   </a>
   <ul class="dropdown-menu">
-    <li><a ui-sref="^.newchronicle"><i class="fa fa-plus"></i>&nbsp;&nbsp;Add Chronicle</a></li>
     <li><a ui-sref="^.owned"><i class="fa fa-plus"></i>&nbsp;&nbsp;My Chronicles</a></li>
     <li><a ui-sref="^.chronicles"><i class="fa fa-plus"></i>&nbsp;&nbsp;All Chronicles</a></li>
-    <li><a ui-sref="app.chronicle.neweventyay"><i class="fa fa-plus"></i>&nbsp;&nbsp;Add Event</a></li>
-    <li><a ui-sref=".events"><i class="fa fa-plus"></i>&nbsp;&nbsp;Events</a></li>
     <li><a ui-sref=".settings"><i class="fa fa-cog"></i>&nbsp;&nbsp;Settings</a></li>
-    <li><a ui-sref=".edit"><i class="fa fa-cog"></i>&nbsp;&nbsp;Edit this Chronicle</a></li>
-    <li><a ng-click="delete()"><i class="fa fa-cog"></i>&nbsp;&nbsp;Delete this Chronicle</a></li>
     <li><a ng-click="deleteEvent()"><i class="fa fa-cog"></i>&nbsp;&nbsp;Delete this Event</a></li>
   </ul>
 </div>
 
 <div class="container-fluid">
-
-  <script type="text/ng-template" id="search-users.html">
-    <a>{{(match.model).name}}</a>
-  </script>
-
-  <div class="col-lg-8 col-lg-offset-2">
-
-    <div class="control-group">
-      <div class="col-sm-12 left-inner-addon" >
-        <pre> Model: {{read | json}} </pre>
-        <i class="fa fa-person"></i>
-        <input id="text" class="form-control" typeahead="user as user.name for user in searchUsers($viewValue) | limitTo: 8" placeholder="Give Read Access" ng-model="read"
-        typeahead-template-url="search-users.html">
-      </div>
-      <div class="col sm-10 col-sm-offset-2">
-        <button class="btn btn-primary" ng-show="read" ng-click="adduser()"> Add User </button>
-      </div>
-    </div>
-
-    <div class="control-group">
-      <div class="col-sm-12 left-inner-addon" >
-        <i class="fa fa-person"></i>
-        <pre> Model: {{edit | json}} </pre>
-        <input id="text" class="form-control" typeahead="user as user.name for user in searchUsers($viewValue) | limitTo: 8" placeholder="Give Edit Access" ng-model="edit">
-      </div>
-      <div class="col sm-10 col-sm-offset-2">
-        <button class="btn btn-primary" ng-show="edit" ng-click="adduser()"> Add User </button>
-      </div>
-    </div>
-
-  </div>
 
   <div class="col-lg-8 col-lg-offset-2">
     
@@ -56,15 +20,14 @@
         <div style="text-align: center;"> <a ui-sref="^.neweventyay({currentEvent: event._id})">+</a> </div>
         <a ui-sref="^.event({eventId: event._id})">
 
-          <div class="img-circular background" style="background-image: url({{event.metadata.photo}});"></div>
+          <div class="img-circular background" hm-hold="settings(event)" style="background-image: url({{event.metadata.photo}});"></div>
+        </a>
           <div class="metadata">
             <br> {{event.metadata.title}}
           </div>
-
-        </a>
-       
       </li>
     </ul>
+    <div style="text-align: center;"> <a ui-sref="^.neweventyay">+</a> </div>
   </div>
 
 </div>
