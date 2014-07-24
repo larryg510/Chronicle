@@ -60,7 +60,7 @@ angular.module('chronicle.event', [
         $scope.tabs = [
           { title:'Text Content', thing:'Comment', format: 'text', content: '' },
           { title:'Quote', thing:'Quote', format: 'quote', content: ''},
-          { title:'Image', thing:'Upload (Must be a file <68 KB large)', format: 'image', content: '' }
+          { title:'Image', thing:'Upload', format: 'image', content: '' }
         ];
 
         $scope.getActiveTab = function(){
@@ -114,7 +114,7 @@ angular.module('chronicle.event', [
     for(var i = 0; i< $scope.event.content.length; i++){
       if($scope.event.content[i]._id == id.id)
       {
-        if($scope.event.content[i].owner == $scope.user._id)
+        if($scope.event.content[i].owner._id == $scope.user._id)
         {
           var index = i;
           $scope.event.content.splice(index, 1);
