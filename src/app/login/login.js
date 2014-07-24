@@ -28,8 +28,18 @@ angular.module('chronicle.login', [
 
 .controller('LoginCtrl', function($scope, $state, apiService){
   $scope.login = function(){
-    return apiService.signup($scope.username).then(function(user){
+    var account = {username: $scope.username, password: $scope.password};
+    return apiService.login(account).then(function(user){
       $state.go('app.user', {userId: user._id});
+    });
+  };
+})
+
+.controller('SignupCtrl', function($scope, $state, apiService){
+  $scope.signup = function(){
+    var account = {username: $scope.username, password: $scope.password, email: $scope.email};
+    return apiService.signup(account).then(function(user){
+
     });
   };
 });

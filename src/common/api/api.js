@@ -17,8 +17,11 @@ angular.module('chronicle.api', ['chronicle.api.user', 'chronicle.api.chronicle'
         users: function(search){
           return http.get('users', { search: search });
         },
-        signup: function(username){
-          return http.post('signup', { username: username });
+        signup: function(account){
+          return http.post('signup', account);
+        },
+        login: function(account){
+          return http.get('login', account);
         },
         public: function(){
           return http.get('public');

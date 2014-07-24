@@ -6,9 +6,13 @@ var express     = require('express')
 
 var UserSchema = new Schema({
   name:       { type: String, index: 'text' },
+  username:   String,
+  password:   String,
+  email:      String,
+  info:       {picture: String, description: String},
   sessionId:  String,
   chronicles: [{type: Schema.Types.ObjectId,  ref: 'Chronicle'}],
-  updates: [{chronicle: {type: Schema.Types.ObjectId, ref: 'Chronicle'}, chronicletitle: String, user: String, event: String, eventtitle: String, eventedit: Boolean, content: {format: String, content: String}, read: {type: Boolean, default: false}}]
+  
 }, {
  toJSON: {
    virtuals: true

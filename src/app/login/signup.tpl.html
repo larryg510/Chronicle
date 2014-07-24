@@ -1,14 +1,42 @@
 <div class="container-fluid">
 <div class="text-center">
-    <h1 class="control-label col-sm-10 col-sm-offset-2"> <font color=#0099FF> Sign Up For account </font> </h1>
+    <h1 class="control-label col-sm-10 col-sm-offset-2"> <font color=#0099FF> Sign Up For Account </font> </h1>
 </div>
 <form class="form-horizontal" role="form">
 <div>
     <div class="control-group">
-        <label class="control-label col-sm-2" placeholder="UserID">UserID:</label>
+        <label class="control-label col-sm-2" placeholder="Name">Name:</label>
         <div class="col-sm-10 left-inner-addon" >
             <i class="fa fa-tags"></i>
-            <input id="text" class="form-control" ng-model="username" placeholder="Sign Up!">
+            <input id="text" class="form-control" ng-model="name" placeholder="Name to be displayed to other users">
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label col-sm-2" placeholder="Username">Username:</label>
+        <div class="col-sm-10 left-inner-addon" >
+            <i class="fa fa-tags"></i>
+            <input id="text" class="form-control" ng-model="username" placeholder="Desired username!">
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label col-sm-2" placeholder="Password">Password:</label>
+        <div class="col-sm-10 left-inner-addon" >
+            <i class="fa fa-tags"></i>
+            <input id="text" class="form-control" ng-model="password" placeholder="Keep your Account Safe!">
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label col-sm-2" placeholder="confirmpassword">Confirm Password:</label>
+        <div class="col-sm-10 left-inner-addon" >
+            <i class="fa fa-tags"></i>
+            <input id="text" class="form-control" ng-model="confirmpassword" placeholder="Confirm Your Password">
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label col-sm-2" placeholder="email">Email:</label>
+        <div class="col-sm-10 left-inner-addon" >
+            <i class="fa fa-tags"></i>
+            <input id="text" class="form-control" ng-model="email" placeholder="Provide your email">
         </div>
     </div>
     <br>
@@ -19,7 +47,7 @@
     </div>
     <div class="control-group">
         <div class = "col-sm-offset-2 col-sm-10">
-            <button class="btn btn-secondary form-control"> User already exists? Log in instead </button>
+            <a ui-sref="app.login"> User already exists? Log in instead <a>
         </div>
     </div>
     <br>

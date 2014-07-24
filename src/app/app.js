@@ -59,9 +59,10 @@ angular.module('chronicle', [
   });
 })
 
-.controller('AppCtrl', function($scope, $state, apiService) {
+.controller('AppCtrl', function($scope, $state, apiService, user) {
+  console.log(user);
   if($state.is('app')){
-    $state.go('app.login');
+    $state.go(user ? 'app.chronicles' : 'app.login');
   }
 })
 

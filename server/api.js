@@ -41,12 +41,20 @@ router.post('/signup', function(req, res, next){
     return res.success(req.login.toObject()); //should never really happen
   } else {
     var user = new User({
-      name: req.body.data.username,
+      name: req.body.data.name,
+      username: req.body.data.username,
+      password: req.body.data.password,
+      email: req.body.data.email,
       sessionId: req.sessionID
     });
 
     user.saveQ().thenResolve(user).then(res.success).catch(res.error);
   }
+});
+
+//logins in a user
+router.get('/login', function(req, res, next){
+
 });
 
 // get current user's chronicles
