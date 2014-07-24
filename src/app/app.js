@@ -60,14 +60,9 @@ angular.module('chronicle', [
 })
 
 .controller('AppCtrl', function($scope, $state, apiService, user) {
-  console.log(user);
   if($state.is('app')){
-<<<<<<< HEAD
-    $state.go(user ? 'app.chronicles' : 'app.login');
-=======
-    console.log($scope.user);
-    $state.go($scope.user ? 'app.chronicles' : 'app.login');
->>>>>>> 72a289f8feddfbf885777b2c8ee4f8e167d56df5
+    console.log(user);
+    $state.go(user._id ? 'app.chronicles' : 'app.login');
   }
 })
 

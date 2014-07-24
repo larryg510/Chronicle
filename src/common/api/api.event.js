@@ -27,9 +27,6 @@
         },
         deleteContent: function(id){
           return this.http.delete('/content', id);
-        },
-        trackupdates: function(content){
-          return this.http.post('/trackupdates', content);
         }
       };
       

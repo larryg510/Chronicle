@@ -19,7 +19,7 @@ angular.module('chronicle.login', [
     url: 'signup',
     views: {
       main: {
-        controller: 'LoginCtrl',
+        controller: 'SignupCtrl',
         templateUrl: 'login/signup.tpl.html',
       }
     }
@@ -37,9 +37,9 @@ angular.module('chronicle.login', [
 
 .controller('SignupCtrl', function($scope, $state, apiService){
   $scope.signup = function(){
-    var account = {username: $scope.username, password: $scope.password, email: $scope.email};
+    var account = {name: $scope.name, username: $scope.username, password: $scope.password, email: $scope.email};
     return apiService.signup(account).then(function(user){
-
+      $state.go('app.user', {userId: user._id});
     });
   };
 });

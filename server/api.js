@@ -38,8 +38,10 @@ router.post('*', function(req, res, next){
 // creates sessionID for new user
 router.post('/signup', function(req, res, next){
   if(req.login){
+    console.log("wtf");
     return res.success(req.login.toObject()); //should never really happen
   } else {
+    console.log("miew");
     var user = new User({
       name: req.body.data.name,
       username: req.body.data.username,
@@ -52,9 +54,14 @@ router.post('/signup', function(req, res, next){
   }
 });
 
-//logins in a user
+//login a user
 router.get('/login', function(req, res, next){
-
+  if(req.login){
+    return res.success(req.login.toOBject()); //pls why is this happening
+  } else {
+    User.findOneAndUpdateQ({username : req.body.data.username, password: req.body.data.password},
+      {$set: {sessionId: req.sessionID}}).then(res.success).catch(res.error);
+  }
 });
 
 // get current user's chronicles
@@ -77,7 +84,7 @@ router.get('/login', function(req, res, next){
 
 // get all chronicles
 router.get('/chronicles', function(req, res, next){
-  if(!req.login) { res.error('Not Logged In', 403); }
+  if(!req.login) { res.error({}, 403); }
 
   var query = { $or: [{ user: req.login._id }, { read: req.login._id }, { edit: req.login._id }] };
 
@@ -442,7 +449,7 @@ userRouter.param('user', function(req, res, next, id) {
 
 // get current user info
 userRouter.get('/', function(req, res, next){
-  res.success(req.login || 'not logged in');
+  res.success(req.login || {});
 });
 
 // get requested user's personal profile
