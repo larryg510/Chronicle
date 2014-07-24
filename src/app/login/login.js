@@ -28,7 +28,10 @@ angular.module('chronicle.login', [
 
 .controller('LoginCtrl', function($scope, $state, apiService){
   $scope.login = function(){
+    console.log($scope.username);
+    console.log($scope.password);
     var account = {username: $scope.username, password: $scope.password};
+    console.log(account);
     return apiService.login(account).then(function(user){
       $state.go('app.user', {userId: user._id});
     });

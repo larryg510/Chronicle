@@ -21,7 +21,7 @@ angular.module('chronicle.api', ['chronicle.api.user', 'chronicle.api.chronicle'
           return http.post('signup', account);
         },
         login: function(account){
-          return http.get('login', account);
+          return http.post('login', account);
         },
         public: function(){
           return http.get('public');

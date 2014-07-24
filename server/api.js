@@ -55,7 +55,7 @@ router.post('/signup', function(req, res, next){
 });
 
 //login a user
-router.get('/login', function(req, res, next){
+router.post('/login', function(req, res, next){
   if(req.login){
     return res.success(req.login.toOBject()); //pls why is this happening
   } else {
