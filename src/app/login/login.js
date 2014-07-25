@@ -26,8 +26,12 @@ angular.module('chronicle.login', [
   }); 
 })
 
-.controller('LoginCtrl', function($scope, $state, apiService){
+.controller('LoginCtrl', function($scope, $state, apiService, user){
+  if (user._id){
+    $state.go('app.chronicles');
+  }
   $scope.login = function(){
+
     console.log($scope.username);
     console.log($scope.password);
     var account = {username: $scope.username, password: $scope.password};
@@ -38,7 +42,10 @@ angular.module('chronicle.login', [
   };
 })
 
-.controller('SignupCtrl', function($scope, $state, apiService){
+.controller('SignupCtrl', function($scope, $state, apiService, user){
+  if (user._id){
+    $state.go('app.chronicles');
+  }
   $scope.signup = function(){
     var account = {name: $scope.name, username: $scope.username, password: $scope.password, email: $scope.email};
     return apiService.signup(account).then(function(user){

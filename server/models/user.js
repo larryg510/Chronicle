@@ -19,7 +19,7 @@ var UserSchema = new Schema({
  }
 });
 
-/*
+
 UserSchema.pre("save", function(next){
   var self = this;
   mongoose.models["User"].findOne({username : self.username}, function(err, results){
@@ -34,7 +34,7 @@ UserSchema.pre("save", function(next){
     }
   });
 });
-*/
+
 
 
 var User = module.exports = mongoose.model('User', UserSchema);
