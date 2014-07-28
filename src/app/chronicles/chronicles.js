@@ -22,6 +22,9 @@
     resolve: {
       chronicles: function($stateParams, apiService){
         return apiService.chronicles();
+      },
+      publicchronicles: function($stateParams, apiService){
+        return apiService.public();
       }
     }
   });
@@ -60,7 +63,8 @@
   });
 })
 
-.controller('ChroniclesCtrl', function($scope, $state, $modal, apiService, user, chronicles) {
+.controller('ChroniclesCtrl', function($scope, $state, $modal, apiService, user, chronicles, publicchronicles) {
+  $scope.publicchronicles = publicchronicles;
   $scope.currenttab = 1;
   $scope.settab = function(chosentab){
     $scope.currenttab = chosentab;

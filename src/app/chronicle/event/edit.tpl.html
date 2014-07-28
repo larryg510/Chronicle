@@ -8,7 +8,7 @@
         <label class="control-label col-sm-2" placeholder="Title">Title:</label>
         <div class="col-sm-10 left-inner-addon" >
             <i class="fa fa-tags"></i>
-            <input id="text" class="form-control" ng-model="event.metadata.title" placeholder="Name your Event!">
+            <input id="text" class="form-control" ng-model="event.metadata.title" placeholder="Name your Event!" required>
         </div>
     </div>
      <div class="control-group">
@@ -57,6 +57,9 @@
                 <input type="file" class="form-control" filereader="event.metadata.photo">
             </div>
             <button class="btn btn-primary form-control" ng-disabled="button" ng-click="button=true; modify()">Submit </button>
+
+
+            <button class="btn btn-primary form-control" ng-disabled="button || (!event.metadata.title)" ng-click="button=true; modify()">Submit</button>
             <div class="spinner" ng-show="loading"> Please Wait...</div>
 
         </div>
