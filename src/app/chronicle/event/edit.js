@@ -111,7 +111,6 @@ angular.module('chronicle.event.edit', [
   };
   $scope.modify = function(){
     // Sent to apiService
-
     if($scope.event._id){
       return apiService.chronicle($scope.chronicle._id).event($scope.event._id).update($scope.event.metadata).then(function(){
         //Add Putting UserID of dude into UpdateID and Add Date into UpdateDate
