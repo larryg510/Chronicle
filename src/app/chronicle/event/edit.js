@@ -110,6 +110,7 @@ angular.module('chronicle.event.edit', [
     return $scope.currenttab == settab;
   };
   $scope.modify = function(){
+    $scope.loading = true;
     // Sent to apiService
 
     if($scope.event._id){
