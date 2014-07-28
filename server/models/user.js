@@ -8,7 +8,7 @@ var UserSchema = new Schema({
   name:       { type: String, index: 'text', required : true},
   username:   {type: String, required : true, unique : true},
   password:   {type: String, required : true},
-  email:      {type: String, required : true},
+  email:      String,
   info:       {picture: String, description: String},
   sessionId:  String,
   chronicles: [{type: Schema.Types.ObjectId,  ref: 'Chronicle'}],
