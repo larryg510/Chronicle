@@ -9,7 +9,6 @@ angular.module('chronicle', [
   'chronicle.updates',
   'ngSanitize',
   'ngTouch',
-  'ngMock',
   'angular-gestures',
   'ui.bootstrap',
   'ui.router',
