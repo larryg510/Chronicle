@@ -18,7 +18,7 @@ router.use(function(req, res, next){
 
   // standardizes error
   res.error = function(error, code){
-    res.json(500 || code, { error: error });
+    res.json(500 || code, { error: error.message || error });
   };
 
   // login based on user's sessionID
