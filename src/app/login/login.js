@@ -49,7 +49,8 @@ angular.module('chronicle.login', [
   $scope.signup = function(){
     var account = {name: $scope.name, username: $scope.username, password: $scope.password, email: $scope.email};
     return apiService.signup(account).then(function(user){
+      console.log("halp");
       $state.go('app.user', {userId: user._id});
-    });
+    }).catch(function(results){$scope.unerror= true;});
   };
 });

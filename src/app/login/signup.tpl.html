@@ -18,6 +18,11 @@
             <input id="text" class="form-control" ng-model="username" placeholder="Desired username!" required>
         </div>
     </div>
+    <div ng-show="unerror"  class="control-group" style="color:red">
+        <label class="control-label col-sm-2" > Error!</label>
+        <div class="col-sm-10" > Username is already taken! </div>
+        <i class="fa fa-key"></i>
+    </div>
     <div class="control-group">
         <label class="control-label col-sm-2" placeholder="Password">Password*:</label>
         <div class="col-sm-10 left-inner-addon" >
@@ -35,7 +40,7 @@
     <div ng-hide="password == confirmpassword"  class="control-group" style="color:red">
         <label class="control-label col-sm-2" > Error!</label>
         <div class="col-sm-10" > Passwords do not Match! </div>
-        <i class="fa-spinner"></i>
+        <i class="fa fa-key"></i>
 
     </div>
     <div class="control-group">
