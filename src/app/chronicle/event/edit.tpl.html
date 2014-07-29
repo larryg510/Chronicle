@@ -56,9 +56,6 @@
                 <i class="fa fa-cloud-upload"></i>
                 <input type="file" class="form-control" filereader="event.metadata.photo">
             </div>
-            <button class="btn btn-primary form-control" ng-disabled="button" ng-click="button=true; modify()">Submit </button>
-
-
             <button class="btn btn-primary form-control" ng-disabled="button || (!event.metadata.title)" ng-click="button=true; modify()">Submit</button>
             <div class="spinner" ng-show="loading"> Please Wait...</div>
 

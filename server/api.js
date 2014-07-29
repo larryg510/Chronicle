@@ -88,7 +88,6 @@ router.get('/chronicles', function(req, res, next){
     res.error({}, 403); 
   }
   else{
-    console.log(req.login);
     var query = { $or: [{ user: req.login._id }, { read: req.login._id }, { edit: req.login._id }] };
     Chronicle.find(query).populate("user").execQ().then(res.success).catch(res.error);
   }
