@@ -64,6 +64,7 @@
 })
 
 .controller('ChroniclesCtrl', function($scope, $state, $modal, apiService, user, chronicles, publicchronicles) {
+  console.log(chronicles);
   $scope.publicchronicles = publicchronicles;
   $scope.currenttab = 1;
   $scope.settab = function(chosentab){
