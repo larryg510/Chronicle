@@ -20,6 +20,9 @@
       }
     }, 
     resolve: {
+      // user: function($stateParams, apiService){
+      // return apiService.user($stateParams.userId).info();
+      // },
       chronicles: function($stateParams, apiService){
         return apiService.chronicles();
       },
@@ -77,10 +80,11 @@
   $scope.owned = chronicles.filter(function(chronicle){
     return chronicle.user._id == $scope.user._id;
   });
-
+  console.log($scope.owned);
   $scope.readaccess = chronicles.filter(function(chronicle){
     return chronicle.read.indexOf($scope.user._id) !== -1;
   });
+  console.log($scope.readaccess);
   $scope.editaccess = chronicles.filter(function(chronicle){
     return chronicle.edit.indexOf($scope.user._id) !== -1;
   });

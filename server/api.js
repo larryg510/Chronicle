@@ -84,11 +84,14 @@ router.post('/login', function(req, res, next){
 
 // get all chronicles
 router.get('/chronicles', function(req, res, next){
-  if(!req.login) { res.error({}, 403); }
+  if(!req.login) { 
+    res.error({}, 403); 
+  }
+  else{
+    var query = { $or: [{ user: req.login._id }, { read: req.login._id }, { edit: req.login._id }] };
+    Chronicle.find(query).populate("user").execQ().then(res.success).catch(res.error);
+  }
 
-  var query = { $or: [{ user: req.login._id }, { read: req.login._id }, { edit: req.login._id }] };
-
-  Chronicle.find(query).populate("user").execQ().then(res.success).catch(res.error);
 });
 
 // post new chronicle to user's chronicle library

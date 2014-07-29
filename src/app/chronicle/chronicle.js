@@ -41,14 +41,18 @@ angular.module('chronicle.chronicle', [
 .controller('ChronicleCtrl', function($scope, $state, apiService, chronicle, events, user) {
   $scope.user = user;
   $scope.chronicle = chronicle;
+  console.log($scope.chronicle);
   $scope.events = events;
+  console.log($scope.events.length);
 
   $scope.access = (($scope.user._id == $scope.chronicle.user) || ($scope.chronicle.edit.indexOf($scope.user._id) !== -1) || ($scope.chronicle.read.indexOf($scope.user._id) !== -1));
   if(!($scope.chronicle.public || $scope.access)){
     $state.go('app.chronicles');
   }
-  if($state.is('app.chronicle')){
-    $state.go($scope.events.length ? '.events' : '.newevent');
+  else{
+    if($state.is('app.chronicle')){
+      $state.go($scope.events.length ? '.events' : '.newevent');
+    }
   }
 })
 

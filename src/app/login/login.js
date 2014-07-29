@@ -37,7 +37,7 @@ angular.module('chronicle.login', [
     var account = {username: $scope.username, password: $scope.password};
     console.log(account);
     return apiService.login(account).then(function(user){
-      $state.go('app.user', {userId: user._id});
+      $state.go($state.current, {}, {reload: true});
     });
   };
 })
