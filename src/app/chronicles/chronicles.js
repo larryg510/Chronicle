@@ -20,9 +20,9 @@
       }
     }, 
     resolve: {
-      // user: function($stateParams, apiService){
-      // return apiService.user($stateParams.userId).info();
-      // },
+      user: function($stateParams, apiService){
+      return apiService.user($stateParams.userId).info();
+      },
       chronicles: function($stateParams, apiService){
         return apiService.chronicles();
       },

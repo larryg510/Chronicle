@@ -38,7 +38,7 @@ router.post('*', function(req, res, next){
 // creates sessionID for new user
 router.post('/signup', function(req, res, next){
   if(req.login){
-    console.log("wtf");
+    console.log("hi");
     return res.success(req.login.toObject()); //should never really happen
   } else {
     console.log("miew");
