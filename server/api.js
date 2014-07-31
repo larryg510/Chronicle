@@ -54,6 +54,26 @@ router.post('/signup', function(req, res, next){
   }
 });
 
+router.post('/edituser', function(req, res, next){
+  //FIX THIS var d = new Date();
+  console.log(req.body.data);
+  // var update = new Update({
+  //   user : req.login._id,
+  //   chronicle : req.chronicle._id,
+  //   event : req.event._id,
+  //   obj : req.event,
+  //   object : 'obj',
+  //   actor : 'user',
+  //   verb : 'edit',
+  //   target : 'event',
+  //   date : d
+  // });
+  // Chronicle.findOneAndUpdateQ({ events: { $elemMatch: { _id: req.event._id } } },
+  //   { $set: { 'events.$.metadata': req.event.metadata.toObject() } }).then(update.saveQ()).then(function() {
+  //   res.json(req.event);
+  // });
+});
+
 //login a user
 router.post('/login', function(req, res, next){
   if(req.login){

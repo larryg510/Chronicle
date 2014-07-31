@@ -1,8 +1,8 @@
 <nav class="navbar navbar-default navbar-fixed-top" style="background-color:#33CCFF" role="navigation">
   <div class="container-fluid">
-    <a href="javascript:history.back()" class="navbar-brand navbar-left" style="color:#FFFFFF;">
+    <!-- <a href="javascript:history.back()" class="navbar-brand navbar-left" style="color:#FFFFFF;">
       <i class="fa fa-angle-left"></i>
-    </a>
+    </a> -->
     <div class="navbar-text" style="color:#FFFFFF;" >
       <ul class="breadcrumb">
         <li style="text-overflow:clip; width: 85px;"><a ui-sref="app.chronicles"> All Chronicles </a></li>
@@ -10,10 +10,7 @@
         <li style="width:100px; text-overflow:ellipsis">{{event.metadata.title}}</li>
       </ul>
     </div>
-    
-    
-    <!-- Actions -->
-    <ul class="nav navbar-nav navbar-right">
+   <ul class="nav navbar-nav navbar-right">
       <li class="dropdown">
         <a href="#" class="dropdown-toggle">
           <i class="fa fa-bars"></i>
@@ -28,6 +25,15 @@
         </ul>
       </li>
     </ul>
+    <a ui-sref="app.chronicles" class="navbar-brand navbar-right" style="color:#FFFFFF; padding: 15px 15px;">
+      <i class="fa fa-home fa-fw"></i>
+    </a>
+
+    <a ui-sref="app.updates" class="navbar-brand navbar-right" style="color:#FFFFFF; padding: 15px 30px;">
+      <i class="fa fa-exclamation"></i>
+    </a>
+    <!-- Actions -->
+   
     
   </div>
 </nav>

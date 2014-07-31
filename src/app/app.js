@@ -45,12 +45,12 @@ angular.module('chronicle', [
   //     });
   //   }
   // });
-  // $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
-  //   //console.log('stateChangeSuccess', toState, fromState);
-  //   if (angular.isObject(toState.data) && angular.isDefined(toState.data.pageTitle)) {
-  //     $rootScope.pageTitle = toState.data.pageTitle + ' :: Modit' ;
-  //   }
-  // });
+  $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
+    console.log('stateChangeSuccess', toState, fromState);
+    // if (angular.isObject(toState.data) && angular.isDefined(toState.data.pageTitle)) {
+    //   $rootScope.pageTitle = toState.data.pageTitle + ' :: Modit' ;
+    // }
+  });
   $rootScope.$on('$stateChangeError', function(event, toState, toParams, fromState, fromParams, error) {
     console.log('stateChangeError', toState, fromState, error);
     event.preventDefault();
