@@ -7,9 +7,7 @@ angular.module('chronicle.event', [
 ])
 
 .config(function($stateProvider) {
-  var resolve = {
-    
-  };
+  var resolve = {};
 
   $stateProvider.state('app.chronicle.event', {
     resolve: resolve,
@@ -18,6 +16,10 @@ angular.module('chronicle.event', [
       main: {
         controller: 'EventCtrl',
         templateUrl: 'chronicle/event/event.tpl.html',
+      },
+      bottomnav: {
+        controller: 'BottomNavCtrl',
+        templateUrl: 'chronicle/event/bottom-nav.tpl.html',
       }
     }
   });
@@ -136,5 +138,34 @@ angular.module('chronicle.event', [
     */
   };
 
+
+})
+
+.controller('BottomNavCtrl', function($scope, $state, apiService, chronicle, events) {
+  $scope.chronicle = chronicle;
+  $scope.events = events;
+  $scope.$state = $state;
+
+  $scope.events.forEach(function(event){
+    if(event._id == $state.params.eventId) {
+      $scope.event = event;
+    }
+  });
+
+  $scope.currentindex = events.indexOf($scope.event);
+
+  if ($scope.currentindex !== 0) {
+    $scope.prevevent = $scope.events[$scope.currentindex - 1];
+  }
+  else {
+    $scope.first = true;
+  }
+
+  if ($scope.events[$scope.currentindex + 1] !== undefined) {
+    $scope.nextevent = $scope.events[$scope.currentindex + 1];
+  }
+  else {
+    $scope.last = true;
+  }
 
 });
