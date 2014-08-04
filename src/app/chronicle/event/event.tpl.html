@@ -1,7 +1,7 @@
   <div class="row">
-  <ul>
     <a ui-sref=".edit" style="text-decoration:none">
-    <div class="background" style="background-image: url({{event.metadata.photo}});">
+    <img src="{{event.metadata.photo}}" style="width:100%;">
+<!--     <div class="background" style="background-image: url({{event.metadata.photo}});">
       <br><br><br><br><br>
       <div class="metadata">
         <br>
@@ -13,13 +13,14 @@
         <br>
       </div>
       <br><br><br><br><br>
-    </div>
-    </a>
-  </ul>
+    </div> -->
+    <div class="title">{{event.metadata.title}}</div>
+    <div class="description">{{event.metadata.description}}</div>
+  </a>
   </div>
   <div class="contentrow">
     <div class="evcontent" ng-repeat="content in event.content" id="event._id">
-    <br><a ng-click="open({id: content._id})"> + </a>
+    <br><a ng-click="open({id: content._id})" style="font-weight:100;"> + </a>
         <div class="text" ng-show="content.format === 'text'">
           <br><div>{{content.content}}</div>                                                                                                
         </div>
@@ -33,6 +34,6 @@
         <div class="col-xs-7" ng-hide="user._id ==content.owner._id"></div>
         <div class="content-small col-xs-5"> {{content.owner.name}} </div><br>
     </div>
-    <br><a class="contentbutton" ng-click="open()">Add Content!</a>
+    <br><a class="contentbutton" ng-click="open()" style="font-weight:100;"> + </a>
   </div>
 </div>
