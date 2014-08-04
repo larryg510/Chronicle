@@ -1,7 +1,8 @@
 angular.module('chronicle.newchronicle', [
   'chronicle.api',
   'ui.router',
-  'ui.bootstrap'
+  'ui.bootstrap',
+  'filereader'
 ])
 
 .config(function($stateProvider) {
@@ -83,10 +84,11 @@ angular.module('chronicle.newchronicle', [
   };
 
   $scope.create = function(){
+    console.log($scope.chronicle.photo);
+    console.log($scope.public);
     if($scope.chronicle._id){
-      return apiService.chronicle($scope.chronicle._id).update({title: $scope.title, public: $scope.public}).then(function(){
+      return apiService.chronicle($scope.chronicle._id).update({title: $scope.chronicle.title, public: $scope.public, photo: $scope.chronicle.photo}).then(function(){
         //update the update array within Users for use in notifications
-        apiService.chronicle($scope.chronicle._id).trackupdates($scope.chronicle.title).then(function(){});
         $state.go('app.chronicles');
 
       });
@@ -100,7 +102,8 @@ angular.module('chronicle.newchronicle', [
       var chronicle = {
         title: $scope.chronicle.title,
         events: [],
-        public: $scope.public
+        public: $scope.public,
+        photo: $scope.chronicle.photo
       };
       
       return apiService.chronicles(chronicle).then(function(chronicle){
