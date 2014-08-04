@@ -25,6 +25,10 @@
         </div>
       </div>
 
+      <div class="control-group">
+        <input type="file" class="form-control" filereader="chronicle.photo">
+      </div>
+
       <div class="form-group">
         would you like this to be public?
         <input type="checkbox" ng-model="public" style="margin-left: 20px;">
@@ -33,6 +37,8 @@
       <div class="form-group">
         <button class="btn btn-primary form-control control-group" ng-click="create()">submit</button>
       </div>
+
+      <div class="spinner" ng-show="loading">please wait...</div>
       
     </form>
   </div>

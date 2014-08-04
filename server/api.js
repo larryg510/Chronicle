@@ -208,8 +208,9 @@ chronicleRouter.post('/', function(req, res, next){
   });
   req.chronicle.title = req.body.data.title;
   req.chronicle.public = req.body.data.public;
+  req.chronicle.photo = req.body.data.photo;
   Chronicle.findOneAndUpdateQ( { _id: req.chronicle._id } ,
-    { $set: { 'title': req.chronicle.title, 'public' : req.chronicle.public } }).then(update.saveQ()).then(res.success).catch(res.error);
+    { $set: { 'title': req.chronicle.title, 'public' : req.chronicle.public, 'photo' : req.chronicle.photo } }).then(update.saveQ()).then(res.success).catch(res.error);
 
 });
 

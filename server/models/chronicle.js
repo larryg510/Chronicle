@@ -38,6 +38,7 @@ user: { type: Schema.Types.ObjectId, ref: 'User'},
 read: [{type: Schema.Types.ObjectId, ref: 'User'}],
 edit: [{type: Schema.Types.ObjectId, ref: 'User'}],
 title: String,
+photo: String,
 public: {type: Boolean, default: true},
 events: [EventSchema],
 }, {

@@ -34,6 +34,9 @@ angular.module('chronicle.updates', [
 	$scope.myupdates = updates.filter(function(update){
 		return $scope.user._id !== update.user._id && update.read.indexOf($scope.user._id) == -1;
 	});
+	for(var i in $scope.myupdates){
+		$scope.myupdates[i].date = moment($scope.myupdates[i].date).fromNow();	
+	}
 	console.log($scope.myupdates);
 
 })

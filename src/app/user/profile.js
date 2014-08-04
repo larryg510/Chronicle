@@ -26,7 +26,7 @@ angular.module('chronicle.profile', [
 				return apiService.profilechronicles({userId: $stateParams.userId});
 			}
 		}
-	});
+	}); 
 })
 
 .controller('ProfileCtrl', function($scope, $state, apiService, user, chronicles){
