@@ -16,6 +16,14 @@
   		<div class="col-sm-offset-2 col-sm-10">
        <input type="text" class="form-control" style="text-align: center" ng-model="chronicle.title" placeholder="title" onfocus="this.placeholder = ''"><br>
       </div>
+      <div class="control-group">
+        <div class="col-xs-offset-2 col-xs-10">
+            <div class="left-inner-addon">
+                <i class="fa fa-cloud-upload"></i>
+                <input type="file" class="form-control" filereader="chronicle.photo">
+            </div>
+        </div>
+      </div>
       <div class="col-sm-offset-2 col-sm-10">
         Public: <input type="checkbox" ng-model="public"> 
     	</div>
@@ -24,6 +32,7 @@
           <button class="btn btn-primary form-control" ng-click="create()">Submit</button>
         </div>
     	</div>
+      <div class="spinner" ng-show="loading"> Please Wait...</div>
 </form>
 
 <div ng-show="!first">
