@@ -1,68 +1,54 @@
 <div class="container-fluid">
-<div class="text-center">
-    <h1 class="control-label col-xs-10 col-xs-offset-2"> <font color=#0099FF> Sign Up For Account </font> </h1>
-</div>
-<form class="form-horizontal" role="form">
-<div>
-    <div class="control-group">
-        <label class="control-label col-xs-2" placeholder="Name">Name*:</label>
-        <div class="col-xs-10 left-inner-addon" >
-            <i class="fa fa-user"></i>
-            <input id="text" class="form-control" ng-model="name" placeholder="Name to be displayed to other users" required>
-        </div>
-    </div>
-    <div class="control-group">
-        <label class="control-label col-xs-2" placeholder="Username">Username*:</label>
-        <div class="col-xs-10 left-inner-addon" >
-            <i class="fa fa-tags"></i>
-            <input id="text" class="form-control" ng-model="username" placeholder="Desired username!" required>
-        </div>
-    </div>
-    <div ng-show="unerror"  class="control-group" style="color:red">
-        <label class="control-label col-xs-2" > Error!</label>
-        <div class="col-xs-10" > Username is already taken! </div>
-        <i class="fa fa-key"></i>
-    </div>
-    <div class="control-group">
-        <label class="control-label col-xs-2" placeholder="Password">Password*:</label>
-        <div class="col-xs-10 left-inner-addon" >
-            <i class="fa fa-key"></i>
-            <input id="text" class="form-control" type="password" ng-model="password" placeholder="Keep your Account Safe!" required>
-        </div>
-    </div>
-    <div class="control-group">
-        <label class="control-label col-xs-2" placeholder="confirmpassword">Confirm Password*:</label>
-        <div class="col-xs-10 left-inner-addon" >
-            <i class="fa fa-key"></i>
-            <input id="text" class="form-control" type="password" ng-model="confirmpassword" placeholder="Confirm Your Password" required>
-        </div>
-    </div>
-    <div ng-hide="password == confirmpassword"  class="control-group" style="color:red">
-        <label class="control-label col-xs-2" > Error!</label>
-        <div class="col-xs-10" > Passwords do not Match! </div>
-        <i class="fa fa-key"></i>
+  <div class="absolute-center">
+    <form class="form-horizontal col-xs-8 col-xs-offset-2 col-sm-4 col-sm-offset-4" role="form">
 
-    </div>
-    <div class="control-group">
-        <label class="control-label col-xs-2" placeholder="email">Email:</label>
-        <div class="col-xs-10 left-inner-addon" >
-            <i class="fa fa-envelope-o"></i>
-            <input id="text" class="form-control" ng-model="email" placeholder="Provide your email">
+      <div class="form-group">
+        <h1 class="text-center"> <font color=#33CCFF size=200pt>sign up!</font> </h1>
+      </div>
+
+      <div class="form-group">
+        <input id="text" class="form-control control-group" ng-model="name" placeholder="full name" required>
+      </div>
+
+      <div class="form-group">
+
+        <input id="text" class="form-control control-group" ng-model="username" placeholder="username" required>
+
+        <div ng-show="unerror"  class="control-group" style="color:red">      
+          <div class="control-label" > Error: username already taken.</div>
         </div>
-    </div>
-    <br>
-    <div class="control-group">
-        <div class="col-xs-offset-2 col-xs-10">
-            <button class="btn btn-primary form-control" ng-click = "signup()">Submit</button>
+
+      </div>
+
+      <div class="form-group">
+        <input id="text" class="form-control control-group" type="password" ng-model="password" placeholder="password" required>
+      </div>
+
+      <div class="form-group">
+        
+        <input id="text" class="form-control control-group" type="password" ng-model="confirmpassword" placeholder="confirm password"
+        required>
+
+        <div ng-hide="password == confirmpassword"  class="control-group" style="color:red">
+          <div class="control-label" >Error: passwords do not match.</div>
         </div>
-    </div>
-    <div class="control-group">
-        <div class = "col-xs-offset-2 col-xs-10">
-            <a ui-sref="app.login"> User already exists? Log in instead <a>
-            <div style="color:red">*indicates required field</div>
+
+      </div>
+
+      <div class="form-group">
+        <input id="text" class="form-control control-group" ng-model="email" placeholder="email address">
+      </div>
+
+      <div class="form-group">
+        <button class="btn btn-primary form-control" ng-click="signup()">sign up</button>
+      </div>
+
+      <div class="form-group">
+        <div class="control-group text-center">
+          <a ui-sref="app.login">already have an account? log in!</a>
         </div>
-    </div>
-    <br>
-</div>
-</form>
+      </div>
+
+    </form>
+  </div>
 </div>

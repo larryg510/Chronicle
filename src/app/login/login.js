@@ -1,4 +1,3 @@
-
 angular.module('chronicle.login', [
 	'chronicle.api',
 	'ui.router',
