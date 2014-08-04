@@ -1,38 +1,35 @@
-<div style="margin-top: 50px">
 <div class="container-fluid fill">
-  <div class="content-main">Updates</div>
-  <br>
+  <div class="content-main">Updates</div><br>
   <div class="col-lg-6 col-lg-offset-3">
- 		<ul ng-show="myupdates.length" class="event-list">
-    <li ng-repeat="update in myupdates"> 
- 			<a ui-sref="app.chronicle.event({chronicleId: update.chronicle._id})" ng-if="update.target == 'chronicle'">
-    			<div class="content" ng-if="update.verb == 'add'">
-    				{{update.user.name}} added the chronicle "{{update.chronicle.title}}" {{update.date}}
-    			</div>
-					<div class="content" ng-if="update.verb == 'edit'">
-    				{{update.user.name}} changed the name of the chronicle "{{update.obj.old}}" to "{{update.obj.new}}" {{update.date}}
-    			</div> 
-    	</a>
-			<a ui-sref="app.chronicle.event({eventId: update.event, chronicleId: update.chronicle._id})" style="text-decoration:none" ng-if="update.target == 'event'">
-    		    <div class="content" ng-if="update.verb == 'add'">
-    				{{update.user.name}} added "{{update.obj.metadata.title}}" to the chronicle "{{update.chronicle.title}}" {{update.date}}
-    			</div>
-    			<div class="content" ng-if="update.verb == 'edit'">
-    				{{update.user.name}} edited "{{update.obj.metadata.title}}" in the chronicle "{{update.chronicle.title}}" {{update.date}}
-    			</div>
-    			<div class="content" ng-if="update.verb == 'addcontent' && update.obj.format == 'img'">
-    				{{update.user.name}} added picture content to the event "{{update.obj.title}}" in the chronicle "{{update.chronicle.title}}" {{update.date}}
-    			</div>
-    			<div class="content" ng-if="update.verb == 'addcontent' && update.obj.format == 'text'">
-    				{{update.user.name}} added text content to the event "{{update.obj.title}}" in the chronicle "{{update.chronicle.title}}" {{update.date}}
-    			</div>
-    			<div class="content" ng-if="update.verb == 'addcontent' && update.obj.format == 'quote'">
-    				{{update.user.name}} added quote content to the event "{{update.obj.title}}" in the chronicle "{{update.chronicle.title}}" {{update.date}}
-    			</div> 
-    		</a>  
-    </li> 
+    <ul ng-show="myupdates.length" class="event-list">
+      <li ng-repeat="update in myupdates">
+        <a ui-sref="app.chronicle({chronicleId: update.chronicle._id})" ng-if="update.target == 'chronicle'">
+          <div class="content" ng-if="update.verb == 'add'">
+            {{update.user.name}} added the chronicle "{{update.chronicle.title}}" {{update.date}}
+          </div>
+          <div class="content" ng-if="update.verb == 'edit'">
+            {{update.user.name}} changed "{{update.obj.old}}" to "{{update.obj.new}}" {{update.date}}
+          </div> 
+        </a>
+        <a ui-sref="app.chronicle({chronicleId: update.chronicle._id}).event({eventId: update.event})" style="text-decoration:none" ng-if="update.target == 'event'">
+          <div class="content" ng-if="update.verb == 'add'">
+            {{update.user.name}} added "{{update.obj.metadata.title}}" to the chronicle "{{update.chronicle.title}}" {{update.date}}
+          </div>
+          <div class="content" ng-if="update.verb == 'edit'">
+            {{update.user.name}} edited "{{update.obj.metadata.title}}" in the chronicle "{{update.chronicle.title}}" {{update.date}}
+          </div>
+          <div class="content" ng-if="update.verb == 'addcontent' && update.obj.format == 'img'">
+            {{update.user.name}} added a picture to the event "{{update.obj.title}}" in the chronicle "{{update.chronicle.title}}" {{update.date}}
+          </div>
+          <div class="content" ng-if="update.verb == 'addcontent' && update.obj.format == 'text'">
+            {{update.user.name}} added some text to the event "{{update.obj.title}}" in the chronicle "{{update.chronicle.title}}" {{update.date}}
+          </div>
+          <div class="content" ng-if="update.verb == 'addcontent' && update.obj.format == 'quote'">
+            {{update.user.name}} added a quote to the event "{{update.obj.title}}" in the chronicle "{{update.chronicle.title}}" {{update.date}}
+          </div> 
+        </a>  
+      </li> 
     </ul> 
   </div>
-</div>
 </div>
 
