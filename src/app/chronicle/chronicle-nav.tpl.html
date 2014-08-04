@@ -1,12 +1,7 @@
 <nav class="navbar navbar-default navbar-fixed-top" style="background-color:#33CCFF" role="navigation">
   <div class="container-fluid">
-    <!-- <a href="javascript:history.back()" class="navbar-brand navbar-left" style="color:#FFFFFF;">
-      <i class="fa fa-angle-left"></i>
-    </a> -->
     <div class="navbar-text" style="color:#FFFFFF;" >
       <ul class="breadcrumb">
-<!--         <li style="text-overflow:clip; width: 85px;"><a ui-sref="app.chronicles"> All Chronicles </a></li> -->
-        <!-- <li><a ui-sref="app.chronicle.events">{{chronicle.title}}</a></li> -->
         <li style="font-weight:200; font-size:10pt; width:100px; text-overflow:ellipsis">{{chronicle.title}}</li>
       </ul>
     </div>
@@ -17,7 +12,6 @@
         </a>
         <ul class="dropdown-menu" >
          <li><a ui-sref="app.updates"><i class="fa fa-plus"></i>&nbsp;&nbsp;Updates</a></li>
-          <!-- <li><a ui-sref=".settings"><i class="fa fa-cog"></i>&nbsp;&nbsp;Settings</a></li> -->
           <li><a ui-sref=".edit"><i class="fa fa-cog"></i>&nbsp;&nbsp;Edit this Chronicle</a></li>
           <li><a ng-click="delete()"><i class="fa fa-cog"></i>&nbsp;&nbsp;Delete this Chronicle</a></li>
           <li ng-show="$state.is('app.chronicle.event')"><a ng-click="deleteEvent()" ><i class="fa fa-cog"></i>&nbsp;&nbsp;Delete this Event</a></li>
