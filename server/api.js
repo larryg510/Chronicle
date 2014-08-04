@@ -129,6 +129,13 @@ router.get('/public', function(req, res, next){
   Chronicle.find({public : true}).populate("user").execQ().then(res.success).catch(res.error);
 });
 
+//get all chronicles for profile
+router.get('/profilechronicles', function(req, res, next){
+  console.log("Hi");
+  console.log(req.query.userId);
+  Chronicle.findQ({$and: [{user: req.query.userId}, {public: true}]}).then(res.success).catch(res.error);
+});
+
 //get all updaates
 router.get('/updates', function(req, res, next){
   console.log('updates');

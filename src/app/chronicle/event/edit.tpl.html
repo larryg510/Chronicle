@@ -26,20 +26,17 @@
         </div>
     </div>
     <div class="control-group">
-        <div class="col-sm-offset-2 col-sm-10">
-        <button class="btn btn-primary" ng-click="settab(1)"> Calendar </button>
-        <button class="btn btn-primary" ng-click="settab(2)"> Input </button>
+        <label class="control-label col-sm-2" placeholder="Date">Date:</label>
+        <div class="col-sm-10 left-inner-addon">
+            <i class="fa fa-calendar"></i>
+            <input class="form-control" data-format="yyyy-mm-dd" type="date" ng-model="event.metadata.date">
         </div>
     </div>
     <div class="control-group">
-        <label class="control-label col-sm-2" placeholder="When">When:</label>
-        <div class="col-sm-10 left-inner-addon" ng-show="istab(1)">
+        <label class="control-label col-sm-2" placeholder="Time">Time:</label>
+        <div class="col-sm-10 left-inner-addon">
             <i class="fa fa-calendar"></i>
-            <input class="form-control" data-format="yyyy-mm-dd" type="date" ng-model="event.metadata.time">
-        </div>
-        <div class="col-sm-10 left-inner-addon" ng-show="istab(2)">
-            <i class="fa fa-calendar-o"></i>
-            <input class="form-control" type="text" ng-model="event.metadata.time" placeholder="When">
+            <input class="form-control" type="time" data-format="yyyy-mm-dd" ng-model="event.metadata.time">
         </div>
     </div>
      <div class="control-group">

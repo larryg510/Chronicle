@@ -23,6 +23,7 @@ var EventSchema = new Schema({
    names: String,
    location: String,
    time: String,
+   date: String,
    description: String,
    photo: String,
    color: { type: String, default: function(){
