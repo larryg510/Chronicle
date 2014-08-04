@@ -1,0 +1,16 @@
+<nav class="navbar navbar-default navbar-fixed-bottom ng-scope" style="background-color:#33CCFF" role="navigation">
+  <div class="container-fluid">
+    <a ng-hide="first" ui-sref="^.event({eventId: prevevent._id})" class="navbar-brand navbar-left" style="color:#FFFFFF;">
+    <i class="fa fa-angle-left"></i>
+    </a>
+    <a ng-hide="last" ui-sref="^.event({eventId: nextevent._id})" class="navbar-brand navbar-right" style="color:#FFFFFF; padding:15px 0px">
+    <i class="fa fa-angle-right"></i>
+    </a>
+    <ul class="nav">
+    <li>{{event.metadata.title}}</li>
+    </ul>
+<!--     <ul class="nav top">
+    <li><i class="fa fa-sort-up"></i></li>
+    </ul> -->
+  </div>
+</nav>

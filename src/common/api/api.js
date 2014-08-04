@@ -31,6 +31,12 @@ angular.module('chronicle.api', ['chronicle.api.user', 'chronicle.api.chronicle'
         },
         logout : function(user) {
           return http.post('logout', user);
+        },
+        profilechronicles: function(userId){
+          return http.get('profilechronicles', userId);
+        },
+        edituser : function(user) {
+          return http.post('edituser', user);
         }
         // mychronicles: function(){
         //   return http.get('/chronicles/owned');

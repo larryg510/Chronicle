@@ -38,7 +38,7 @@ router.post('*', function(req, res, next){
 // creates sessionID for new user
 router.post('/signup', function(req, res, next){
   if(req.login){
-    console.log("wtf");
+    console.log("hi");
     return res.success(req.login.toObject()); //should never really happen
   } else {
     console.log("miew");
@@ -52,6 +52,26 @@ router.post('/signup', function(req, res, next){
 
     user.saveQ().thenResolve(user).then(res.success).catch(res.error);
   }
+});
+
+router.post('/edituser', function(req, res, next){
+  //FIX THIS var d = new Date();
+  console.log(req.body.data);
+  // var update = new Update({
+  //   user : req.login._id,
+  //   chronicle : req.chronicle._id,
+  //   event : req.event._id,
+  //   obj : req.event,
+  //   object : 'obj',
+  //   actor : 'user',
+  //   verb : 'edit',
+  //   target : 'event',
+  //   date : d
+  // });
+  // Chronicle.findOneAndUpdateQ({ events: { $elemMatch: { _id: req.event._id } } },
+  //   { $set: { 'events.$.metadata': req.event.metadata.toObject() } }).then(update.saveQ()).then(function() {
+  //   res.json(req.event);
+  // });
 });
 
 //login a user
@@ -127,6 +147,13 @@ router.post('/logout', function(req, res, next){
 //get all public chronicles
 router.get('/public', function(req, res, next){
   Chronicle.find({public : true}).populate("user").execQ().then(res.success).catch(res.error);
+});
+
+//get all chronicles for profile
+router.get('/profilechronicles', function(req, res, next){
+  console.log("Hi");
+  console.log(req.query.userId);
+  Chronicle.findQ({$and: [{user: req.query.userId}, {public: true}]}).then(res.success).catch(res.error);
 });
 
 //get all updaates

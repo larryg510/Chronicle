@@ -32,6 +32,21 @@ angular.module('chronicle.user', [
       } */
     }
   });
+
+  $stateProvider.state('app.settings', {
+    url: 'settings',
+    //resolve: resolve, 
+    views: {
+      main: {
+        controller: 'SettingsCtrl', 
+        templateUrl:'user/settings.tpl.html',
+      }//,
+      // topnav: {
+      //   controller: 'UserNavCtrl',
+      //   templateUrl: 'user/user-nav.tpl.html'
+      // }
+    }
+  });
 })
 
 .controller('UserCtrl', function($scope, $state, apiService, user, chronicles) {
@@ -49,6 +64,16 @@ angular.module('chronicle.user', [
     console.log($scope.user);
     apiService.logout($scope.user);
     $state.go('app.login');
+  };
+})
+
+.controller('SettingsCtrl', function($scope, $state, apiService, user){
+  $scope.user = user;
+  console.log(user);
+  $state.edituser = function() {
+    console.log($scope.user);
+    apiService.edituser($scope.user);
+    $state.go('app.chronicles');
   };
 })
 
