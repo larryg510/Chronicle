@@ -1,43 +1,9 @@
-<br>
-<br>
-<br>
-<br>
-<div class="dropdown pull-right">
-  <ul class="dropdown-menu">
-    <li><a ui-sref="^.owned"><i class="fa fa-plus"></i>&nbsp;&nbsp;My Chronicles</a></li>
-    <li><a ui-sref="^.chronicles"><i class="fa fa-plus"></i>&nbsp;&nbsp;All Chronicles</a></li>
-    <li><a ui-sref=".settings"><i class="fa fa-cog"></i>&nbsp;&nbsp;Settings</a></li>
-    <li><a ng-click="deleteEvent()"><i class="fa fa-cog"></i>&nbsp;&nbsp;Delete this Event</a></li>
-  </ul>
-</div>
-<!-- <div class="container-fluid">
-
-  <div class="col-lg-8 col-lg-offset-2">
-    
-    <ul ng-show="events.length" class="event-list">
-      <li ng-repeat="event in events" class="event row-fluid">
-
-        <div style="text-align: center;"> <a ui-sref="^.neweventyay({currentEvent: event._id})">+</a> </div>
-        <a ui-sref="^.event({eventId: event._id})">
-
-          <div class="img-circular background" hm-hold="settings(event)" style="background-image: url({{event.metadata.photo}});"></div>
-        </a>
-          <div class="metadata">
-            <br> {{event.metadata.title}}
-          </div>
-      </li>
-    </ul>
-    <div style="text-align: center;"> <a ui-sref="^.neweventyay">+</a> </div>
-  </div>
-
-</div>
- -->
 <div class="container-fluid">
   <ul ng-show="events.length" class="event-list">
     <li ng-repeat="event in events | orderBy:['metadata.date', 'metadata.time']" class="event row-fluid">
       <div style="text-align: center;"> <a ui-sref="^.neweventyay({currentEvent: event._id})">+</a> </div>
         <a ui-sref="^.event({eventId: event._id})">
-          <div class="img-circular background" hm-hold="settings(event)" style="background-image: url({{event.metadata.photo}});"></div>
+          <div class="img-circular-event background" hm-hold="settings(event)" style="background-image: url({{event.metadata.photo}});"></div>
         </a>
           <div class="metadata">
             <br> {{event.metadata.title}} <br> {{event.metadata.date}} {{event.metadata.time}}
