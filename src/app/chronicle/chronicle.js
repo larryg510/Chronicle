@@ -29,10 +29,10 @@ angular.module('chronicle.chronicle', [
         controller: 'ChronicleTopNavCtrl',
         templateUrl: 'chronicle/chronicle-nav.tpl.html',
       }
-      /* bottomnav: {
-        controller: 'ChronicleBottomNavCtrl',
-        templateUrl: 'chronicle/nav/chronicle-timeline-nav.tpl.html'
-      } */
+      // bottomnav: {
+      //   controller: 'ChronicleBottomNavCtrl',
+      //   templateUrl: 'chronicle/event/bottom-nav.tpl.html'
+      // } 
     }
   });
 
@@ -55,12 +55,6 @@ angular.module('chronicle.chronicle', [
     }
   }
 })
-
-
-
-
-
-
 
 .controller('ChronicleTopNavCtrl', function($scope, $state, apiService, chronicle, events) {
   $scope.chronicle = chronicle;
@@ -98,18 +92,12 @@ angular.module('chronicle.chronicle', [
   });
 })
 
-/* .controller('ChronicleBottomNavCtrl', function($scope, $state, apiService, chronicle, events) {
-  $scope.chronicle = chronicle;
-  $scope.events = events;
-  $scope.event = events[0];
-
-  $scope.totalItems = 64;
-  $scope.currentPage = 
-  $scope.setPage = function (pageNo) {
-    $scope.currentPage = pageNo;
-  };
-  $scope.maxSize = 5;
-}) */
+//  .controller('ChronicleBottomNavCtrl', function($scope, $state, apiService, chronicle, events) {
+//   $scope.chronicle = chronicle;
+//   $scope.events = events;
+//   $scope.event = events[0];
+//   $scope.bottomnav = false;
+// }) 
 
 .directive('eventScroller', function(){
   return {

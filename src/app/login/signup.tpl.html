@@ -1,63 +1,63 @@
 <div class="container-fluid">
 <div class="text-center">
-    <h1 class="control-label col-sm-10 col-sm-offset-2"> <font color=#0099FF> Sign Up For Account </font> </h1>
+    <h1 class="control-label col-xs-10 col-xs-offset-2"> <font color=#0099FF> Sign Up For Account </font> </h1>
 </div>
 <form class="form-horizontal" role="form">
 <div>
     <div class="control-group">
-        <label class="control-label col-sm-2" placeholder="Name">Name*:</label>
-        <div class="col-sm-10 left-inner-addon" >
+        <label class="control-label col-xs-2" placeholder="Name">Name*:</label>
+        <div class="col-xs-10 left-inner-addon" >
             <i class="fa fa-user"></i>
             <input id="text" class="form-control" ng-model="name" placeholder="Name to be displayed to other users" required>
         </div>
     </div>
     <div class="control-group">
-        <label class="control-label col-sm-2" placeholder="Username">Username*:</label>
-        <div class="col-sm-10 left-inner-addon" >
+        <label class="control-label col-xs-2" placeholder="Username">Username*:</label>
+        <div class="col-xs-10 left-inner-addon" >
             <i class="fa fa-tags"></i>
             <input id="text" class="form-control" ng-model="username" placeholder="Desired username!" required>
         </div>
     </div>
     <div ng-show="unerror"  class="control-group" style="color:red">
-        <label class="control-label col-sm-2" > Error!</label>
-        <div class="col-sm-10" > Username is already taken! </div>
+        <label class="control-label col-xs-2" > Error!</label>
+        <div class="col-xs-10" > Username is already taken! </div>
         <i class="fa fa-key"></i>
     </div>
     <div class="control-group">
-        <label class="control-label col-sm-2" placeholder="Password">Password*:</label>
-        <div class="col-sm-10 left-inner-addon" >
+        <label class="control-label col-xs-2" placeholder="Password">Password*:</label>
+        <div class="col-xs-10 left-inner-addon" >
             <i class="fa fa-key"></i>
             <input id="text" class="form-control" type="password" ng-model="password" placeholder="Keep your Account Safe!" required>
         </div>
     </div>
     <div class="control-group">
-        <label class="control-label col-sm-2" placeholder="confirmpassword">Confirm Password*:</label>
-        <div class="col-sm-10 left-inner-addon" >
+        <label class="control-label col-xs-2" placeholder="confirmpassword">Confirm Password*:</label>
+        <div class="col-xs-10 left-inner-addon" >
             <i class="fa fa-key"></i>
             <input id="text" class="form-control" type="password" ng-model="confirmpassword" placeholder="Confirm Your Password" required>
         </div>
     </div>
     <div ng-hide="password == confirmpassword"  class="control-group" style="color:red">
-        <label class="control-label col-sm-2" > Error!</label>
-        <div class="col-sm-10" > Passwords do not Match! </div>
+        <label class="control-label col-xs-2" > Error!</label>
+        <div class="col-xs-10" > Passwords do not Match! </div>
         <i class="fa fa-key"></i>
 
     </div>
     <div class="control-group">
-        <label class="control-label col-sm-2" placeholder="email">Email:</label>
-        <div class="col-sm-10 left-inner-addon" >
+        <label class="control-label col-xs-2" placeholder="email">Email:</label>
+        <div class="col-xs-10 left-inner-addon" >
             <i class="fa fa-envelope-o"></i>
             <input id="text" class="form-control" ng-model="email" placeholder="Provide your email">
         </div>
     </div>
     <br>
     <div class="control-group">
-        <div class="col-sm-offset-2 col-sm-10">
+        <div class="col-xs-offset-2 col-xs-10">
             <button class="btn btn-primary form-control" ng-click = "signup()">Submit</button>
         </div>
     </div>
     <div class="control-group">
-        <div class = "col-sm-offset-2 col-sm-10">
+        <div class = "col-xs-offset-2 col-xs-10">
             <a ui-sref="app.login"> User already exists? Log in instead <a>
             <div style="color:red">*indicates required field</div>
         </div>
