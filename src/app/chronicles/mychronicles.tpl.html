@@ -19,7 +19,7 @@
     <div class="row-fluid">
       <div class="col-xs-6" ng-repeat="chronicle in owned" hm-hold="settings(chronicle)">
         <a ui-sref="app.chronicle({chronicleId: chronicle._id})" style="text-decoration:none">
-          <div class="img-circular"></div><br>
+          <div class="img-circular" hm-hold="settings(chronicle)" style="background-image: url({{chronicle.photo}});"></div><br>
         </a>
         <div class="content">{{chronicle.title}}<br>
 <!--           {{chronicle.user.name}}</div> -->
@@ -30,7 +30,7 @@
       <div class="row-fluid">
       <div class="col-xs-6" ng-repeat="chronicle in editaccess">
         <a ui-sref="app.chronicle({chronicleId: chronicle._id})" style="text-decoration:none">
-          <div class="img-circular" hm-hold="settings(chronicle)"></div>
+          <div class="img-circular" hm-hold="settings(chronicle)" style="background-image: url({{chronicle.photo}});"></div>
           <br>
         </a>
         <div class="content">{{chronicle.title}}<br> Edit: <small>{{chronicle.user.name}}</small></div> 
@@ -41,7 +41,7 @@
       <div class="row-fluid">
       <div class="col-xs-6" ng-repeat="chronicle in readaccess">
         <a ui-sref="app.chronicle({chronicleId: chronicle._id})" style="text-decoration:none">
-          <div class="img-circular" hm-hold="settings(chronicle)"></div>
+          <div class="img-circular" hm-hold="settings(chronicle)" style="background-image: url({{chronicle.photo}});"></div>
           <br>
         </a>
         <div class="content">{{chronicle.title}}<br>
@@ -53,7 +53,7 @@
     <div class="row-fluid">
       <div class="col-xs-6" ng-repeat="chronicle in publicchronicles">
         <a ui-sref="app.chronicle({chronicleId: chronicle._id})" style="text-decoration:none">
-            <div class="img-circular" hm-hold="settings(chronicle)"></div>
+            <div class="img-circular background" hm-hold="settings(chronicle)" style="background-image: url({{chronicle.photo}});"></div>
             <br>
         </a>
         <div class="content">{{chronicle.title}}<br>
