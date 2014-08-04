@@ -5,17 +5,17 @@
     </a> -->
     <div class="navbar-text" style="color:#FFFFFF;" >
       <ul class="breadcrumb">
-        <li style="text-overflow:clip; width: 85px;"><a ui-sref="app.chronicles"> All Chronicles </a></li>
+<!--         <li style="text-overflow:clip; width: 85px;"><a ui-sref="app.chronicles"> All Chronicles </a></li> -->
         <!-- <li><a ui-sref="app.chronicle.events">{{chronicle.title}}</a></li> -->
-        <li style="width:100px; text-overflow:ellipsis">{{event.metadata.title}}</li>
+        <li style="width:100px; text-overflow:ellipsis">{{chronicle.title}}</li>
       </ul>
     </div>
-   <ul class="nav navbar-nav navbar-right">
+   <ul class="nav navbar-nav navbar-right" style="margin-right: -15px">
       <li class="dropdown">
-        <a href="#" class="dropdown-toggle">
+        <a href="#" class="dropdown-toggle" style="padding: 15px 15px">
           <i class="fa fa-bars"></i>
         </a>
-        <ul class="dropdown-menu">
+        <ul class="dropdown-menu" >
          <li><a ui-sref="app.updates"><i class="fa fa-plus"></i>&nbsp;&nbsp;Updates</a></li>
           <!-- <li><a ui-sref=".settings"><i class="fa fa-cog"></i>&nbsp;&nbsp;Settings</a></li> -->
           <li><a ui-sref=".edit"><i class="fa fa-cog"></i>&nbsp;&nbsp;Edit this Chronicle</a></li>
@@ -25,7 +25,7 @@
         </ul>
       </li>
     </ul>
-    <a ui-sref="app.chronicles" class="navbar-brand navbar-right" style="color:#FFFFFF; padding: 15px 15px;">
+    <a ui-sref="app.chronicles" class="navbar-brand navbar-right" style="color:#FFFFFF; ">
       <i class="fa fa-home fa-fw"></i>
     </a>
 
