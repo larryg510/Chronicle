@@ -80,7 +80,7 @@ router.post('/edituser', function(req, res, next){
   //   date : d
   // });
   User.findOneAndUpdateQ({ _id : req.body.data._id},
-    { $set: { 'name': req.body.data.name } }).then(res.success).catch(res.error);
+    { $set: { 'name': req.body.data.name, 'username': req.body.data.username, 'email': req.body.data.email} }).then(res.success).catch(res.error);
 });
 
 router.post('/editprofile', function(req,res, next){

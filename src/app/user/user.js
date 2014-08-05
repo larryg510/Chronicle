@@ -71,9 +71,15 @@ angular.module('chronicle.user', [
   $scope.user = user;
   console.log(user);
   $scope.edituser = function() {
-    console.log($scope.user);
-    apiService.edituser($scope.user);
-    $state.go('app.chronicles');
+    if($scope.password == $scope.user.password){
+      $scope.passwrong = false;
+      return apiService.edituser($scope.user).then(function(){
+         $state.go('app.chronicles');
+      }).catch(function(results){$scope.unerror= true;});
+    }
+    else{
+      $scope.passwrong = true;
+    }
   };
   $scope.editprofile = function() {
     apiService.editprofile($scope.user);
