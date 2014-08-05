@@ -1,62 +1,45 @@
-<div style="margin-top: 50px">
-<div class="container-fluid">
+<script type="text/ng-template" id="search-users.html">
+<a>{{(match.model).name}}</a>
+</script>
 
-  <script type="text/ng-template" id="search-users.html">
-    <a>{{(match.model).name}}</a>
-  </script>
+<div class="container-fluid fill">
+  <div class="absolute-center">
+    <form class="form-horizontal col-xs-8 col-xs-offset-2 col-sm-4 col-sm-offset-4" role="form">
 
-<div class="text-right"><a href="javascript:history.back()" style="text-decoration:none">
-  <i class="fa fa-times"></i></a>
-</div>
-<div class="text-center">
-    <h1 class="control-label col-sm-10 col-sm-offset-1"> <font color=#33CCFF size=200pt> Create a new chronicle </font> </h1>
-</div>
-<form class="form-horizontal" role="form">
-  	<br>
-  		<div class="col-sm-offset-2 col-sm-10">
-       <input type="text" class="form-control" style="text-align: center" ng-model="chronicle.title" placeholder="title" onfocus="this.placeholder = ''"><br>
+      <div class="form-group">
+        <h1 class="text-center"> <font color=#33CCFF size=200pt>create a new chronicle</font></h1>
       </div>
+
+      <div class="form-group">
+        <input id="text" class="form-control control-group" ng-model="chronicle.title" placeholder="title">
+      </div>
+
+      <div ng-show="!first">
+        <div class="form-group">
+          <input id="text" class="form-control" typeahead="user as user.name for user in searchUsers($viewValue) | limitTo: 8" placeholder="add viewer" ng-model="read" typeahead-template-url="search-users.html">
+          <button class="btn btn-primary" ng-show="read" ng-click="adduser()">add</button>
+        </div>
+        <div class="form-group">
+          <input id="text" class="form-control" typeahead="user as user.name for user in searchUsers($viewValue) | limitTo: 8" placeholder="add editor" ng-model="edit">
+          <button class="btn btn-primary" ng-show="edit" ng-click="adduser()">add</button>
+        </div>
+      </div>
+
       <div class="control-group">
-        <div class="col-xs-offset-2 col-xs-10">
-            <div class="left-inner-addon">
-                <i class="fa fa-cloud-upload"></i>
-                <input type="file" class="form-control" filereader="chronicle.photo">
-            </div>
-        </div>
+        <input type="file" class="form-control" filereader="chronicle.photo">
       </div>
-      <div class="col-sm-offset-2 col-sm-10">
-        Public: <input type="checkbox" ng-model="public"> 
-    	</div>
-    	<div class="control-group">
-        <div class="col-sm-offset-2 col-sm-10">
-          <button class="btn btn-primary form-control" ng-click="create()">Submit</button>
-        </div>
-    	</div>
-      <div class="spinner" ng-show="loading"> Please Wait...</div>
-</form>
 
-<div ng-show="!first">
+      <div class="form-group">
+        would you like this to be public?
+        <input type="checkbox" ng-model="public" style="margin-left: 20px;">
+      </div>
 
-  <div class="control-group">
-    <div class="col-sm-offset-2 col-sm-10" >
-      <input id="text" class="form-control" typeahead="user as user.name for user in searchUsers($viewValue) | limitTo: 8" placeholder="Give Read Access" ng-model="read"
-      typeahead-template-url="search-users.html">
-    </div>
-    <div class="col-sm-offset-3 col-sm-10">
-      <button class="btn btn-primary" ng-show="read" ng-click="adduser()"> Add User </button>
-    </div>
-  </div>
+      <div class="form-group">
+        <button class="btn btn-primary form-control control-group" ng-click="create()">submit</button>
+      </div>
 
-  <div class="control-group">
-    <div class="col-sm-offset-2 col-sm-10" >
-      <input id="text" class="form-control" typeahead="user as user.name for user in searchUsers($viewValue) | limitTo: 8" placeholder="Give Edit Access" ng-model="edit">
-    </div>
-    <div class="col-sm-offset-3 col-sm-10">
-      <button class="btn btn-primary" ng-show="edit" ng-click="adduser()"> Add User </button>
-    </div>
+      <div class="spinner" ng-show="loading">please wait...</div>
+      
+    </form>
   </div>
 </div>
-
-</div>
-</div>
-

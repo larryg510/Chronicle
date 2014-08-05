@@ -1,5 +1,5 @@
 <div style="margin-top: 100px">
-<div style= "position:fixed; top: 50px; left:0; width:100%; text-align: center">
+<div style= "position:fixed; top: 50px; left:0; width:100%; text-align: center; z-index: 100;">
   <button type="button" class="btn btn-primary" ng-class="{active: istab(1)}" ng-click="settab(1)" >Mine</button>
   <button type="button" class="btn btn-primary" ng-class="{active: istab(2)}" ng-click="settab(2)" >Shared with me </button>
   <button type="button" class="btn btn-primary" ng-class="{active: istab(3)}" ng-click="settab(3)" >Public</button>
@@ -16,37 +16,38 @@
   <ul ng-show="owned.length && istab(1)" class="event-list">
     <div class="row-fluid col-xs-6" ng-repeat="chronicle in owned" hm-hold="settings(chronicle)">
         <a ui-sref="app.chronicle({chronicleId: chronicle._id})" style="text-decoration:none">
-          <div class="img-circular background" hm-hold="settings(chronicle)" style="background-image: url({{chronicle.photo}});"></div><br>
+          <div class="img-circular i-cbackground" hm-hold="settings(chronicle)" style="background-image: url({{chronicle.photo}});"></div><br>
         </a>
-        <div class="content">{{chronicle.title}}<br>
+        <div class="content">{{chronicle.title}}<br></div>
     </div>
   </ul>
     <ul ng-show="editaccess.length && istab(2)" class="event-list">
       <div class="row-fluid col-xs-6" ng-repeat="chronicle in editaccess">
         <a ui-sref="app.chronicle({chronicleId: chronicle._id})" style="text-decoration:none">
-          <div class="img-circular background" hm-hold="settings(chronicle)" style="background-image: url({{chronicle.photo}});"></div>
+          <div class="img-circular i-cbackground" hm-hold="settings(chronicle)" style="background-image: url({{chronicle.photo}});"></div>
           <br>
         </a>
-        <div class="content">{{chronicle.title}}<br> Edit: <small>{{chronicle.user.name}}</small></div> 
+        <div class="content">{{chronicle.title}}<br> Edit: <small>{{chronicle.user.name }}</small></div> 
       </div>
     </div>
   </ul>
   <ul ng-show="readaccess.length && istab(2)" class="event-list">
       <div class="row-fluid col-xs-6" ng-repeat="chronicle in readaccess">
         <a ui-sref="app.chronicle({chronicleId: chronicle._id})" style="text-decoration:none">
-          <div class="img-circular background" hm-hold="settings(chronicle)" style="background-image: url({{chronicle.photo}});"></div>
+          <div class="img-circular i-cbackground" hm-hold="settings(chronicle)" style="background-image: url({{chronicle.photo}});"></div>
           <br>
         </a>
-        <div class="content">{{chronicle.title}}<br> Read: <small>{{chronicle.user.name}}</small></div>
+        <div class="content">{{chronicle.title}}<br> Read: <small>{{chronicle.user.name }}</small></div>
+
       </div>
   </ul>
   <ul ng-show="publicchronicles.length && istab(3)" class="event-list">
       <div class="row-fluid col-xs-6" ng-repeat="chronicle in publicchronicles">
         <a ui-sref="app.chronicle({chronicleId: chronicle._id})" style="text-decoration:none">
-            <div class="img-circular background" hm-hold="settings(chronicle)" style="background-image: url({{chronicle.photo}});"></div>
+            <div class="img-circular i-cbackground" hm-hold="settings(chronicle)" style="background-image: url({{chronicle.photo}});"></div>
             <br>
         </a>
-        <div class="content">{{chronicle.title}}<br> {{chronicle.user.name}}</div>
+        <div class="content">{{chronicle.title}}<br> {{chronicle.user.name }}</div>
       </div>
   </ul>
 </div> 
