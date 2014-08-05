@@ -6,8 +6,8 @@ angular.module('chronicle.profile', [
 ])
 
 .config(function($stateProvider){
-	$stateProvider.state('app.profile', {
-		url: 'profile/{userId: [0-9a-f]{24}}',
+	$stateProvider.state('app.user.profile', {
+		url: '/profile',
 		views: {
 			main: {
 				controller: 'ProfileCtrl',
@@ -19,9 +19,6 @@ angular.module('chronicle.profile', [
 			}
 		},
 		resolve: {
-			user: function($stateParams, apiService){
-				return apiService.user($stateParams.userId).info();
-			},
 			chronicles: function($stateParams, apiService){
 				return apiService.profilechronicles({userId: $stateParams.userId});
 			}

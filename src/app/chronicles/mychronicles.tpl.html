@@ -6,29 +6,23 @@
 </div>
 <div class="content-main" > My Chronicles </div>
 <div class="container-fluid fill">
-<div class="row-fluid">
-  <div class="col-xs-6">
+<div class="row-fluid col-xs-6">
     <a ui-sref="^.newchronicle" style="text-decoration:none">
       <div class="img-circular">
         <div class="content-add">New<br>Chronicle</div>
       </div>
     </a>
-  </div>
 </div>
   <ul ng-show="owned.length && istab(1)" class="event-list">
-    <div class="row-fluid">
-      <div class="col-xs-6" ng-repeat="chronicle in owned" hm-hold="settings(chronicle)">
+    <div class="row-fluid col-xs-6" ng-repeat="chronicle in owned" hm-hold="settings(chronicle)">
         <a ui-sref="app.chronicle({chronicleId: chronicle._id})" style="text-decoration:none">
           <div class="img-circular background" hm-hold="settings(chronicle)" style="background-image: url({{chronicle.photo}});"></div><br>
         </a>
         <div class="content">{{chronicle.title}}<br>
-<!--           {{chronicle.user.name}}</div> -->
-      </div>
     </div>
   </ul>
     <ul ng-show="editaccess.length && istab(2)" class="event-list">
-      <div class="row-fluid">
-      <div class="col-xs-6" ng-repeat="chronicle in editaccess">
+      <div class="row-fluid col-xs-6" ng-repeat="chronicle in editaccess">
         <a ui-sref="app.chronicle({chronicleId: chronicle._id})" style="text-decoration:none">
           <div class="img-circular background" hm-hold="settings(chronicle)" style="background-image: url({{chronicle.photo}});"></div>
           <br>
@@ -38,28 +32,22 @@
     </div>
   </ul>
   <ul ng-show="readaccess.length && istab(2)" class="event-list">
-      <div class="row-fluid">
-      <div class="col-xs-6" ng-repeat="chronicle in readaccess">
+      <div class="row-fluid col-xs-6" ng-repeat="chronicle in readaccess">
         <a ui-sref="app.chronicle({chronicleId: chronicle._id})" style="text-decoration:none">
           <div class="img-circular background" hm-hold="settings(chronicle)" style="background-image: url({{chronicle.photo}});"></div>
           <br>
         </a>
-        <div class="content">{{chronicle.title}}<br>
-          Read: {{chronicle.user.name}}</div>
+        <div class="content">{{chronicle.title}}<br> Read: <small>{{chronicle.user.name}}</small></div>
       </div>
-    </div>
   </ul>
   <ul ng-show="publicchronicles.length && istab(3)" class="event-list">
-    <div class="row-fluid">
-      <div class="col-xs-6" ng-repeat="chronicle in publicchronicles">
+      <div class="row-fluid col-xs-6" ng-repeat="chronicle in publicchronicles">
         <a ui-sref="app.chronicle({chronicleId: chronicle._id})" style="text-decoration:none">
             <div class="img-circular background" hm-hold="settings(chronicle)" style="background-image: url({{chronicle.photo}});"></div>
             <br>
         </a>
-        <div class="content">{{chronicle.title}}<br>
-          {{chronicle.user.name}}</div>
+        <div class="content">{{chronicle.title}}<br> {{chronicle.user.name}}</div>
       </div>
-    </div>
   </ul>
 </div> 
 </div>
