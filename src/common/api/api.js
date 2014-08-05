@@ -37,6 +37,9 @@ angular.module('chronicle.api', ['chronicle.api.user', 'chronicle.api.chronicle'
         },
         edituser : function(user) {
           return http.post('edituser', user);
+        },
+        editprofile: function(user) {
+          return http.post('editprofile', user);
         }
         // mychronicles: function(){
         //   return http.get('/chronicles/owned');

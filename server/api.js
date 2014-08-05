@@ -54,6 +54,17 @@ router.post('/signup', function(req, res, next){
   }
 });
 
+//login a user
+router.post('/login', function(req, res, next){
+  if(req.login){
+    return res.success(req.login.toOBject()); //pls why is this happening
+  } else {
+    User.findOneAndUpdateQ({'username' : req.body.data.username, 'password': req.body.data.password},
+      {$set: {'sessionId': req.sessionID}}).then(res.success).catch(res.error);
+  }
+});
+
+
 router.post('/edituser', function(req, res, next){
   //FIX THIS var d = new Date();
   console.log(req.body.data);
@@ -69,21 +80,14 @@ router.post('/edituser', function(req, res, next){
   //   date : d
   // });
   User.findOneAndUpdateQ({ _id : req.body.data._id},
-    { $set: { 'name': req.body.data.name } }).then(function() {
-    res.json(req.event);
-  });
+    { $set: { 'name': req.body.data.name } }).then(res.success).catch(res.error);
 });
 
-//login a user
-router.post('/login', function(req, res, next){
-  if(req.login){
-    return res.success(req.login.toOBject()); //pls why is this happening
-  } else {
-    User.findOneAndUpdateQ({username : req.body.data.username, password: req.body.data.password},
-      {$set: {sessionId: req.sessionID}}).then(res.success).catch(res.error);
-  }
+router.post('/editprofile', function(req,res, next){
+  console.log(req.body.data);
+  User.findOneAndUpdateQ({ _id : req.body.data._id},
+    { $set: { 'info' : req.body.data.info} }).then(res.success).catch(res.error);
 });
-
 // get current user's chronicles
 // router.get('/chronicles/owned', function(req, res, next){
 //   Chronicle.find({ user: req.login && req.login._id}).populate("user").execQ().then(res.success).catch(res.error);

@@ -40,11 +40,11 @@ angular.module('chronicle.user', [
       main: {
         controller: 'SettingsCtrl', 
         templateUrl:'user/settings.tpl.html',
-      }//,
-      // topnav: {
-      //   controller: 'UserNavCtrl',
-      //   templateUrl: 'user/user-nav.tpl.html'
-      // }
+      },
+      topnav: {
+        controller: 'UserNavCtrl',
+        templateUrl: 'user/user-nav.tpl.html'
+      }
     }
   });
 })
@@ -73,6 +73,10 @@ angular.module('chronicle.user', [
   $scope.edituser = function() {
     console.log($scope.user);
     apiService.edituser($scope.user);
+    $state.go('app.chronicles');
+  };
+  $scope.editprofile = function() {
+    apiService.editprofile($scope.user);
     $state.go('app.chronicles');
   };
   $scope.settab = function(chosentab){

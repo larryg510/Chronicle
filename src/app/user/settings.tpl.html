@@ -1,80 +1,102 @@
-
-    <div class="btn-group" style="text-align:center">
-      <button type="button" class="btn btn-primary" ng-class="{active: istab(1)}" ng-click="settab(1)" >Password</button>
-      <button type="button" class="btn btn-primary" ng-class="{active: istab(2)}" ng-click="settab(2)" >Account Settings </button>
-      <button type="button" class="btn btn-primary" ng-class="{active: istab(3)}" ng-click="settab(3)" >Profile Settings</button>
-    </div>
+<div style="top: 50px; left:0; width:100%; z-index: 100; text-align: center;">
+  <button type="button" class="btn btn-primary" ng-class="{active: istab(1)}" ng-click="settab(1)" >Password</button>
+  <button type="button" class="btn btn-primary" ng-class="{active: istab(2)}" ng-click="settab(2)" >Account Settings </button>
+  <button type="button" class="btn btn-primary" ng-class="{active: istab(3)}" ng-click="settab(3)" >Profile Settings</button>
+</div>
 <div class="container-fluid">
 <div class="text-center">
-    <h1 class="control-label col-sm-10 col-sm-offset-2"> <font color=#0099FF> Edit your information </font> </h1>
+    <h1 class="control-label"> <font color=#0099FF> Edit your information </font> </h1>
 </div>
-<form class="form-horizontal" role="form" ng-show="istab(2)">
-<div>
+<br>
+<form class="form-horizontal" role="form" ng-show="istab(1)">
+      <div class="control-group">
+        <label class="control-label col-xs-2" placeholder="Password">Change your Password*:</label>
+        <div class="col-xs-10 left-inner-addon" >
+            <i class="fa fa-key"></i>
+            <input id="text" class="form-control" type="password" ng-model="password" placeholder="Keep your Account Safe!" required>
+        </div>
+    </div>
     <div class="control-group">
-        <label class="control-label col-sm-2" placeholder="Name">Change your name:</label>
-        <div class="col-sm-10 left-inner-addon" >
+        <label class="control-label col-xs-2" placeholder="confirmpassword">Confirm new Password*:</label>
+        <div class="col-xs-10 left-inner-addon" >
+            <i class="fa fa-key"></i>
+            <input id="text" class="form-control" type="password" ng-model="confirmpassword" placeholder="Confirm Your Password" required>
+        </div>
+    </div>
+        <div class="control-group">
+        <div class="col-xs-offset-2 col-xs-10">
+            <button class="btn btn-primary form-control" ng-click="edituser()">Submit</button>
+        </div>
+    </div>
+    <div class="control-group">
+        <div class = "col-xs-offset-2 col-xs-10">
+            <div style="color:red">*indicates required field</div>
+        </div>
+    </div>
+</form>
+<form class="form-horizontal" role="form" ng-show="istab(2)">
+    <div class="control-group">
+        <label class="control-label col-xs-2" placeholder="Name">Change your name:</label>
+        <div class="col-xs-10 left-inner-addon" >
             <i class="fa fa-user"></i>
             <input id="text" class="form-control" ng-model="user.name" placeholder="Name to be displayed to other users" required>
         </div>
     </div>
     <div class="control-group">
-        <label class="control-label col-sm-2" placeholder="Username">Change your username:</label>
-        <div class="col-sm-10 left-inner-addon" >
+        <label class="control-label col-xs-2" placeholder="Username">Change your username:</label>
+        <div class="col-xs-10 left-inner-addon" >
             <i class="fa fa-tags"></i>
             <input id="text" class="form-control" ng-model="user.username" placeholder="Desired username!" required>
         </div>
     </div>
     <div ng-show="unerror"  class="control-group" style="color:red">
-        <label class="control-label col-sm-2" > Error!</label>
-        <div class="col-sm-10" > Username is already taken! </div>
+        <label class="control-label col-xs-2" > Error!</label>
+        <div class="col-xs-10" > Username is already taken! </div>
         <i class="fa fa-key"></i>
     </div>
     <div ng-hide="password == confirmpassword"  class="control-group" style="color:red">
-        <label class="control-label col-sm-2" > Error!</label>
-        <div class="col-sm-10" > Passwords do not Match! </div>
+        <label class="control-label col-xs-2" > Error!</label>
+        <div class="col-xs-10" > Passwords do not Match! </div>
         <i class="fa fa-key"></i>
     </div>
     <br>
     <div class="control-group">
-        <label class="control-label col-sm-2" placeholder="email">Email:</label>
-        <div class="col-sm-10 left-inner-addon" >
+        <label class="control-label col-xs-2" placeholder="email">Email:</label>
+        <div class="col-xs-10 left-inner-addon" >
             <i class="fa fa-envelope-o"></i>
             <input id="text" class="form-control" ng-model="user.email" placeholder="Provide your email">
         </div>
     </div>
     <br>
     <div class="control-group">
-        <div class="col-sm-offset-2 col-sm-10">
+        <div class="col-xs-offset-2 col-xs-10">
             <button class="btn btn-primary form-control" ng-click="edituser()">Submit</button>
         </div>
     </div>
-</form>
     <div class="control-group">
-        <div class = "col-sm-offset-2 col-sm-10">
+        <div class = "col-xs-offset-2 col-xs-10">
             <div style="color:red">*indicates required field</div>
         </div>
     </div>
     <br>
-
-    <form class="form-horizontal" role="form" ng-show="istab(1)">
-      <div class="control-group">
-        <label class="control-label col-sm-2" placeholder="Password">Change your Password*:</label>
-        <div class="col-sm-10 left-inner-addon" >
-            <i class="fa fa-key"></i>
-            <input id="text" class="form-control" type="password" ng-model="password" placeholder="Keep your Account Safe!" required>
-        </div>
-    </div>
-    <div class="control-group">
-        <label class="control-label col-sm-2" placeholder="confirmpassword">Confirm new Password*:</label>
-        <div class="col-sm-10 left-inner-addon" >
-            <i class="fa fa-key"></i>
-            <input id="text" class="form-control" type="password" ng-model="confirmpassword" placeholder="Confirm Your Password" required>
-        </div>
-    </div>
-        <div class="control-group">
-        <div class="col-sm-offset-2 col-sm-10">
-            <button class="btn btn-primary form-control" ng-click="edituser()">Submit</button>
-        </div>
-    </div>
 </form>
+<form class="form-horizontal" role="form" ng-show="istab(3)">
+    <div class="control-group">
+        <label class="control-label col-xs-2" placeholder="Description">Change your Description:</label>
+        <div class="col-xs-10 left-inner-addon" >
+            <i class="fa fa-key"></i>
+            <input id="text" class="form-control" ng-model="user.info.description" placeholder="Write Something About Yourself!">
+        </div>
+    </div>
+    <label class="control-label col-xs-2" placeholder="ProPic">Change your Profile Picture: </label>
+    <div class="col-xs-10">
+        <div class="left-inner-addon">
+            <i class="fa fa-cloud-upload"></i>
+            <input type="file" class="form-control" filereader="user.info.photo">
+            <button class="btn btn-primary form-control" ng-click="editprofile()">Submit</button>
+                    <div class="spinner" ng-show="loading"> Please Wait...</div>
+    </div>
+
+</form>
+
 </div>
