@@ -70,10 +70,16 @@ angular.module('chronicle.user', [
 .controller('SettingsCtrl', function($scope, $state, apiService, user){
   $scope.user = user;
   console.log(user);
-  $state.edituser = function() {
+  $scope.edituser = function() {
     console.log($scope.user);
     apiService.edituser($scope.user);
     $state.go('app.chronicles');
+  };
+  $scope.settab = function(chosentab){
+    $scope.currenttab = chosentab;
+  };
+  $scope.istab = function(settab){
+    return $scope.currenttab == settab;
   };
 })
 

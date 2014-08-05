@@ -68,10 +68,10 @@ router.post('/edituser', function(req, res, next){
   //   target : 'event',
   //   date : d
   // });
-  // Chronicle.findOneAndUpdateQ({ events: { $elemMatch: { _id: req.event._id } } },
-  //   { $set: { 'events.$.metadata': req.event.metadata.toObject() } }).then(update.saveQ()).then(function() {
-  //   res.json(req.event);
-  // });
+  User.findOneAndUpdateQ({ _id : req.body.data._id},
+    { $set: { 'name': req.body.data.name } }).then(function() {
+    res.json(req.event);
+  });
 });
 
 //login a user
