@@ -44,7 +44,6 @@ angular.module('chronicle.chronicle', [
   console.log($scope.chronicle);
   $scope.events = events;
   console.log($scope.events.length);
-
   $scope.access = (($scope.user._id == $scope.chronicle.user) || ($scope.chronicle.edit.indexOf($scope.user._id) !== -1) || ($scope.chronicle.read.indexOf($scope.user._id) !== -1));
   if(!($scope.chronicle.public || $scope.access)){
     $state.go('app.chronicles');
@@ -56,12 +55,14 @@ angular.module('chronicle.chronicle', [
   }
 })
 
-.controller('ChronicleTopNavCtrl', function($scope, $state, apiService, chronicle, events) {
+.controller('ChronicleTopNavCtrl', function($scope, $state, apiService, chronicle, events, user) {
   $scope.chronicle = chronicle;
   $scope.events = events;
   $scope.event = events[0];
   $scope.$state = $state;
+  $scope.user = user;
 
+  $scope.editaccess = ($scope.user._id == $scope.chronicle.user) || ($scope.chronicle.edit.indexOf($scope.user._id) !== -1);
   $scope.delete = function() {
     apiService.chronicle(chronicle._id).delete().then(function(){
       $state.go('app.chronicles');

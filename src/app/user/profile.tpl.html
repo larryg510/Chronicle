@@ -4,16 +4,9 @@
     About me: {{user.info}}
   </div>
   <div class="row-fluid">
-    <div class="col-xs-6 chronicle-thumbnail">
-      <a ui-sref="^.newchronicle" style="text-decoration:none">
-        <div class="img-circular">
-          <div class="content-add">New<br>Chronicle</div>
-        </div>
-      </a>
-    </div>
     <div class="col-xs-6" ng-repeat="chronicle in chronicles">
         <a ui-sref="app.chronicle({chronicleId: chronicle._id})" style="text-decoration:none">
-          <div class="img-circular" hm-hold="settings(chronicle)"></div>
+          <div class="img-circular i-cbackground" style="background-image: url({{chronicle.photo}});"></div>
           <br>
         </a>
           <div class="content">{{chronicle.title}}<br></div>
