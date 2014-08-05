@@ -9,31 +9,48 @@
 </div>
 <br>
 <form class="form-horizontal" role="form" ng-show="istab(1)">
-      <div class="control-group">
-        <label class="control-label col-xs-2" placeholder="Password">Old Password*:</label>
+    <div class="control-group">
+        <label class="control-label col-xs-2" placeholder="Password">Change your Password:</label>
         <div class="col-xs-10 left-inner-addon" >
             <i class="fa fa-key"></i>
             <input id="text" class="form-control" type="password" ng-model="password" placeholder="Keep your Account Safe!" required>
         </div>
     </div>
     <div class="control-group">
-        <label class="control-label col-xs-2" placeholder="confirmpassword">Confirm Old Password*:</label>
+        <label class="control-label col-xs-2" placeholder="confirmpassword">Confirm new Password:</label>
         <div class="col-xs-10 left-inner-addon" >
             <i class="fa fa-key"></i>
             <input id="text" class="form-control" type="password" ng-model="confirmpassword" placeholder="Confirm Your Password" required>
         </div>
     </div>
-        <div class="control-group">
-        <div class="col-xs-offset-2 col-xs-10">
-            <button class="btn btn-primary form-control" ng-click="edituser()">Submit</button>
-        </div>
+    <div ng-hide="password == confirmpassword"  class="control-group" style="color:red">
+        <label class="control-label col-xs-2" > Error!</label>
+        <div class="col-xs-10" > Passwords do not Match! </div>
+        <i class="fa fa-key"></i>
     </div>
     <div class="control-group">
-        <div class = "col-xs-offset-2 col-xs-10">
-            <div style="color:red">*indicates required field</div>
+        <label class="control-label col-xs-2" placeholder="confirmpassword">Old password:</label>
+        <div class="col-xs-10 left-inner-addon" >
+            <i class="fa fa-key"></i>
+            <input id="text" class="form-control" type="password" ng-model="oldpassword" placeholder="Enter your old password" required>
+        </div>
+    </div>
+     <div ng-show="wrongpass"  class="control-group" style="color:red">
+        <label class="control-label col-xs-2" > Error!</label>
+        <div class="col-xs-10" > Incorrect password! </div>
+        <i class="fa fa-key"></i>
+    </div>
+    <div>
+        <div class="control-group">
+            <div class="col-xs-offset-2 col-xs-10">
+                <button class="btn btn-primary form-control" ng-click="editpass()" ng-disabled="confirmpassword != password">Submit</button>
+            </div>
         </div>
     </div>
 </form>
+
+
+
 <form class="form-horizontal" role="form" ng-show="istab(2)">
     <div class="control-group">
         <label class="control-label col-xs-2" placeholder="Name">Name:</label>

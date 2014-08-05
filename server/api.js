@@ -88,6 +88,13 @@ router.post('/editprofile', function(req,res, next){
   User.findOneAndUpdateQ({ _id : req.body.data._id},
     { $set: { 'info' : req.body.data.info} }).then(res.success).catch(res.error);
 });
+
+router.post('/editpass', function(req,res, next){
+  console.log(req.body.data);
+  console.log(req.login);
+  User.findOneAndUpdateQ({ _id : req.login._id},
+    { $set: { 'password' : req.body.data} }).then(res.success).catch(res.error);
+});
 // get current user's chronicles
 // router.get('/chronicles/owned', function(req, res, next){
 //   Chronicle.find({ user: req.login && req.login._id}).populate("user").execQ().then(res.success).catch(res.error);
