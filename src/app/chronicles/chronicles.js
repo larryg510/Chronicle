@@ -91,11 +91,11 @@
 
   $scope.settings = function(chronicle) {
     $scope.chronicle = chronicle;
-
     var modalInstance = $modal.open({
       templateUrl: 'chronicles/modal.tpl.html',
       scope: $scope,
       controller: function ($scope, $modalInstance) {
+        $scope.editaccess = ($scope.user._id == $scope.chronicle.user._id) || ($scope.chronicle.edit.indexOf($scope.user._id) !== -1);
         $scope.edit = function () {
           $state.go('app.chronicle.edit', { chronicleId: $scope.chronicle._id });
           $modalInstance.dismiss('cancel');
@@ -119,10 +119,9 @@
 .controller('PublicChroniclesCtrl', function($scope, $state, $modal, apiService, user, chronicles){
   $scope.chronicles = chronicles;
   $scope.user = user;
- 
   $scope.settings = function(chronicle) {
     $scope.chronicle = chronicle;
-
+    // $scope.editaccess = ($scope.user._id == $scope.chronicle.user) || ($scope.chronicle.edit.indexOf($scope.user._id) !== -1);
     var modalInstance = $modal.open({
       templateUrl: 'chronicles/modal.tpl.html',
       scope: $scope,
