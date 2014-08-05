@@ -85,6 +85,16 @@ angular.module('chronicle.user', [
   $scope.istab = function(settab){
     return $scope.currenttab == settab;
   };
+  $scope.editpass = function() {
+    // console.log($scope.password);
+    if ($scope.user.password == $scope.oldpassword){
+      return apiService.editpass($scope.password).then(function(){
+        $scope.user.password = $scope.password;
+        $state.go('app.chronicles');
+      });
+    }
+    else{$scope.wrongpass = true;}
+  };
 })
 
 /* .controller('ChronicleBottomNavCtrl', function($scope, $state, apiService, chronicle, events) {
