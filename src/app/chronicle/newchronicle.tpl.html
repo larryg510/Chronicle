@@ -35,10 +35,10 @@
       </div>
 
       <div class="form-group">
-        <button class="btn btn-primary form-control control-group" ng-click="create()">submit</button>
+        <button class="btn btn-primary form-control control-group" ng-disabled="button" ng-click="button=true; create()">submit</button>
       </div>
 
-      <div class="spinner" ng-show="loading">please wait...</div>
+      <div class="spinner" ng-show="button">please wait...</div>
       
     </form>
   </div>
