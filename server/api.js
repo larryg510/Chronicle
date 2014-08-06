@@ -47,10 +47,9 @@ router.post('/signup', function(req, res, next){
       username: req.body.data.username,
       password: req.body.data.password,
       email: req.body.data.email,
-      sessionId: req.sessionID
     });
 
-    user.saveQ().thenResolve(user).then(res.success).catch(res.error);
+    user.saveQ().then(res.success).catch(res.error);
   }
 });
 
