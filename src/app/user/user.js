@@ -53,7 +53,7 @@ angular.module('chronicle.user', [
   $scope.state = $state;
   $scope.user = user;
   if($state.is('app.user')){
-    $state.go(chronicles.length ? '^.chronicles' : 'app.newchronicle');
+    $state.go('app.chronicles');
   }
 })
 
