@@ -7,7 +7,7 @@ angular.module('chronicle.profile', [
 
 .config(function($stateProvider){
 	$stateProvider.state('app.user.profile', {
-		url: '/profile',
+		url: 'profile',
 		views: {
 			main: {
 				controller: 'ProfileCtrl',
