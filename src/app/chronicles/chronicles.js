@@ -97,7 +97,7 @@
       controller: function ($scope, $modalInstance) {
         $scope.editaccess = ($scope.user._id == $scope.chronicle.user._id) || ($scope.chronicle.edit.indexOf($scope.user._id) !== -1);
         $scope.edit = function () {
-          $state.go('app.chronicle.edit', { chronicleId: $scope.chronicle._id });
+          // $state.go('app.chronicle.edit', { chronicleId: $scope.chronicle._id });
           $modalInstance.dismiss('cancel');
         }; 
 
@@ -121,14 +121,13 @@
   $scope.user = user;
   $scope.settings = function(chronicle) {
     $scope.chronicle = chronicle;
-    // $scope.editaccess = ($scope.user._id == $scope.chronicle.user) || ($scope.chronicle.edit.indexOf($scope.user._id) !== -1);
     var modalInstance = $modal.open({
       templateUrl: 'chronicles/modal.tpl.html',
       scope: $scope,
       controller: function ($scope, $modalInstance) {
         $scope.edit = function () {
           $state.go('app.chronicle.edit', { chronicleId: $scope.chronicle._id });
-          $modalInstance.dismiss('cancel');
+          $modalInstance.close();
         }; 
 
         $scope.cancel = function () {
@@ -136,10 +135,8 @@
         };
 
         $scope.delete = function (chronicle) {
-          apiService.chronicle($scope.chronicle._id).delete().then(function(){
-            $state.go('app.public');
-            $modalInstance.dismiss('cancel');
-          });
+          apiService.chronicle($scope.chronicle._id).delete().then();
+          $modalInstance.dismiss('cancel');
         };
       }
     });

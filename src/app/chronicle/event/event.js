@@ -77,7 +77,6 @@ angular.module('chronicle.event', [
           var activeTab = $scope.getActiveTab();
 
         if(id){
-          console.log("NYABUTALES");
           apiService.chronicle(_chronicle._id).event(_event._id).newContent({
             format: activeTab.format,
             content: activeTab.content
@@ -114,12 +113,11 @@ angular.module('chronicle.event', [
   };
     $scope.deleteContent = function (id) {
     console.log(id.id);
-    for(var i = 0; i< $scope.event.content.length; i++){
+    for(var i = 0; i < $scope.event.content.length; i++){
       if($scope.event.content[i]._id == id.id)
       {
         if($scope.event.content[i].owner._id == $scope.user._id)
         {
-          console.log("wat");
           var index = i;
           $scope.event.content.splice(index, 1);
           apiService.chronicle($scope.chronicle._id).event($scope.event._id).deleteContent(id).then();

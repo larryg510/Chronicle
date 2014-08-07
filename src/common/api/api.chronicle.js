@@ -24,7 +24,7 @@
           return this.http.post('', info);
         },
         delete: function(){
-          return this.http.delete('/');
+          return this.http.delete('');
         },
         readaccess: function(addeduser){
           return this.http.post('/read', addeduser);
