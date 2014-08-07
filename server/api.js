@@ -63,7 +63,7 @@ router.post('/login', function(req, res, next){
   }
 });
 
-
+//account settings
 router.post('/edituser', function(req, res, next){
   //FIX THIS var d = new Date();
   console.log(req.body.data);
@@ -82,18 +82,27 @@ router.post('/edituser', function(req, res, next){
     { $set: { 'name': req.body.data.name, 'username': req.body.data.username, 'email': req.body.data.email} }).then(res.success).catch(res.error);
 });
 
+//profile settings
 router.post('/editprofile', function(req,res, next){
   console.log(req.body.data);
   User.findOneAndUpdateQ({ _id : req.body.data._id},
     { $set: { 'info' : req.body.data.info} }).then(res.success).catch(res.error);
 });
 
+//password settings
 router.post('/editpass', function(req,res, next){
   console.log(req.body.data);
   console.log(req.login);
   User.findOneAndUpdateQ({ _id : req.login._id},
     { $set: { 'password' : req.body.data} }).then(res.success).catch(res.error);
 });
+
+//Retrieve all users for Users page
+router.get('/retrieveusers', function(req,res,next){
+  console.log("hue");
+  User.findQ({}).then(res.success).catch(res.error);
+});
+
 // get current user's chronicles
 // router.get('/chronicles/owned', function(req, res, next){
 //   Chronicle.find({ user: req.login && req.login._id}).populate("user").execQ().then(res.success).catch(res.error);

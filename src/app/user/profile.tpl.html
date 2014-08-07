@@ -1,12 +1,13 @@
 <div class="container-fluid fill">
-<div class="content-main">{{user.name}}</div>
 <div class="editbutton">
   <a ui-sref="app.settings"><button class="btn btn-primary">Edit Profile</button></a>
 </div>
-<div class="img-profile i-cbackground" style="background-image: url({{user.info.photo}});"></div>
+<div class="content-main"> {{profileuser.name}} </div>
+<a ng-show="user._id == profileuser._id" ui-sref="app.settings"><button class="btn btn-primary"> Edit Profile </button></a> 
+<div class="img-profile i-cbackground" style="background-image: url({{profileuser.info.photo}});"></div>
   <br>
     <div class="content">
-    About me: {{user.info.description}}
+    About me: {{profileuser.info.description}}
   </div>
   <div class="row-fluid">
     <div class="col-xs-6" ng-repeat="chronicle in chronicles">

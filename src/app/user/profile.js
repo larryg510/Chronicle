@@ -7,7 +7,7 @@ angular.module('chronicle.profile', [
 
 .config(function($stateProvider){
 	$stateProvider.state('app.user.profile', {
-		url: 'profile',
+		url: '/profile/{profileuser}',
 		views: {
 			main: {
 				controller: 'ProfileCtrl',
@@ -20,14 +20,18 @@ angular.module('chronicle.profile', [
 		},
 		resolve: {
 			chronicles: function($stateParams, apiService){
-				return apiService.profilechronicles({userId: $stateParams.userId});
+				return apiService.profilechronicles({userId: $stateParams.profileuser});
+			},
+			profileuser: function($stateParams, apiService){
+				return apiService.user($stateParams.profileuser).info();
 			}
 		}
 	}); 
 })
 
-.controller('ProfileCtrl', function($scope, $state, apiService, user, chronicles){
+.controller('ProfileCtrl', function($scope, $state, apiService, user, profileuser, chronicles){
 	$scope.user = user;
+	$scope.profileuser = profileuser;
 	console.log($scope.user);
 	$scope.chronicles = chronicles;
 	console.log($scope.chronicles);

@@ -13,12 +13,13 @@
         <ul class="dropdown-menu" >
           <li ng-show="editaccess"><a ui-sref=".edit"><i class="fa fa-cog"></i>&nbsp;&nbsp;Edit this Chronicle</a></li>
           <li ng-show="editaccess"><a ng-click="delete()"><i class="fa fa-minus-circle"></i>&nbsp;&nbsp;Delete this Chronicle</a></li>
+          <li><a ui-sref="app.users">&nbsp;&nbsp;Users</li>
           <li ng-show="$state.is('app.chronicle.event') && editaccess"><a ng-click="deleteEvent()" ><i class="fa fa-minus-circle"></i>&nbsp;&nbsp;Delete this Event</a></li>
           <li><a ng-click="logout()">Log Out</a></li>
         </ul>
       </li>
     </ul>
-    <a ui-sref="app.user.profile({userId: user._id})" class="navbar-brand navbar-right" style="color:#FFFFFF; margin-left: 0px; ">
+    <a ui-sref="app.user.profile({userId: user._id, profileuser: user._id})" class="navbar-brand navbar-right" style="color:#FFFFFF; margin-left: 0px; ">
       <i class="fa fa-user"></i>
     </a>
     <a ui-sref="app.chronicles" class="navbar-brand navbar-right" style="color:#FFFFFF; margin-left: 0px;">

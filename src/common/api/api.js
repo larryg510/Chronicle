@@ -43,6 +43,9 @@ angular.module('chronicle.api', ['chronicle.api.user', 'chronicle.api.chronicle'
         },
         editpass: function(pass) {
           return http.post('editpass', pass);
+        },
+        retrieveusers: function(){
+          return http.get('retrieveusers');
         }
         // mychronicles: function(){
         //   return http.get('/chronicles/owned');
