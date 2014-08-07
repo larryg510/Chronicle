@@ -18,13 +18,18 @@
                     <input id="text" class="form-control" ng-model="event.metadata.names" placeholder="Who was present?">
                 </div>
             </div>
+            
             <div class="control-group">
                 <label class="control-label col-xs-2" placeholder="Where">Where:</label>
                 <div class="col-xs-10 left-inner-addon">
                     <i class="fa fa-map-marker"></i>
-                    <input id="text" class="form-control" ng-model="event.metadata.location" placeholder="Add a Location">
+                    <input id="text" class="form-control" ng-model="event.metadata.location" placeholder="Add a Location"typeahead="address for address in getLocation($viewValue)" typeahead-loading="loadingLocations">
+
                 </div>
             </div>
+
+
+
             <div class="control-group">
                 <label class="control-label col-xs-2" placeholder="Date">Date:</label>
                 <div class="col-xs-10 left-inner-addon">

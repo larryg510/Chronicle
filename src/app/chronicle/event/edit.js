@@ -48,7 +48,7 @@ angular.module('chronicle.event.edit', [
 })
 */
 
-.controller('EditEventCtrl', function($scope, $state, apiService, user) {
+.controller('EditEventCtrl', function($scope, $state, apiService, user, $http) {
   if($state.params.eventId){
     //todo search for event in chronicle VVVV ????? 
     /* for(var i = 0; i < $scope.chronicle.events.length; i++){
@@ -109,6 +109,22 @@ angular.module('chronicle.event.edit', [
   $scope.istab = function(settab){
     return $scope.currenttab == settab;
   };
+
+  $scope.getLocation = function(val) {
+    return $http.get('https://maps.googleapis.com/maps/api/geocode/json', {
+      params: {
+        address: val,
+        sensor: false
+      }
+    }).then(function(res){
+      var addresses = [];
+      angular.forEach(res.data.results, function(item){
+        addresses.push(item.formatted_address);
+      });
+      return addresses;
+    });
+  };
+
   $scope.modify = function(){
     $scope.loading = true;
     // Sent to apiService
