@@ -1,4 +1,5 @@
 <div class="container-fluid">
+  <div class="content-main" ng-hide="events.length"> This chronicle does not have any events yet! :3 </div>
   <ul ng-show="events.length" class="event-list">
     <li ng-repeat="event in events | orderBy:['metadata.date', 'metadata.time']" class="event row-fluid">
       <div style="text-align: center; font-size: large"> <a ui-sref="^.neweventyay({currentEvent: event._id})">+</a> </div>
@@ -10,6 +11,6 @@
           </div>
     </li>
   </ul>
-  <div style="text-align: center; font-size: large"><a ui-sref="^.neweventyay">+</a></div>
+  <div ng-show="events.length" style="text-align: center; font-size: large"><a ui-sref="^.neweventyay">+</a></div>
 </div>
 </div>

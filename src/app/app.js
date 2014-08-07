@@ -3,6 +3,7 @@ angular.module('chronicle', [
   'templates-common',
   'chronicle.api',
   'chronicle.user',
+  'chronicle.users',
   'chronicle.profile',
   'chronicle.chronicles',
   'chronicle.chronicle',
