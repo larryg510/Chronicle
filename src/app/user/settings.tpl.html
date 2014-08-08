@@ -1,55 +1,78 @@
-<div style="top: 50px; left:0; width:100%; z-index: 100; text-align: center;">
-  <button type="button" class="btn btn-primary" ng-class="{active: istab(1)}" ng-click="settab(1)" >Password</button>
-  <button type="button" class="btn btn-primary" ng-class="{active: istab(2)}" ng-click="settab(2)" >Account Settings </button>
-  <button type="button" class="btn btn-primary" ng-class="{active: istab(3)}" ng-click="settab(3)" >Profile Settings</button>
+<div style="margin-top: 50px; left:0; width:100%; z-index: 100; text-align: center;">
+  <button type="button" class="btn btn-primary" ng-class="{active: istab(1)}" ng-click="settab(1)" >password</button>
+  <button type="button" class="btn btn-primary" ng-class="{active: istab(2)}" ng-click="settab(2)" >account</button>
+  <button type="button" class="btn btn-primary" ng-class="{active: istab(3)}" ng-click="settab(3)" >profile</button>
 </div>
-<div class="container-fluid">
-<div class="text-center">
-    <h1 class="control-label"> <font color=#0099FF> Edit your information </font> </h1>
+
+<div class="container-fluid fill">
+  <div class="absolute-center" style="margin-top: 100px;">
+
+    <div ng-hide="istab(1) || istab(2) || istab(3)">
+      <div class="form-group col-xs-8 col-xs-offset-2 col-sm-4 col-sm-offset-4">
+        <h1 class="text-center"> <font color=#33CCFF size=200pt>edit account and profile settings</font></h1>
+      </div>
+    </div>
+
+    <form ng-show="istab(1)" class="form-horizontal col-xs-8 col-xs-offset-2 col-sm-4 col-sm-offset-4" role="form">
+      <div class="form-group">
+        <input id="text" class="form-control control-group" type="password" ng-model="password" placeholder="new password" required>
+      </div>
+      <div class="form-group">
+        <input id="text" class="form-control control-group" type="password" ng-model="confirmpassword" placeholder="confirm new password" required>
+        <div ng-hide="password == confirmpassword" class="control-group" style="color:red">      
+          <div class="control-label" >error: passwords do not match.</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <input id="text" class="form-control control-group" type="password" ng-model="oldpassword" placeholder="enter old password" required>
+        <div ng-show="wrongpass" class="control-group" style="color:red">      
+          <div class="control-label" >error: incorrect password.</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <button class="btn btn-primary form-control" ng-click="editpass()" ng-disabled="confirmpassword != password">submit</button>
+      </div>
+    </form>
+
+    <form ng-show="istab(2)" class="form-horizontal col-xs-8 col-xs-offset-2 col-sm-4 col-sm-offset-4" role="form">
+      <div class="form-group">
+        <input id="text" class="form-control control-group" ng-model="user.name" placeholder="full name" required>
+      </div>
+      <div class="form-group">
+        <input id="text" class="form-control control-group" ng-model="user.username" placeholder="username" required>
+      </div>
+      <div class="form-group">
+        <input id="text" class="form-control control-group" ng-model="user.email" placeholder="e-mail address" required>
+      </div>
+      <div class="form-group">
+        <input id="text" class="form-control control-group" type="password" ng-model="password" placeholder="enter your password" required>
+        <div ng-show="passwrong" class="control-group" style="color:red">      
+          <div class="control-label" >error: incorrect password.</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <button class="btn btn-primary form-control" ng-click="edituser()">submit</button>
+      </div>
+    </form>
+
+    <form ng-show="istab(3)" class="form-horizontal col-xs-8 col-xs-offset-2 col-sm-4 col-sm-offset-4" role="form">
+      <div class="form-group">
+        <input id="text" class="form-control control-group" ng-model="user.info.description" placeholder="write something about yourself">
+      </div>
+      <div class="form-group">
+        <input type="file" class="form-control" filereader="user.info.photo">
+      </div>
+      <div class="form-group">
+        <button class="btn btn-primary form-control" ng-click="editprofile()">submit</button>
+        <div class="spinner" ng-show="loading">please wait...</div>
+      </div>
+    </form>
+
+  </div>
 </div>
-<br>
-<form class="form-horizontal" role="form" ng-show="istab(1)">
-    <div class="control-group">
-        <label class="control-label col-xs-2" placeholder="Password">New:</label>
-        <div class="col-xs-10 left-inner-addon" >
-            <i class="fa fa-key"></i>
-            <input id="text" class="form-control" type="password" ng-model="password" placeholder="Keep your Account Safe!" required>
-        </div>
-    </div>
-    <div class="control-group">
-        <label class="control-label col-xs-2" placeholder="confirmpassword">Reenter:</label>
-        <div class="col-xs-10 left-inner-addon" >
-            <i class="fa fa-key"></i>
-            <input id="text" class="form-control" type="password" ng-model="confirmpassword" placeholder="Confirm Your Password" required>
-        </div>
-    </div>
-    <div ng-hide="password == confirmpassword"  class="control-group" style="color:red">
-        <label class="control-label col-xs-2" > Error!</label>
-        <div class="col-xs-10" > Passwords do not Match! </div>
-        <i class="fa fa-key"></i>
-    </div>
-    <div class="control-group">
-        <label class="control-label col-xs-2" placeholder="confirmpassword">Old:</label>
-        <div class="col-xs-10 left-inner-addon" >
-            <i class="fa fa-key"></i>
-            <input id="text" class="form-control" type="password" ng-model="oldpassword" placeholder="Enter your old password" required>
-        </div>
-    </div>
-     <div ng-show="wrongpass"  class="control-group" style="color:red">
-        <label class="control-label col-xs-2" > Error!</label>
-        <div class="col-xs-10" > Incorrect password! </div>
-        <i class="fa fa-key"></i>
-    </div>
-    <div>
-        <div class="control-group">
-            <div class="col-xs-offset-2 col-xs-10">
-                <button class="btn btn-primary form-control" ng-click="editpass()" ng-disabled="confirmpassword != password">Submit</button>
-            </div>
-        </div>
-    </div>
-</form>
 
 
+<!-- div class="container-fluid">
 
 <form class="form-horizontal" role="form" ng-show="istab(2)">
     <div class="control-group">
@@ -120,4 +143,4 @@
                     <div class="spinner" ng-show="loading"> Please Wait...</div>
     </div>
 </form>
-</div>
+</div> -->
