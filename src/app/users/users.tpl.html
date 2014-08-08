@@ -3,7 +3,7 @@
   <div class="row-fluid">
     <div class="col-xs-6" ng-repeat="profileuser in users">
         <a ui-sref="app.user.profile({userId: user._id, profileuser: profileuser._id})" style="text-decoration:none">
-          <div class="img-circular" hm-hold="settings(chronicle)" style="background-image: url({{profileuser.info.photo}});"></div>
+          <div class="img-circular i-cbackground" hm-hold="settings(chronicle)" style="background-image: url({{profileuser.info.photo}});"></div>
           <br>
         </a>
           <div class="content">{{profileuser.name}}<br></div>

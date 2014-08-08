@@ -56,7 +56,7 @@ router.post('/signup', function(req, res, next){
 //login a user
 router.post('/login', function(req, res, next){
   if(req.login){
-    return res.success(req.login.toOBject()); //pls why is this happening
+    return res.success(req.login.toObject()); //pls why is this happening
   } else {
     User.findOneAndUpdateQ({'username' : req.body.data.username, 'password': req.body.data.password},
       {$set: {'sessionId': req.sessionID}}).then(res.success).catch(res.error);
