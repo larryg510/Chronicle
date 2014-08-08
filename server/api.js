@@ -38,10 +38,10 @@ router.post('*', function(req, res, next){
 // creates sessionID for new user
 router.post('/signup', function(req, res, next){
   if(req.login){
-    console.log("hi");
+    //console.log("hi");
     return res.success(req.login.toObject()); //should never really happen
   } else {
-    console.log("miew");
+    //console.log("miew");
     var user = new User({
       name: req.body.data.name,
       username: req.body.data.username,
@@ -99,7 +99,7 @@ router.post('/editpass', function(req,res, next){
 
 //Retrieve all users for Users page
 router.get('/retrieveusers', function(req,res,next){
-  console.log("hue");
+  //console.log("hue");
   User.findQ({}).then(res.success).catch(res.error);
 });
 
@@ -170,14 +170,14 @@ router.get('/public', function(req, res, next){
 
 //get all chronicles for profile
 router.get('/profilechronicles', function(req, res, next){
-  console.log("Hi");
+  //console.log("Hi");
   //console.log(req.query.userId);
   Chronicle.findQ({$and: [{user: req.query.userId}, {public: true}]}).then(res.success).catch(res.error);
 });
 
 //get all updaates
 router.get('/updates', function(req, res, next){
-  console.log('updates');
+  //console.log('updates');
    Chronicle.find({ $or: [{ read: req.login._id }, { edit: req.login._id }, {user : req.login._id}] }).select('_id').lean().execQ().then(function(chronicles){
     return Update.find({ chronicle: { $in: chronicles } }).populate("user chronicle").execQ();
   }).then(res.success).catch(res.error);
@@ -249,7 +249,7 @@ chronicleRouter.post('/events', function(req, res, next){
         break;
       }
     }
-    console.log(index);
+    //console.log(index);
     req.chronicle.events.splice(index , 0, event);
     event = req.chronicle.events[index];
     var update = new Update({
@@ -280,7 +280,7 @@ chronicleRouter.post('/events', function(req, res, next){
     var index = req.chronicle.events.length;
     req.chronicle.events.push({metadata: req.body.data});
     event = req.chronicle.events[index];
-    console.log(event);
+    //console.log(event);
     var update = new Update({
       user : req.login._id,
       chronicle : req.chronicle._id,
@@ -396,13 +396,13 @@ chronicleRouter.delete('/event/:event/content', function(req, res, next){
 
 //delete a chronicle 
 chronicleRouter.delete('/', function(req, res, next){
-  console.log("omgmiew");
+  //console.log("omgmiew");
   Chronicle.findByIdAndRemoveQ(req.chronicle._id).then(res.success).catch(res.error);
 });
 
 //delete an event 
 chronicleRouter.delete('/event/:event', function(req, res, next){
-  console.log("delete event");  
+  //console.log("delete event");  
   var d = new Date();
   var update = new Update({
     user : req.login._id,
