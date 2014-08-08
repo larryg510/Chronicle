@@ -139,28 +139,32 @@ angular.module('chronicle.event', [
 
 })
 
-.controller('BottomNavCtrl', function($scope, $state, apiService, chronicle, events) {
+.controller('BottomNavCtrl', function($scope, $state, $filter, apiService, chronicle, events) {
+  var orderBy = $filter('orderBy');
   $scope.chronicle = chronicle;
   $scope.events = events;
+  console.log($scope.events);
   $scope.$state = $state;
+  $scope.sortedevents = orderBy($scope.events, ['metadata.date','metadata.time']);
+  console.log($scope.sortedevents);
 
-  $scope.events.forEach(function(event){
+  $scope.sortedevents.forEach(function(event){
     if(event._id == $state.params.eventId) {
       $scope.event = event;
     }
   });
 
-  $scope.currentindex = events.indexOf($scope.event);
+  $scope.currentindex = $scope.sortedevents.indexOf($scope.event);
 
   if ($scope.currentindex !== 0) {
-    $scope.prevevent = $scope.events[$scope.currentindex - 1];
+    $scope.prevevent = $scope.sortedevents[$scope.currentindex - 1];
   }
   else {
     $scope.first = true;
   }
 
-  if ($scope.events[$scope.currentindex + 1] !== undefined) {
-    $scope.nextevent = $scope.events[$scope.currentindex + 1];
+  if ($scope.sortedevents[$scope.currentindex + 1] !== undefined) {
+    $scope.nextevent = $scope.sortedevents[$scope.currentindex + 1];
   }
   else {
     $scope.last = true;
