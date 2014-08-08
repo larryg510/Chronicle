@@ -66,7 +66,7 @@ router.post('/login', function(req, res, next){
 //account settings
 router.post('/edituser', function(req, res, next){
   //FIX THIS var d = new Date();
-  console.log(req.body.data);
+  //console.log(req.body.data);
   // var update = new Update({
   //   user : req.login._id,
   //   chronicle : req.chronicle._id,
@@ -84,15 +84,15 @@ router.post('/edituser', function(req, res, next){
 
 //profile settings
 router.post('/editprofile', function(req,res, next){
-  console.log(req.body.data);
+  //console.log(req.body.data);
   User.findOneAndUpdateQ({ _id : req.body.data._id},
     { $set: { 'info' : req.body.data.info} }).then(res.success).catch(res.error);
 });
 
 //password settings
 router.post('/editpass', function(req,res, next){
-  console.log(req.body.data);
-  console.log(req.login);
+  //console.log(req.body.data);
+  //console.log(req.login);
   User.findOneAndUpdateQ({ _id : req.login._id},
     { $set: { 'password' : req.body.data} }).then(res.success).catch(res.error);
 });
@@ -153,7 +153,7 @@ router.post('/chronicles', function(req, res, next){
 
 //get all users for typeahead
 router.get('/users', function(req, res, next){
-  console.log('search', req.query.search);
+  //console.log('search', req.query.search);
   var query = req.query.search ? { name: { $regex: new RegExp('.*' +  req.query.search  + '.*', 'i') } } : {};
   User.find(query).limit(50).select("name _id").lean().execQ().then(res.success).catch(res.error);
 });
@@ -171,7 +171,7 @@ router.get('/public', function(req, res, next){
 //get all chronicles for profile
 router.get('/profilechronicles', function(req, res, next){
   console.log("Hi");
-  console.log(req.query.userId);
+  //console.log(req.query.userId);
   Chronicle.findQ({$and: [{user: req.query.userId}, {public: true}]}).then(res.success).catch(res.error);
 });
 
@@ -236,7 +236,8 @@ chronicleRouter.post('/', function(req, res, next){
 
 // push new event to requested chronicle
 chronicleRouter.post('/events', function(req, res, next){
-  var event = { metadata: req.body.data };  console.log(req.query.before);
+  var event = { metadata: req.body.data };  
+  //console.log(req.query.before);
   var d = new Date();
 
   if(req.query.before){
@@ -352,7 +353,7 @@ chronicleRouter.post('/event/:event/content', function(req, res, next){
       target: 'event',
       date : d
     });
-    console.log(update);
+    //console.log(update);
     Q.ninvoke(Chronicle.collection, 'update', {events: {$elemMatch: {_id: req.event._id} } },
       { $push: {'events.$.content' : { $each: [content], $position: index} } }).then(function(){
         var response = content;
@@ -388,7 +389,7 @@ chronicleRouter.post('/event/:event/content', function(req, res, next){
 
 //delete content
 chronicleRouter.delete('/event/:event/content', function(req, res, next){
-  console.log(req.query.id);
+  //console.log(req.query.id);
   Chronicle.findOneAndUpdateQ({events: {$elemMatch: {_id: req.event._id} } }, 
     { $pull: { 'events.$.content': { _id: req.query.id } } }).then(res.success).catch(res.error)
 });
@@ -420,8 +421,8 @@ chronicleRouter.delete('/event/:event', function(req, res, next){
 
 //add user to read array
 chronicleRouter.post('/read', function(req, res, next){
-  console.log(req.body.data._id);
-  console.log(req.chronicle._id);
+  //console.log(req.body.data._id);
+  //console.log(req.chronicle._id);
   Chronicle.findByIdAndUpdateQ(req.chronicle._id,
     {$addToSet: {'read': req.body.data._id} }).then(res.success).catch(res.error);
   /*
@@ -432,7 +433,7 @@ chronicleRouter.post('/read', function(req, res, next){
 
 //add user to edit array
 chronicleRouter.post('/edit', function(req, res, next){
-  console. log(req.body.data);
+  //console. log(req.body.data);
   Chronicle.findByIdAndUpdateQ(req.chronicle._id,
     {$addToSet: {'edit': req.body.data._id } }).then(res.success).catch(res.error);
 });

@@ -1,9 +1,8 @@
 <div class="container-fluid fill">
-<div class="editbutton">
-  <a ui-sref="app.settings"><button class="btn btn-primary">Edit Profile</button></a>
-</div>
 <div class="content-main"> {{profileuser.name}} </div>
-<a ng-show="user._id == profileuser._id" ui-sref="app.settings"><button class="btn btn-primary"> Edit Profile </button></a> 
+<div class="editbutton">
+<a ng-show="user._id == profileuser._id" ui-sref="app.settings"><button class="btn btn-primary"> Edit Profile </button></a>
+</div>
 <div class="img-profile i-cbackground" style="background-image: url({{profileuser.info.photo}});"></div>
   <br>
     <div class="content">
