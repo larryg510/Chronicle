@@ -12,7 +12,6 @@
         },
         newContent: function(content, id){
           if(content){
-            console.log(id);
             return this.http.post('/content' + (id ? '?id=' + id : ''), content);
           }
           else{

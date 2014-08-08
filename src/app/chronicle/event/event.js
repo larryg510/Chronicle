@@ -79,7 +79,8 @@ angular.module('chronicle.event', [
         if(id){
           apiService.chronicle(_chronicle._id).event(_event._id).newContent({
             format: activeTab.format,
-            content: activeTab.content
+            content: activeTab.content,
+            speaker: activeTab.speaker
           }, id.id).then(function(content){
             //apiService.chronicle(_chronicle._id).event(_event._id).trackupdates({format: activeTab.format, content: activeTab.content}).then(function(){});
             for(var i = 0; i < _event.content.length; i++){
@@ -95,7 +96,8 @@ angular.module('chronicle.event', [
         else{
           apiService.chronicle(_chronicle._id).event(_event._id).newContent({
             format: activeTab.format,
-            content: activeTab.content
+            content: activeTab.content,
+            speaker: activeTab.speaker
           }).then(function(content){
             //apiService.chronicle(_chronicle._id).event(_event._id).trackupdates({format: activeTab.format, content: activeTab.content}).then(function(){});
             _event.content.push(content);

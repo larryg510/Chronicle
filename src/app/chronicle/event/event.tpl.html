@@ -27,8 +27,8 @@
         <div class="text" ng-show="content.format === 'text'">
           <br><div>{{content.content}}</div>                                                                                                
         </div>
-        <div class="quote" ng-show="content.format === 'quote'">
-          <br><div>"{{content.content}}"</div>
+        <div ng-show="content.format === 'quote'">
+          <br><div class="quote">"{{content.content}}"</div><div class="speaker">- {{content.speaker}}</div>
         </div>
         <div class="photo" ng-show="content.format === 'image'">
           <br><img src="{{content.content}}" style="max-width:100%"/>

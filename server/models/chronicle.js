@@ -7,7 +7,7 @@ var express     = require('express')
 var ContentSchema = new Schema({
  format: String,
  content: String,
- //: String
+ speaker: String,
  owner: { type: Schema.Types.ObjectId, ref: 'User'}
 });
 
