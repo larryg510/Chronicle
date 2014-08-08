@@ -50,8 +50,9 @@ angular.module('chronicle.login', [
     return apiService.signup(account).then(function(user){
       console.log("halp");
       return apiService.login(account).then(function(user){
+        $scope.button = false;
         $state.go($state.current,{}, {reload: true});
       });
-    }).catch(function(results){$scope.unerror= true;});
+    }).catch(function(results){$scope.unerror= true; $scope.button =false;});
   };
 });
