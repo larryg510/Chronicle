@@ -75,7 +75,7 @@ angular.module('chronicle.user', [
       $scope.passwrong = false;
       return apiService.edituser($scope.user).then(function(){
          $state.go('app.chronicles');
-      }).catch(function(results){$scope.unerror= true;});
+      }).catch(function(results){$scope.unerror= true; $scope.button=false;});
     }
     else{
       $scope.passwrong = true;
@@ -97,7 +97,7 @@ angular.module('chronicle.user', [
       return apiService.editpass($scope.password).then(function(){
         $scope.user.password = $scope.password;
         $state.go('app.chronicles');
-      });
+      }).catch(function(results){$scope.unerror= true; $scope.button=false;});
     }
     else{$scope.wrongpass = true;}
   };

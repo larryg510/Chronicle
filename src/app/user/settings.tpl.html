@@ -30,7 +30,7 @@
         </div>
       </div>
       <div class="form-group">
-        <button class="btn btn-primary form-control" ng-click="editpass()" ng-disabled="confirmpassword != password">submit</button>
+        <button class="btn btn-primary form-control" ng-click="button = true; editpass()" ng-disabled="confirmpassword != password || button">submit</button>
       </div>
     </form>
 
@@ -51,7 +51,7 @@
         </div>
       </div>
       <div class="form-group">
-        <button class="btn btn-primary form-control" ng-click="edituser()">submit</button>
+        <button class="btn btn-primary form-control" ng-disabled="button" ng-click="button=true; edituser()">submit</button>
       </div>
     </form>
 
@@ -63,7 +63,7 @@
         <input type="file" class="form-control" filereader="user.info.photo">
       </div>
       <div class="form-group">
-        <button class="btn btn-primary form-control" ng-click="editprofile()">submit</button>
+        <button class="btn btn-primary form-control" ng-disabled="button"ng-click="button = true; editprofile()">submit</button>
         <div class="spinner" ng-show="loading">please wait...</div>
       </div>
     </form>
