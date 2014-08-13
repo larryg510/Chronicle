@@ -41,7 +41,7 @@
       <a ui-sref="app.chronicle({chronicleId: chronicle._id})" style="text-decoration:none">
         <div class="img-circular i-cbackground" hm-hold="settings(chronicle)" style="background-image: url({{chronicle.photo}});"></div><br>
       </a>
-      <div class="content">{{chronicle.title}}<br>Following: <small>{{chronicle.user.name}}</small></div>
+      <div class="content">{{chronicle.title}}<br>Suscribed: <small>{{chronicle.user.name}}</small></div>
     </div>
   </ul>
   <ul ng-show="publicchronicles.length && istab(3)" class="event-list">

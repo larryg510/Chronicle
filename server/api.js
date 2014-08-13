@@ -136,6 +136,28 @@ router.get('/followingchronicles', function(req, res, next){
 router.get('/isfollowing', function(req, res, next){
   Vector.findOneQ({origin: req.login._id, destination: req.query.profile}).then(res.success).catch(res.error);
 });
+
+//Get Users that You are following
+router.get('/usersfollowing', function(req, res, next){
+  Vector.find({origin: req.login._id}).select('destination').lean().execQ().then(function(vectors){
+    var users = [];
+    for(var i = 0; i< vectors.length; i++){
+      users[i] = vectors[i].destination;
+    }
+    return User.find({_id: {$in: users}}).execQ();
+  }).then(res.success).catch(res.error);
+});
+//Get Users that are following you
+router.get('/usersfollowed', function(req, res, next){
+  Vector.find({destination: req.login._id}).select('origin').lean().execQ().then(function(vectors){
+    var users = [];
+    for(var i = 0; i< vectors.length;i++){
+      users[i] = vectors[i].origin;
+    }
+    return User.find({_id: {$in: users}}).execQ();
+  }).then(res.success).catch(res.error);
+});
+
 // get current user's chronicles
 // router.get('/chronicles/owned', function(req, res, next){
 //   Chronicle.find({ user: req.login && req.login._id}).populate("user").execQ().then(res.success).catch(res.error);

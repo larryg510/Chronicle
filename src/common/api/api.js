@@ -58,6 +58,12 @@ angular.module('chronicle.api', ['chronicle.api.user', 'chronicle.api.chronicle'
         },
         isfollowing: function(profile){
           return http.get('isfollowing', profile);
+        },
+        usersfollowing: function(){
+          return http.get('usersfollowing');
+        },
+        usersfollowed: function(){
+          return http.get('usersfollowed');
         }
         // mychronicles: function(){
         //   return http.get('/chronicles/owned');

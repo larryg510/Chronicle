@@ -5,6 +5,7 @@ angular.module('chronicle', [
   'chronicle.user',
   'chronicle.users',
   'chronicle.profile',
+  'chronicle.follow',
   'chronicle.chronicles',
   'chronicle.chronicle',
   'chronicle.login',
