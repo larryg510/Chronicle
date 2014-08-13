@@ -108,8 +108,18 @@ router.get('/retrieveusers', function(req,res,next){
 router.post('/follow', function(req, res, next){
   // User.findOneAndUpdateQ({_id: req.login._id},
   //   {$push: {'following': req.body.data}}).then(res.success).catch(res.error);
+  var d = new Date();
   var vector = new Vector({origin: req.login._id, relation: 'follow', destination: req.body.data});
-  vector.saveQ().then(res.success).catch(res.error);
+  var update = new Update({
+    user : req.login._id,
+    usertwo: req.body.data,
+    object : 'obj',
+    verb : 'follow',
+    actor : 'user',
+    date : d
+  });
+  console.log(update);
+  vector.saveQ().then(update.saveQ()).then(res.success).catch(res.error);
 });
 
 //remove followers
@@ -236,6 +246,10 @@ router.get('/updates', function(req, res, next){
    Chronicle.find({ $or: [{ read: req.login._id }, { edit: req.login._id }, {user : req.login._id}] }).select('_id').lean().execQ().then(function(chronicles){
     return Update.find({ chronicle: { $in: chronicles } }).populate("user chronicle").execQ();
   }).then(res.success).catch(res.error);
+});
+
+router.get('/userupdates', function(req, res, next){
+  return Update.find( {usertwo : req.login._id}).populate("user usertwo").execQ().then(res.success).catch(res.error);
 });
 
 //=====Chronicle Routes===========================================================================

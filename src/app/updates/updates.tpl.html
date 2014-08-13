@@ -2,7 +2,7 @@
   <div class="content-main">Updates</div><br>
   <div class="col-lg-6 col-lg-offset-3">
     <ul ng-show="myupdates.length" class="event-list">
-      <li ng-repeat="update in myupdates">
+      <li ng-repeat="update in myupdates | orderBy: 'date'">
         <a ui-sref="app.chronicle({chronicleId: update.chronicle._id})" ng-if="update.target == 'chronicle'">
           <div class="content-update" ng-if="update.verb == 'add'">
             {{update.user.name}} added the chronicle "{{update.chronicle.title}}" {{update.date}}
@@ -27,6 +27,9 @@
           <div class="content-update" ng-if="update.verb == 'addcontent' && update.obj.format == 'quote'">
             {{update.user.name}} added a quote to the event "{{update.obj.title}}" in the chronicle "{{update.chronicle.title}}" {{update.date}}
           </div> 
+        </a>
+        <a ui-sref="app.user.profile({userId: user._id, profileuser: update.usertwo._id})" ng-if="update.verb == 'follow'">
+            <div class="content-update" > User "{{update.usertwo.name}}" followed you! {{update.date}}</div>
         </a>
         <br>  
       </li> 

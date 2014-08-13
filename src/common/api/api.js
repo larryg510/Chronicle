@@ -29,6 +29,9 @@ angular.module('chronicle.api', ['chronicle.api.user', 'chronicle.api.chronicle'
         updates : function(){
           return http.get('updates');
         },
+        userupdates: function(){
+          return http.get('userupdates');
+        },
         logout : function(user) {
           return http.post('logout', user);
         },
