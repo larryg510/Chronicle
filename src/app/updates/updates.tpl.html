@@ -29,7 +29,7 @@
           </div> 
         </a>
         <a ui-sref="app.user.profile({userId: user._id, profileuser: update.usertwo._id})" ng-if="update.verb == 'follow'">
-            <div class="content-update" > User "{{update.usertwo.name}}" followed you! {{update.date}}</div>
+            <div class="content-update" > User "{{update.user.name}}" followed you! {{update.date}}</div>
         </a>
         <br>  
       </li> 
