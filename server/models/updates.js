@@ -6,6 +6,7 @@ var express     = require('express')
 
 var UpdateSchema = new Schema({
   user: { type: Schema.Types.ObjectId, ref: 'User'},
+  usertwo: { type: Schema.Types.ObjectId, ref: 'User'},
   chronicle: {type: Schema.Types.ObjectId, ref: 'Chronicle'},
   event: { type: Schema.Types.ObjectId, ref: 'Event'},
   obj: Schema.Types.Mixed,

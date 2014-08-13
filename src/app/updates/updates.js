@@ -20,6 +20,9 @@ angular.module('chronicle.updates', [
 		resolve: {
 			updates: function($stateParams, apiService){
 				return apiService.updates();
+			},
+			userupdates: function($stateParams, apiService){
+				return apiService.userupdates();
 			}
 		}
 
@@ -27,19 +30,21 @@ angular.module('chronicle.updates', [
 
 })
 
-.controller('UpdatesCtrl', function($scope, $state, apiService, user, updates){
+.controller('UpdatesCtrl', function($scope, $state, apiService, user, userupdates, updates){
 	$scope.user = user;
 	$scope.updates = updates;
-	console.log($scope.updates);
-	$scope.myupdates = updates.filter(function(update){
+	//console.log($scope.updates);
+	console.log(userupdates);
+
+	$scope.myupdates = updates.concat(userupdates).filter(function(update){
 		return $scope.user._id !== update.user._id && update.read.indexOf($scope.user._id) == -1;
 	});
 	toolongago = function(element){
 		return (moment() < moment(element.date).add('days', 7));
 	};
 	$scope.myupdates = $scope.myupdates.filter(toolongago);
-	console.log("now");
-	console.log($scope.myupdates);
+	//console.log("now");
+	//console.log($scope.myupdates);
 
 	for(var i in $scope.myupdates){
 		//console.log(moment($scope.myupdates[i].date) > moment($scope.myupdates[i].date).subtract('days', 3));
