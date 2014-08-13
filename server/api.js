@@ -381,9 +381,6 @@ chronicleRouter.post('/event/:event/content', function(req, res, next){
       response.owner = req.login.toObject();
       res.json(response);
      }).then(update.saveQ()).catch(console.log);
-
-  //req.chronicle.event.updateQ({ $push: { content: content } }).then(function(){
-  
   }
 });
 
