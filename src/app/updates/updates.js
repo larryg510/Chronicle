@@ -34,10 +34,18 @@ angular.module('chronicle.updates', [
 	$scope.myupdates = updates.filter(function(update){
 		return $scope.user._id !== update.user._id && update.read.indexOf($scope.user._id) == -1;
 	});
-	for(var i in $scope.myupdates){
-		$scope.myupdates[i].date = moment($scope.myupdates[i].date).fromNow();	
-	}
+	toolongago = function(element){
+		return (moment() < moment(element.date).add('days', 7));
+	};
+	$scope.myupdates = $scope.myupdates.filter(toolongago);
+	console.log("now");
 	console.log($scope.myupdates);
+
+	for(var i in $scope.myupdates){
+		//console.log(moment($scope.myupdates[i].date) > moment($scope.myupdates[i].date).subtract('days', 3));
+		$scope.myupdates[i].date = moment($scope.myupdates[i].date).fromNow();
+
+	}
 
 })
 
