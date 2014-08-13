@@ -3,6 +3,7 @@ var express   = require('express')
   , Chronicle = require('./models/chronicle')
   , User      = require('./models/user')
   , Update    = require('./models/updates')
+  , Vector    = require('./models/vector')
   , Q         = require('q')
 ;
 
@@ -103,6 +104,35 @@ router.get('/retrieveusers', function(req,res,next){
   User.findQ({}).then(res.success).catch(res.error);
 });
 
+//Add followers
+router.post('/follow', function(req, res, next){
+  // User.findOneAndUpdateQ({_id: req.login._id},
+  //   {$push: {'following': req.body.data}}).then(res.success).catch(res.error);
+  var vector = new Vector({origin: req.login._id, relation: 'follow', destination: req.body.data});
+  vector.saveQ().then(res.success).catch(res.error);
+});
+
+//remove followers
+router.post('/unfollow', function(req,res, next){
+  // User.findOneAndUpdateQ({_id: req.login._id},
+    // {$pull: {'following': req.body.data}}).then(res.success).catch(res.error);
+  Vector.find({origin: req.login._id, destination: req.body.data}).remove().execQ().then(res.success).catch(res.error);
+});
+
+router.get('/followingchronicles', function(req, res, next){
+  console.log('omgmiew');
+  Vector.find({origin: req.login._id}).select('destination').execQ().then(function(vectors){
+    return Chronicle.find({user: {$in: vectors}}).populate("user").execQ();
+  }).then(res.success).catch(res.error);
+  //  Chronicle.find({ $or: [{ read: req.login._id }, { edit: req.login._id }, {user : req.login._id}] }).select('_id').lean().execQ().then(function(chronicles){
+  //   return Update.find({ chronicle: { $in: chronicles } }).populate("user chronicle").execQ();
+  // }).then(res.success).catch(res.error);
+});
+
+//Check if you are following by returning connection
+router.get('/isfollowing', function(req, res, next){
+  Vector.findOneQ({origin: req.login._id, destination: req.query.profile}).then(res.success).catch(res.error);
+});
 // get current user's chronicles
 // router.get('/chronicles/owned', function(req, res, next){
 //   Chronicle.find({ user: req.login && req.login._id}).populate("user").execQ().then(res.success).catch(res.error);

@@ -11,6 +11,7 @@ var UserSchema = new Schema({
   email:      String,
   info:       {photo: String, description: String},
   sessionId:  String,
+  following:  [{type: Schema.Types.ObjectId, ref: 'User'}],
   chronicles: [{type: Schema.Types.ObjectId,  ref: 'Chronicle'}],
   
 }, {

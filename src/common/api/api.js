@@ -46,6 +46,18 @@ angular.module('chronicle.api', ['chronicle.api.user', 'chronicle.api.chronicle'
         },
         retrieveusers: function(){
           return http.get('retrieveusers');
+        },
+        follow: function(user){
+          return http.post('follow', user);
+        },
+        unfollow: function(user){
+          return http.post('unfollow', user);
+        },
+        followingchronicles: function(){
+          return http.get('followingchronicles');
+        },
+        isfollowing: function(profile){
+          return http.get('isfollowing', profile);
         }
         // mychronicles: function(){
         //   return http.get('/chronicles/owned');

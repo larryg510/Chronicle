@@ -24,17 +24,36 @@ angular.module('chronicle.profile', [
 			},
 			profileuser: function($stateParams, apiService){
 				return apiService.user($stateParams.profileuser).info();
+			},
+			isfollowing: function($stateParams, apiService){
+				return apiService.isfollowing({profile: $stateParams.profileuser});
 			}
 		}
 	}); 
 })
 
-.controller('ProfileCtrl', function($scope, $state, apiService, user, profileuser, chronicles){
+.controller('ProfileCtrl', function($scope, $state, apiService, user, profileuser, chronicles, isfollowing){
+	$scope.isfollowing = false;
+	console.log($scope.isfollowing);
+	if(isfollowing === 'null'){
+		$scope.isfollowing = false;
+	}
+	else{
+		$scope.isfollowing = true;
+	}
 	$scope.user = user;
 	$scope.profileuser = profileuser;
-	console.log($scope.user);
 	$scope.chronicles = chronicles;
-	console.log($scope.chronicles);
+	$scope.follow = function(){
+		apiService.follow($scope.profileuser._id).then(function(){
+			$scope.isfollowing = true;
+		});
+	};
+	$scope.unfollow = function(){
+		apiService.unfollow($scope.profileuser._id).then(function(){
+			$scope.isfollowing = false;
+		});
+	};
 })
 
 .controller('UserNavCtrl', function($scope, $state, apiService, user) {

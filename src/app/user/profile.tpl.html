@@ -3,6 +3,12 @@
 <div class="editbutton">
 <a ng-show="user._id == profileuser._id" ui-sref="app.settings"><button class="btn btn-primary"> Edit Profile </button></a>
 </div>
+<div class="editbutton">
+<button class="btn btn-primary" ng-show="user._id !== profileuser._id && !isfollowing" ng-click="follow()"> Follow this Person </button>
+</div>
+<div class="editbutton" ng-hide="user._id == profileuser._id && isfollowing">
+<button class="btn btn-primary" ng-show="user._id !== profileuser._id && isfollowing" ng-click="unfollow()"> Unfollow this Person </button>
+</div>
 <div class="img-profile i-cbackground" style="background-image: url({{profileuser.info.photo}});"></div>
   <br>
     <div class="content">

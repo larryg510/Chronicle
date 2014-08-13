@@ -28,6 +28,9 @@
       },
       publicchronicles: function($stateParams, apiService){
         return apiService.public();
+      },
+      followingchronicles: function($stateParams, apiService){
+        return apiService.followingchronicles();
       }
     }
   });
@@ -66,7 +69,9 @@
   });
 })
 
-.controller('ChroniclesCtrl', function($scope, $state, $modal, apiService, user, chronicles, publicchronicles) {
+.controller('ChroniclesCtrl', function($scope, $state, $modal, apiService, user, chronicles, publicchronicles, followingchronicles) {
+  $scope.followingchronicles = followingchronicles;
+  console.log($scope.followingchronicles);
   $scope.publicchronicles = publicchronicles;
   $scope.currenttab = 1;
   $scope.settab = function(chosentab){
@@ -80,11 +85,9 @@
   $scope.owned = chronicles.filter(function(chronicle){
     return chronicle.user._id == $scope.user._id;
   });
-  console.log($scope.owned);
   $scope.readaccess = chronicles.filter(function(chronicle){
     return chronicle.read.indexOf($scope.user._id) !== -1;
   });
-  console.log($scope.readaccess);
   $scope.editaccess = chronicles.filter(function(chronicle){
     return chronicle.edit.indexOf($scope.user._id) !== -1;
   });
