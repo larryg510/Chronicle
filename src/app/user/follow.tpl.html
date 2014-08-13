@@ -1,0 +1,23 @@
+<div class="content-main"> Suscriptions</div>
+<div style= "margin-top: 0px; left:0; width:100%; text-align: center; z-index: 100;">
+  <button type="button" class="btn btn-primary" ng-class="{active: istab(1)}" ng-click="settab(1)">People You've Suscribed To</button>
+  <button type="button" class="btn btn-primary" ng-class="{active: istab(2)}" ng-click="settab(2)">Your Suscribers</button>
+</div>
+<div class="container-fluid fill">
+  <div class="row-fluid">
+    <div class="col-xs-6" ng-repeat="profileuser in usersfollowing" ng-show="istab(1)">
+        <a ui-sref="app.user.profile({userId: user._id, profileuser: profileuser._id})" style="text-decoration:none">
+          <div class="img-circular i-cbackground" hm-hold="settings(chronicle)" style="background-image: url({{profileuser.info.photo}});"></div>
+          <br>
+        </a>
+          <div class="content">{{profileuser.name}}<br></div>
+    </div>
+    <div class="col-xs-6" ng-repeat="profileuser in usersfollowed" ng-show="istab(2)">
+        <a ui-sref="app.user.profile({userId: user._id, profileuser: profileuser._id})" style="text-decoration:none">
+          <div class="img-circular i-cbackground" hm-hold="settings(chronicle)" style="background-image: url({{profileuser.info.photo}});"></div>
+          <br>
+        </a>
+          <div class="content">{{profileuser.name}}<br></div>
+    </div>
+  </div>  
+</div>
