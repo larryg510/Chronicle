@@ -120,9 +120,12 @@ router.post('/unfollow', function(req,res, next){
 });
 
 router.get('/followingchronicles', function(req, res, next){
-  console.log('omgmiew');
-  Vector.find({origin: req.login._id}).select('destination').execQ().then(function(vectors){
-    return Chronicle.find({user: {$in: vectors}}).populate("user").execQ();
+  Vector.find({origin: req.login._id}).select('destination').lean().execQ().then(function(vectors){
+    var users = [];
+    for(var i = 0; i < vectors.length; i++){
+      users[i] = vectors[i].destination;
+    }
+    return Chronicle.find({user: {$in: users}}).populate("user").execQ();
   }).then(res.success).catch(res.error);
   //  Chronicle.find({ $or: [{ read: req.login._id }, { edit: req.login._id }, {user : req.login._id}] }).select('_id').lean().execQ().then(function(chronicles){
   //   return Update.find({ chronicle: { $in: chronicles } }).populate("user chronicle").execQ();
