@@ -44,7 +44,7 @@ angular.module('chronicle.newchronicle', [
   $scope.user = user;
   if($scope.chronicle){
     $scope.first = false;
-    $scope.editaccess = ($scope.user._id == $scope.chronicle.user) || ($scope.chronicle.edit.indexOf($scope.user._id) !== -1);
+    $scope.editaccess = ($scope.user._id == $scope.chronicle.user._id) || ($scope.chronicle.edit.indexOf($scope.user._id) !== -1);
     $scope.readaccess = ($scope.chronicle.read.indexOf($scope.user._id) !== -1);
     console.log($scope.editaccess);
     if(!$scope.editaccess){

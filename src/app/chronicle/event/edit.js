@@ -66,7 +66,7 @@ angular.module('chronicle.event.edit', [
     $scope.event = {};
   }
   $scope.user = user;
-  $scope.editaccess = ($scope.user._id == $scope.chronicle.user) || ($scope.chronicle.edit.indexOf($scope.user._id) !== -1);
+  $scope.editaccess = ($scope.user._id == $scope.chronicle.user._id) || ($scope.chronicle.edit.indexOf($scope.user._id) !== -1);
   $scope.readaccess = ($scope.chronicle.read.indexOf($scope.user._id) != -1);
   if($scope.event._id || $state.params.currentEvent){
     if(!$scope.editaccess)
