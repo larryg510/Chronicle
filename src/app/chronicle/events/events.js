@@ -20,6 +20,7 @@ angular.module('chronicle.events', [
 
 .controller('EventsCtrl', function($scope, $state, $modal, apiService, user) {
   $scope.user = user;
+  console.log($scope.chronicle.user);
   $scope.access = (($scope.user._id == $scope.chronicle.user) || ($scope.chronicle.edit.indexOf($scope.user._id) !== -1) || ($scope.chronicle.read.indexOf($scope.user._id) !== -1));
   if(!($scope.chronicle.public || $scope.access))
   {
