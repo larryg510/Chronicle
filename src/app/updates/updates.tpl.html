@@ -28,7 +28,7 @@
             {{update.user.name}} added a quote to the event "{{update.obj.title}}" in the chronicle "{{update.chronicle.title}}" {{update.date}}
           </div> 
         </a>
-        <a ui-sref="app.user.profile({userId: user._id, profileuser: update.usertwo._id})" ng-if="update.verb == 'follow'">
+        <a ui-sref="app.user.profile({userId: user._id, profileuser: update.user._id})" ng-if="update.verb == 'follow'">
             <div class="content-update" > User "{{update.user.name}}" followed you! {{update.date}}</div>
         </a>
         <br>  
