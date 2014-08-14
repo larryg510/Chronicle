@@ -271,12 +271,14 @@ chronicleRouter.param('event', function(req, res, next, id){
 
 // get all info from requested chronicle
 chronicleRouter.get('/', function(req, res, next){
-  res.json(req.chronicle);
+  req.chronicle.populateQ("user").then(function(){
+      res.json(req.chronicle);
+    });
 });
 
 // get all events from requested chronicle
 chronicleRouter.get('/events', function(req, res, next){
-  req.chronicle.populateQ("events.content.owner").then(function(){
+  req.chronicle.populateQ("user events.content.owner").then(function(){
     res.json(req.chronicle.events);
   });
 
