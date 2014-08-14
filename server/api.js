@@ -271,7 +271,7 @@ chronicleRouter.param('event', function(req, res, next, id){
 
 // get all info from requested chronicle
 chronicleRouter.get('/', function(req, res, next){
-  req.chronicle.populateQ("user edit").then(function(){
+  req.chronicle.populateQ("user edit read").then(function(){
       res.json(req.chronicle);
     });
 });
