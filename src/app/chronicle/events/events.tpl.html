@@ -1,11 +1,17 @@
 <div class="container-fluid">
   <div class="content-main" ng-hide="events.length"> This chronicle does not have any events yet! :3 </div>
-    <a ui-sref = "app.user.profile({userId: user._id, profileuser: chronicle.user._id})">
+    
       <div class="content-update" > Owner: {{chronicle.user.name}}
-         <div class="img-small small-background" style="background-image: url({{chronicle.user.info.photo}});"></div>
+        <a ui-sref = "app.user.profile({userId: user._id, profileuser: chronicle.user._id})">
+          <div class="img-small small-background" style="background-image: url({{chronicle.user.info.photo}});"></div>
+        </a>
+          Editors:
+      <li ng-repeat="edituser in chronicle.edit">
+        <a ui-sref="app.user.profile({userId: user._id, profileuser: edituser._id})">
+          {{edituser.name}}
+        </a>
+      </li>
       </div>
-
-    </a>
   <ul ng-show="events.length" class="event-list">
     <li ng-repeat="event in events | orderBy:['metadata.date', 'metadata.time']" class="event row-fluid">
       <div style="text-align: center; font-size: large"> <a ui-sref="^.neweventyay({currentEvent: event._id})">+</a> </div>
