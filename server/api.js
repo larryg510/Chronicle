@@ -279,7 +279,6 @@ chronicleRouter.get('/events', function(req, res, next){
   req.chronicle.populateQ("events.content.owner").then(function(){
     res.json(req.chronicle.events);
   });
-
 });
 
 // edit chronicle title
