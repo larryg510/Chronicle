@@ -61,7 +61,8 @@ angular.module('chronicle.chronicle', [
   $scope.$state = $state;
   $scope.user = user;
 
-  $scope.editaccess = ($scope.user._id == $scope.chronicle.user) || ($scope.chronicle.edit.indexOf($scope.user._id) !== -1);
+  $scope.editaccess = ($scope.user._id == $scope.chronicle.user._id) || ($scope.chronicle.edit.indexOf($scope.user._id) !== -1);
+  console.log($scope.editaccess);
   $scope.delete = function() {
     apiService.chronicle(chronicle._id).delete().then(function(){
       $state.go('app.chronicles');
