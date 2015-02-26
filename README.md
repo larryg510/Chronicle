@@ -8,4 +8,4 @@ Collaborative storytelling.
 *	Lawrence "KLIM" Kim
 *	Kara "Karebear" Shen
 *	Jessica "PO" Xu
-*	Our interns are the best 
+*	Our interns are the best.  Woo!! 
